@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Zonas::class, function (Faker $faker) {
     return [
-        'nombre' => 'ZONA',
-        'description' => 'DESCRPCIÓN'
+        'name' => $faker->title,
+        'description' => $faker->text
     ];
 });
