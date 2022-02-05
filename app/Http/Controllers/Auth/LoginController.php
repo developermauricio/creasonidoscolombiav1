@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Aspirant;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -36,5 +38,39 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function redirectPath()
+    {
+        $userAdministrator = \auth()->user()->hasRole('Administrador');
+        $userAspirant = \auth()->user()->hasRole('Aspirante');
+        $userCurador = \auth()->user()->hasRole('Curador');
+
+        /*=============================================
+            VALIDAMOS EL ROL
+        =============================================*/
+        if ($userAdministrator) {
+            return route('reports.dashboard.page');
+        } else if ($userAspirant) {
+            /*=============================================
+                VALIDAMOS EL ESTADO DEL ASPIRANTE
+            =============================================*/
+            $aspirant = Aspirant::where('user_id', \auth()->user()->id)->first();
+            if ($aspirant->has_project === '1') {
+                return route('aspirant.profile.page');
+            } else {
+                return route('aspirant.register.page');
+            }
+        }else if($userCurador){
+            return route('curador.projects.page');
+        }
+    }
+
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+        $request->session()->invalidate();
+
+        return redirect('/login');
     }
 }

@@ -2,13 +2,15 @@
 
 namespace App;
 
+use App\Models\Curador;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -59,4 +61,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+   static public function getCurador($id){
+//        dd($id);
+        $curador = Curador::where('user_id', $id)->first();
+        return $curador;
+    }
 }

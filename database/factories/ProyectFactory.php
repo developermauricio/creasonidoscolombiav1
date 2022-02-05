@@ -5,8 +5,18 @@
 use App\Proyect;
 use Faker\Generator as Faker;
 
-$factory->define(Proyect::class, function (Faker $faker) {
+$factory->define(\App\Models\Proyect::class, function (Faker $faker) {
+    $title = $faker->name;
+    $audios = array(
+        'https://aicode.sfo3.digitaloceanspaces.com/crea-sonidos/audios/Yuri-Buenaventura-No%20Estoy%20Contigo.mp3',
+        'https://aicode.sfo3.digitaloceanspaces.com/crea-sonidos/audios/Yuri-Buenaventura-Tu-Cancion.mp3',
+    );
     return [
-        //
+        'title'=>$title,
+        'description'=>$faker->sentence,
+        'categories_id' => \App\Models\Category::all()->random()->id,
+        'state'=> \App\Models\Proyect::REVISION,
+        'slug'=> \Illuminate\Support\Str::slug($title, '-'),
+        'audio' => $audios[array_rand($audios)]
     ];
 });

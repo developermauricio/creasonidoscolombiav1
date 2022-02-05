@@ -15,19 +15,20 @@ class CreateProyectsTable extends Migration
     {
         Schema::create('proyects', function (Blueprint $table) {
             $table->id();
-            $table->string('tittle');
+            $table->string('title');
             $table->string('description');
-            $table->enum('status', [
+            $table->enum('state', [
                 \App\Models\Proyect::BORRADOR,
                 \App\Models\Proyect::REVISION,
                 \App\Models\Proyect::ACEPTED,
+                \App\Models\Proyect::QUALIFIED,
                 \App\Models\Proyect::REJECTED,
                 \App\Models\Proyect::APPROVAL,
                 \App\Models\Proyect::PENDING_REGISTER,
             ]);
             $table->string('audio');
             $table->string('slug');
-            $table->integer('end_time');
+            $table->integer('end_time')->nullable();
             $table->unsignedBigInteger('categories_id');
             $table->foreign('categories_id')->references('id')->on('categories');
             $table->timestamps();

@@ -12,4 +12,9 @@ class Curador extends Model
         'categories_id',
         'user_id'
     ];
+
+    public function projects(){
+        return $this->belongsToMany(Proyect::class, 'curador_projects', 'curador_id', 'proyect_id');
+
+    }
 }
