@@ -19,8 +19,10 @@
                         </div>
                        <div class="row">
                            <div class="col-md-6 pt-3">
-                               <h2>Calida interpretativa</h2>
-                               <vs-slider :min="0" :max="20" color="#11435b" v-model="value"/>
+                               <div v-for="qualifit in qualifications" :key="qualifit.id">
+                                   <h5>{{ qualifit.name }}</h5>
+                                   <vs-slider :min="0" :max="qualifit.value" color="#11435b" v-model="qualifit.model"/>
+                               </div>
                            </div>
                            <div class="col-md-6 pt-3">
                                <input-form
@@ -117,7 +119,7 @@ export default {
         },
 
         getQualifications(){
-            axios.get('/curador/get-qualifications').then(resp =>{
+            axios.get('/api/curador/get-qualifications').then(resp =>{
                 this.qualifications = resp.data.data
             }).catch(err =>{
 
@@ -127,6 +129,7 @@ export default {
 
     mounted() {
         this.getProjects()
+        this.getQualifications()
         this.$refs.plyr.player.on('pause', () => {
             this.selectedProject = null
         })

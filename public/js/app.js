@@ -2535,6 +2535,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2611,7 +2613,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     getQualifications: function getQualifications() {
       var _this3 = this;
 
-      axios.get('/curador/get-qualifications').then(function (resp) {
+      axios.get('/api/curador/get-qualifications').then(function (resp) {
         _this3.qualifications = resp.data.data;
       })["catch"](function (err) {});
     }
@@ -2620,6 +2622,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var _this4 = this;
 
     this.getProjects();
+    this.getQualifications();
     this.$refs.plyr.player.on('pause', function () {
       _this4.selectedProject = null;
     });
@@ -7083,21 +7086,32 @@ var render = function () {
                   _c(
                     "div",
                     { staticClass: "col-md-6 pt-3" },
-                    [
-                      _c("h2", [_vm._v("Calida interpretativa")]),
-                      _vm._v(" "),
-                      _c("vs-slider", {
-                        attrs: { min: 0, max: 20, color: "#11435b" },
-                        model: {
-                          value: _vm.value,
-                          callback: function ($$v) {
-                            _vm.value = $$v
-                          },
-                          expression: "value",
-                        },
-                      }),
-                    ],
-                    1
+                    _vm._l(_vm.qualifications, function (qualifit) {
+                      return _c(
+                        "div",
+                        { key: qualifit.id },
+                        [
+                          _c("h5", [_vm._v(_vm._s(qualifit.name))]),
+                          _vm._v(" "),
+                          _c("vs-slider", {
+                            attrs: {
+                              min: 0,
+                              max: qualifit.value,
+                              color: "#11435b",
+                            },
+                            model: {
+                              value: qualifit.model,
+                              callback: function ($$v) {
+                                _vm.$set(qualifit, "model", $$v)
+                              },
+                              expression: "qualifit.model",
+                            },
+                          }),
+                        ],
+                        1
+                      )
+                    }),
+                    0
                   ),
                   _vm._v(" "),
                   _c(
