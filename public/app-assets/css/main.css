@@ -14,6 +14,30 @@
     opacity: 0.5;
     text-decoration: none;
 }
+.vdp-datepicker__calendar{
+    z-index: 1419 !important;
+}
+.toast-message{
+    color: #ffffff !important;
+}
+.toast-title{
+    color: #ffffff !important;
+}
+.toast-icon{
+    display: none !important;
+}
+.input-tel__input.is-invalid{
+    border: 1px solid #f00 !important;
+}
+#text-line-participation.is-invalid{
+    color: red !important;
+}
+.dropzone-area.is-invalid{
+    border: 1px solid #f00 !important;
+}
+.is-invalid .multiselect__tags{
+    border: 1px solid #f00 !important;
+}
 /*@media (max-width: 972px) and (min-width: 320px) {*/
 /*    .logo-header{*/
 /*        position: absolute;*/

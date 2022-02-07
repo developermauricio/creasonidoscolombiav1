@@ -18,7 +18,11 @@
 ======================================-->
     @include('partials.assets.styles')
     @stack('css')
-
+    <script>
+        window.user_email = '{{ auth()->user()->email }}'
+        window.user_name = '{{ auth()->user()->name }}'
+        window.user_last_name = '{{ auth()->user()->last_name }}'
+    </script>
 </head>
 <!-- END: Head-->
 
@@ -95,6 +99,7 @@
 <!-- BEGIN: Theme JS-->
 <script src="/app-assets/js/core/app-menu.js"></script>
 <script src="/app-assets/js/core/app.js"></script>
+<script src="/app-assets/js/scripts/extensions/ext-component-sweet-alerts.js"></script>
 <!-- END: Theme JS-->
 
 <!-- BEGIN: Page JS-->

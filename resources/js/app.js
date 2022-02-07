@@ -36,8 +36,13 @@ Vue.use(VuePlyr, {
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 /*COMPONENTES EXTERNOS*/
 Vue.component('input-form', require('./components/InputFormComponent.vue').default);
+Vue.component('dropzone-upload-document', require('./aspirant/components/DropzoneUploadDocument.vue').default);
+Vue.component('dropzone-upload-music', require('./aspirant/components/DropzoneUploadMusic.vue').default);
 
 Vue.component('aspirant-account-create-component', require('./aspirant/AccountCreate.vue').default);
+Vue.component('aspirant-register-component', require('./aspirant/Register.vue').default);
+Vue.component('aspirant-data-personal-register-component', require('./aspirant/components/DataPersonalRegister.vue').default);
+Vue.component('aspirant-project-register-component', require('./aspirant/components/DataProjectRegister.vue').default);
 
 
 Vue.component('curador-project-component', require('./curador/Projects.vue').default);

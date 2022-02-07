@@ -7,7 +7,7 @@
                 <div class="form-group">
                     <input-form
                         id="txtNameAspirant"
-                        label="Nombres"
+                        label="Nombres Completos"
                         pattern="alf"
                         errorMsg="Ingrese un nombre válido"
                         requiredMsg="Su nombre es requerido"
@@ -19,7 +19,7 @@
                 <div class="form-group">
                     <input-form
                         id="txtLastNameAspirant"
-                        label="Apellidos"
+                        label="Apellidos Completos"
                         pattern="alf"
                         errorMsg="Ingrese un nombre válido"
                         requiredMsg="Sus apellidos son requeridos"

@@ -40,9 +40,9 @@ class DatabaseSeeder extends \Illuminate\Database\Seeder
         factory(Gender::class, 1)->create([
             'name' => 'Femenino'
         ]);
-        factory(Gender::class, 1)->create([
-            'name' => 'Otro'
-        ]);
+//        factory(Gender::class, 1)->create([
+//            'name' => 'Otro'
+//        ]);
 
         // Tipo de documentos
         factory(DocumentType::class, 1)->create([
@@ -58,10 +58,16 @@ class DatabaseSeeder extends \Illuminate\Database\Seeder
 
         // tipos de aspirantes
         factory(AspirantType::class, 1)->create([
-            'name' => 'Persona natural'
+            'name' => 'Personas naturales en representación propia',
+            'description' => 'De manera individual identificado con cédula de ciudadanía'
         ]);
         factory(AspirantType::class, 1)->create([
-            'name' => 'Grupo Constituido'
+            'name' => 'Personas naturales en representación de agrupación',
+            'description' => 'De manera individual identificado con cédula de ciudadanía representando a su agrupación musical'
+        ]);
+        factory(AspirantType::class, 1)->create([
+            'name' => 'Personas naturales en representación de un menor de edad',
+            'description' => 'Identificado con cédula de ciudadanía acreditando ser el padre o tutor del menor de edad'
         ]);
 
         /*=============================================
