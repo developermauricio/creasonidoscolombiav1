@@ -38,11 +38,13 @@
 .is-invalid .multiselect__tags{
     border: 1px solid #f00 !important;
 }
-/*@media (max-width: 972px) and (min-width: 320px) {*/
-/*    .logo-header{*/
-/*        position: absolute;*/
-/*        left: calc(50% - 10px) !important;*/
-/*        padding: 0;*/
-/*        z-index: 1000;*/
-/*    }*/
-/*}*/
+.background-auth{
+    background-size: contain;
+    background-repeat: no-repeat !important;
+    background-image: url(/img/backg-auth.png)
+}
+@media (max-width: 472px) and (min-width: 320px) {
+    .background-auth{
+        display: none !important;
+    }
+}

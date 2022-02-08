@@ -136,7 +136,7 @@ class DatabaseSeeder extends \Illuminate\Database\Seeder
                     factory(\App\Models\Proyect::class, 1)
                         ->create([
                             'state' => \App\Models\Proyect::ACEPTED,
-                            'categories_id' => 1
+                            'category_id' => 1
                         ])->each(function (\App\Models\Proyect $proyect) use ($as, $u) {
                             $proyect->aspirant()->attach($as->id);
                         });

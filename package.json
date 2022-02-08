@@ -27,6 +27,7 @@
         "cxlt-vue2-toastr": "^1.1.1",
         "laravel-vue-pagination": "^2.3.1",
         "material-icons": "^1.10.6",
+        "moment": "^2.29.1",
         "vue-bootstrap4-table": "^1.1.11",
         "vue-multiselect": "^2.1.6",
         "vue-phone-number-input": "^1.1.12",

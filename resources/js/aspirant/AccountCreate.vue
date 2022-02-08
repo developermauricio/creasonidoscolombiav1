@@ -39,19 +39,23 @@
                         :required="true"
                         :msgServer.sync="errors.email"
                     ></input-form>
+                    <p style="margin-top: -0.7rem;font-size: 0.9rem; display: none"
+                       id="text-verify-email-aspirant" class="text-danger">El correo electrónico ya ha sido registrado,
+                        por favor ingrese otro</p>
                 </div>
                 <div class="form-group d-flex justify-content-between">
                     <vs-checkbox color="#B53E2A" v-model="acceptTerm"></vs-checkbox>
                     <a href="/login" style="margin-right:1.2rem">Acepto términos y politicas de privacidad</a>
                 </div>
-<!--                <button :disabled="acceptTerm !== true" @click="accountCreate()" class="btn btn-primary btn-block"-->
-<!--                        tabindex="5">-->
-<!--                    Crear Cuenta-->
-<!--                </button>-->
-                <a @click="accountCreate()" class="btn btn-primary btn-block"
+                <!--                <button :disabled="acceptTerm !== true" @click="accountCreate()" class="btn btn-primary btn-block"-->
+                <!--                        tabindex="5">-->
+                <!--                    Crear Cuenta-->
+                <!--                </button>-->
+                <p style="text-align: justify">Antes de crear la cuenta, por favor verifique que su nombre, apellidos y correo electrónico se encuentren bien escritos. <span style="font-weight: bold">Enviaremos a su correo electrónico la contraseña de acceso para que pueda registrar su propuesta musical</span></p>
+                <button :disabled="!acceptTerm" @click.prevent="accountCreate()" class="btn btn-primary btn-block"
                         tabindex="5">
                     Crear Cuenta
-                </a>
+                </button>
             </form>
             <p class="text-center mt-2"><span>Tienes una cuenta y quieres ingresar a tu perfil?</span><a
                 href="/login"><span>&nbsp;Ingresar</span></a></p>
@@ -69,6 +73,7 @@ export default {
                 last_name: '',
                 email: ''
             },
+            time: null,
             acceptTerm: false,
             errors: {},
         }
@@ -80,7 +85,7 @@ export default {
             setTimeout(() => {
                 let resp = this;
                 /***  VALIDANDO LOS ERRORES Y MOSTRANDO UNA ALERTA  ***/
-                if (document.querySelectorAll(".is-invalid").length > 0 ) {
+                if (document.querySelectorAll(".is-invalid").length > 0) {
                     this.$toast.error({
                         title: 'Error',
                         message: 'Por favor revise que todos los campos esten llenos',
@@ -110,7 +115,7 @@ export default {
                     text: '¿Esta seguro que su nombre, apellidos y correo electrónico están bien escritos?',
                     confirmButtonColor: "#11435b",
                     cancelButtonColor: "#B53E2A",
-                    confirmButtonText: 'Si, todo bien',
+                    confirmButtonText: 'Si, crear cuenta',
                     cancelButtonText: 'Cancelar',
                     customClass: "swal-confirmation",
                     showCancelButton: true,
@@ -126,15 +131,17 @@ export default {
                         axios.post('/api/aspirant/account-create', data).then(res => {
                             resp.$vs.loading.close()
                             this.$toast.success({
-                                title: '¡Todo salio bien!',
+                                title: '¡Muy bien!',
                                 message: 'Cuenta creada exitosamente',
                                 showDuration: 1000,
                                 hideDuration: 5000,
                                 position: 'top right',
                             })
+                            localStorage.setItem('email', this.user.email)
+                            localStorage.setItem('message', 'Su cuenta ha sido creada. Hemos enviado un correo electrónico con la contraseña de acceso, esta contraseña la podrá cambiar cuando este registrando su propuesta musical')
                             // console.log('/'+this.language+"/profile")
-                            // window.location = "/login";
-                            location.reload();
+                            window.location = "/login";
+
                         }).catch(err => {
                             this.$toast.error({
                                 title: 'Error',
@@ -147,8 +154,50 @@ export default {
                     }
                 })
             }, 200)
+        },
+
+        validetEmail(email) {
+
+            setTimeout(() => {
+                axios.get(`/api/verify-email-user/${email}`).then(resp => {
+                    if (resp.data !== 300){
+                        $('#txtEmailAspirant').addClass('is-invalid')
+                        $('#text-verify-email-aspirant').css("display", "block");
+                    }
+
+                }).catch(err => {
+                    this.$toast.error({
+                        title: 'Error',
+                        message: 'Consulte con el administrador',
+                        showDuration: 1000,
+                        hideDuration: 8000,
+                    })
+                });
+                this.$vs.loading.close()
+            }, 1000)
         }
     },
+
+    watch: {
+        'user.email': function (val) {
+
+            if (val) {
+                $('#text-verify-email-aspirant').css("display", "none");
+                if (this.time) {
+                    clearTimeout(this.time)
+                }
+
+                this.time = setTimeout(() => {
+                    this.$vs.loading({
+                        color: '#11435b',
+                        text: 'Validando correo electrónico...'
+                    })
+                    this.validetEmail(val)
+                }, 1000);
+
+            }
+        }
+    }
 }
 </script>
 

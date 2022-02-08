@@ -16,7 +16,8 @@ class CreateProyectsTable extends Migration
         Schema::create('proyects', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('description');
+            $table->text('description');
+            $table->string('name_author');
             $table->enum('state', [
                 \App\Models\Proyect::BORRADOR,
                 \App\Models\Proyect::REVISION,
@@ -25,12 +26,12 @@ class CreateProyectsTable extends Migration
                 \App\Models\Proyect::REJECTED,
                 \App\Models\Proyect::APPROVAL,
                 \App\Models\Proyect::PENDING_REGISTER,
-            ]);
+            ])->default(\App\Models\Proyect::BORRADOR);
             $table->string('audio');
             $table->string('slug');
-            $table->integer('end_time')->nullable();
-            $table->unsignedBigInteger('categories_id');
-            $table->foreign('categories_id')->references('id')->on('categories');
+            $table->timestamp('end_time')->nullable();
+            $table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
         });
     }

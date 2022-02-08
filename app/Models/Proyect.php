@@ -21,9 +21,10 @@ class Proyect extends Model
         'description',
         'state',
         'audio',
+        'name_author',
         'slug',
         'end_time',
-        'categories_id'
+        'category_id'
     ];
 
     public function aspirant(){

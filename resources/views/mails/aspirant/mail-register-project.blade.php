@@ -13,7 +13,7 @@
     td,th,div,p,a,h1,h2,h3,h4,h5,h6 {font-family: "Segoe UI", sans-serif; mso-line-height-rule: exactly;}
     </style>
     <![endif]-->
-    <title>Confirmación creación de cuenta</title>
+    <title>Confirmación propuesta musical registrada</title>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700" rel="stylesheet" media="screen">
     <style>
         .hover-underline:hover {
@@ -100,17 +100,21 @@
                                         <p style="font-weight: 700; font-size: 20px; margin-top: 0; --text-opacity: 1; color: #11435b;">
                                             {{ $name }} {{ $last_name }}</p>
                                         <p class="sm-leading-32" style="font-weight: 600; font-size: 20px; margin: 0 0 16px; --text-opacity: 1; color: #263238; color: rgba(38, 50, 56, var(--text-opacity));">
-                                            Su cuenta ha sido creada exitosamente!
+                                            Su propuesta musical ha sido registrada exitosamente!.
                                         </p>
-                                        <p>Tus credenciales de acceso para participar en <span style="color: #11435b; font-weight: bold">Crea Sonidos Colombia</span></p>
+                                        <p>
+                                            <span style="--text-opacity: 1; color: #B53E2A; text-decoration: none;">TEN EN CUENTA QUE TIENES 24 HORAS PARA EDITAR TU INFORMACIÓN SI ES QUE HAS INGRESADO ALGÚN DATO INCORRECTO.</span>
+                                            Para editar puedes iniciar sesión con tus credenciales de acceso.
+                                        </p>
+                                        <p>Esta la información principal de su propuesta musical:</p>
                                         <ul style="margin-bottom: 24px;">
-                                            <li><span style="font-weight: bold">Correo electrónico:</span> <span style="color: #11435b; font-weight: bold">{{ $email }}</span></li>
-                                            <li><span style="font-weight: bold">Contraseña:</span>  <span style="color: #11435b; font-weight: bold">{{ $password }}</span></li>
+                                            <li><span style="font-weight: bold">Titulo de la canción:</span> <span style="color: #11435b; font-weight: bold">{{ $project_name }}</span></li>
+                                            <li><span style="font-weight: bold">Modalidad o categoría de la canción:</span>  <span style="color: #11435b; font-weight: bold">{{ $project_category }}</span></li>
                                         </ul>
                                         <table style="font-family: 'Montserrat',Arial,sans-serif;" cellpadding="0" cellspacing="0" role="presentation">
                                             <tbody><tr>
                                                 <td style="mso-padding-alt: 16px 24px; --bg-opacity: 1; background-color: #11435b; background-color: #11435b; border-radius: 4px; font-family: Montserrat, -apple-system, 'Segoe UI', sans-serif;" bgcolor="rgba(115, 103, 240, var(--bg-opacity))">
-                                                    <a href="{{ env('APP_URL') }} }}/login" style="display: block; font-weight: 600; font-size: 14px; line-height: 100%; padding: 16px 24px; --text-opacity: 1; color: #ffffff; color: #ffffff; text-decoration: none;">Iniciar Sesión →</a>
+                                                    <a href="{{ env('APP_URL') }} }}/perfil" style="display: block; font-weight: 600; font-size: 14px; line-height: 100%; padding: 16px 24px; --text-opacity: 1; color: #ffffff; color: #ffffff; text-decoration: none;">Ir a mi perfil →</a>
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -122,6 +126,7 @@
                                                 </td>
                                             </tr>
                                         </table>
+
                                         <p style="margin: 0 0 16px;">
                                             Necesita ayuda? Por favor contáctenos
                                             <a href="#" class="hover-underline" style="--text-opacity: 1; color: #B53E2A; text-decoration: none;">haciendo clic aquí</a>.
@@ -160,3 +165,4 @@
 </body>
 
 </html>
+

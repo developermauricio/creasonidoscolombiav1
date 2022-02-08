@@ -84,12 +84,12 @@
            ======================================-->
             <div class="col-12 col-md-6 col-lg-6">
                 <div class="form-group">
-                    <label class="form-control-label">Teléfono <span class="text-danger">*</span></label>
+                    <label class="form-control-label">Celular <span class="text-danger">*</span></label>
                     <VuePhoneNumberInput
                         id="phoneAspirant"
                         v-model="aspirant.phone"
                         :required="true"
-                        requiredMsg="Teléfono es obligatorio"
+                        requiredMsg="Número de celular es obligatorio"
                         @update="aspirant.phoneI=$event.formatInternational"
                         :fetch-country="false"
                         :no-country-selector="true"
@@ -97,12 +97,16 @@
                         :translations="{
                                 countrySelectorLabel: 'Código',
                                 countrySelectorError: 'Selecciona país',
-                                phoneNumberLabel: 'Número de teléfono',
+                                phoneNumberLabel: 'Número de celular',
                                 example: 'Ejemplo'
                             }"/>
                     <p style="margin-top: 0.3rem;font-size: 0.9rem; display: none;"
                        id="text-verify-phone-principal" class="text-danger">
                         El teléfono es obligatorio
+                    </p>
+                    <p style="margin-top: 0.3rem;font-size: 0.9rem; display: none;"
+                       id="text-verify-phone-valid" class="text-danger">
+                        Ingrese un número de celuar válido
                     </p>
                 </div>
             </div>
@@ -111,11 +115,11 @@
            ======================================-->
             <div class="col-12 col-md-6 col-lg-6">
                 <div class="form-group">
-                    <label class="form-control-label">Confirmar teléfono <span class="text-danger">*</span></label>
+                    <label class="form-control-label">Confirmar celular <span class="text-danger">*</span></label>
                     <VuePhoneNumberInput
                         v-model="aspirant.phone_confirmed"
                         :required="true"
-                        requiredMsg="Teléfono es obligatorio"
+                        requiredMsg="Confirmar el número de Celular es obligatorio"
                         @update="aspirant.phoneI=$event.formatInternational"
                         :fetch-country="false"
                         :no-country-selector="true"
@@ -467,6 +471,8 @@ export default {
         'aspirant.phone': function (val){
             if (val){
                 $('.input-tel__input').removeClass('is-invalid')
+            }else{
+                this.aspirant.phone_confirmed = ''
             }
         },
         'aspirant.phone_confirmed': function (val) {

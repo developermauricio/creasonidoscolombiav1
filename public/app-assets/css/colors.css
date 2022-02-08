@@ -1556,8 +1556,8 @@ input:focus ~ .bg-secondary {
   background-color: transparent; }
 
 .alert-success {
-  background: rgba(40, 199, 111, 0.12) !important;
-  color: #28c76f !important; }
+    background: #739594 !important;
+    color: #ffffff !important; }
 
 .alert-success .alert-heading {
   box-shadow: rgba(40, 199, 111, 0.4) 0px 6px 15px -7px; }
