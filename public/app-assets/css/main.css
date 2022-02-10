@@ -1,50 +1,73 @@
-.logo-header{
+.logo-header {
     position: absolute;
     left: calc(50% - 30px) !important;
     padding: 0;
     z-index: 1000;
 }
-.vs-checkbox--icon.material-icons{
+
+.vs-checkbox--icon.material-icons {
     font-size: 17px !important;
 }
 
-.btn-primary.isDisabled{
+.btn-primary.isDisabled {
     color: red;
     cursor: not-allowed;
     opacity: 0.5;
     text-decoration: none;
 }
-.vdp-datepicker__calendar{
+
+.vdp-datepicker__calendar {
     z-index: 1419 !important;
 }
-.toast-message{
+
+.toast-message {
     color: #ffffff !important;
 }
-.toast-title{
+
+.toast-title {
     color: #ffffff !important;
 }
-.toast-icon{
+
+.toast-icon {
     display: none !important;
 }
-.input-tel__input.is-invalid{
+
+.input-tel__input.is-invalid {
     border: 1px solid #f00 !important;
 }
-#text-line-participation.is-invalid{
+
+#text-line-participation.is-invalid {
     color: red !important;
 }
-.dropzone-area.is-invalid{
+
+.dropzone-area.is-invalid {
     border: 1px solid #f00 !important;
 }
-.is-invalid .multiselect__tags{
+
+.is-invalid .multiselect__tags {
     border: 1px solid #f00 !important;
 }
-.background-auth{
+
+.background-auth {
     background-size: contain;
     background-repeat: no-repeat !important;
     background-image: url(/img/backg-auth.png)
 }
+
 @media (max-width: 472px) and (min-width: 320px) {
-    .background-auth{
+    .background-auth {
         display: none !important;
     }
+}
+
+.plyr--audio .plyr__control.plyr__tab-focus, .plyr--audio .plyr__control:hover, .plyr--audio .plyr__control[aria-expanded=true] {
+    background: #11435b !important;
+}
+
+.plyr--full-ui input[type=range] {
+    color: #11435b !important;;
+}
+
+.plyr__menu__container .plyr__control[role=menuitemradio][aria-checked=true]::before {
+    background: #11435b !important;
 }

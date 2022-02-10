@@ -42,8 +42,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 RUTAS DE LOS ASPIRANTES
 =============================================*/
 Route::group(['middleware' => 'auth', 'namespace' => 'Aspirant'], function () {
-    Route::get('/registro', 'RegisterController@index')->name('aspirant.register.page');
-    Route::get('/perfil', 'ProfileController@index')->name('aspirant.profile.page');
+    Route::get('/registro', 'RegisterController@index')->name('aspirant.register.page')->middleware('midd_aspirant_register');
+    Route::get('/perfil', 'ProfileController@index')->name('aspirant.profile.page')->middleware('midd_aspirant_profile');
 });
 
 /*=============================================

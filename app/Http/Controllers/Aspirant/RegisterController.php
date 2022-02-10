@@ -10,6 +10,7 @@ use App\Models\Proyect;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -59,7 +60,7 @@ class RegisterController extends Controller
         $uuid = $request->input('archiveUuid');
         $archive = $request->file('archiveMusic');
         $archiveExtension = $archive->getClientOriginalExtension();
-        $nameArchive =  Str::slug(strtolower($nameProject) . '-' . strtolower($nameAspirant) . '-' . strtolower($archive->getClientOriginalName()) . '-' . 'principal' . '-' . Str::random(10), '-');
+        $nameArchive = Str::slug(strtolower($nameProject) . '-' . strtolower($nameAspirant) . '-' . strtolower($archive->getClientOriginalName()) . '-' . 'principal' . '-' . Str::random(10), '-');
         $path = Storage::disk('public')->put('/projects/' . $nameArchive . '.' . $archiveExtension, file_get_contents($archive));
 
         $urlFinal = '/storage/projects/' . $nameArchive . '.' . $archiveExtension;
@@ -114,6 +115,7 @@ class RegisterController extends Controller
         $phone = $request->phone;
         $birthday = $request->birthday;
         $address = $request->address;
+        $acceptTerm = $request->acceptTerm;
         $genero = json_decode($request->genero);
         $city = json_decode($request->city);
         $archive = json_decode($request->archive);
@@ -128,44 +130,64 @@ class RegisterController extends Controller
         $project_audio = json_decode($request->project_audio);
 
         /*=============================================
+           NUEVA CONTRASEÑA
+        =============================================*/
+        $password = $request->password;
+        $pass = bcrypt($password);
+        /*=============================================
                 ACTUALIZAMOS EL USUARIO
         =============================================*/
-        $user = User::where('id', $user_id)->update([
-            'name' => ucwords($name),
-            'last_name' => ucwords($last_name),
-            'email' => $email,
-            'phone' => $phone,
-            'birthday' => $birthday,
-            'address' => $address,
-            'gender_id' => $genero->id,
-            'city_id' => $city->id,
-            'slug' => Str::slug($name.'-'.$last_name.Str::random(10))
-        ]);
-        /*=============================================
-                ACTUALIZAMOS EL ASPIRANTE
-        =============================================*/
-        $aspirant = Aspirant::where('id', $aspirant_id)->update([
-            'has_project' => 1,
-            'cc_pdf' => $archive[0]->urlArchive,
-            'user_id' => $user_id,
-            'aspirant_type_id' => $aspirantType,
-        ]);
-        /*=============================================
-                CREAMOS EL PROYECTO
-        =============================================*/
-        $dateNow = Carbon::now()->addDay();
-        $dateHour =
-        $project = Proyect::create([
-            'title' => ucwords($project_name),
-            'name_author' => ucwords($project_name_author),
-            'description' => $project_description,
-            'category_id' => $project_category->id,
-            'audio' => $project_audio[0]->urlArchive,
-            'end_time' => Carbon::now()->addDay(),
-            'slug' => Str::slug($project_name.'-'.Str::random(10))
-        ]);
-        Mail::to($email)->send(new RegisterProject($email, $name, $last_name, $project_name, $project_category->category));
+        $success = true;
+        DB::beginTransaction();
+        try {
+            $user = User::where('id', $user_id)->update([
+                'name' => ucwords($name),
+                'last_name' => ucwords($last_name),
+                'email' => $email,
+                'phone' => $phone,
+                'password' => $pass,
+                'birthday' => $birthday,
+                'address' => $address,
+                'gender_id' => $genero->id,
+                'city_id' => $city->id,
+                'slug' => Str::slug($name . '-' . $last_name . Str::random(10))
+            ]);
+            /*=============================================
+                    ACTUALIZAMOS EL ASPIRANTE
+            =============================================*/
+            $aspirant = Aspirant::where('id', $aspirant_id)->update([
+                'has_project' => 1,
+                'accept_termi' => $acceptTerm,
+                'cc_document' => $archive[0]->urlArchive,
+                'extension_document' => $archive[0]->extension,
+                'user_id' => $user_id,
+                'aspirant_type_id' => $aspirantType,
+            ]);
+            /*=============================================
+                    CREAMOS EL PROYECTO
+            =============================================*/
+            $project = Proyect::create([
+                'title' => ucwords($project_name),
+                'name_author' => ucwords($project_name_author),
+                'description' => $project_description,
+                'category_id' => $project_category->id,
+                'audio' => $project_audio[0]->urlArchive,
+                'end_time' => Carbon::now()->addDay(),
+                'slug' => Str::slug($project_name . '-' . Str::random(10))
+            ]);
 
-        return response()->json('Transacción realizada exitosamente', 200);
+            $project->aspirant()->attach($aspirant_id);
+
+            Mail::to($email)->send(new RegisterProject($email, $name, $last_name, ucwords($project_name), $project_category->category));
+        } catch (\Exception $exception) {
+            $success = $exception->getMessage();
+        }
+        if ($success === true) {
+            DB::commit();
+            return response()->json('Transacción realizada exitosamente', 200);
+        } else {
+            return response()->json('Error al realizar la transacción', 500);
+
+        }
     }
 }

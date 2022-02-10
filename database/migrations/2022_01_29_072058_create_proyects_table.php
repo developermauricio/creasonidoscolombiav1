@@ -30,6 +30,10 @@ class CreateProyectsTable extends Migration
             $table->string('audio');
             $table->string('slug');
             $table->timestamp('end_time')->nullable();
+            $table->enum('available_edit', [
+                \App\Models\Proyect::AVAILABLE_TO_EDIT,
+                \App\Models\Proyect::NOT_AVAILABLE_TO_EDIT,
+            ])->default(\App\Models\Proyect::AVAILABLE_TO_EDIT);
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();

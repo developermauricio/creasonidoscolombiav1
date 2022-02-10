@@ -43,9 +43,9 @@
                        id="text-verify-email-aspirant" class="text-danger">El correo electrónico ya ha sido registrado,
                         por favor ingrese otro</p>
                 </div>
-                <div class="form-group d-flex justify-content-between">
+                <div class="form-group d-flex">
                     <vs-checkbox color="#B53E2A" v-model="acceptTerm"></vs-checkbox>
-                    <a href="/login" style="margin-right:1.2rem">Acepto términos y politicas de privacidad</a>
+                    <a href="#" style="margin-right:1.2rem">Acepto términos y politicas de privacidad</a>
                 </div>
                 <!--                <button :disabled="acceptTerm !== true" @click="accountCreate()" class="btn btn-primary btn-block"-->
                 <!--                        tabindex="5">-->

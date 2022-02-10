@@ -29,6 +29,8 @@ Route::post('/upload-archive-music-opcional', 'Aspirant\RegisterController@uploa
 Route::post('/removed-archive-music-opcional', 'Aspirant\RegisterController@removedArchiveMusicOpcional')->name('api.remove.archive.music.opcional');
 Route::post('/create-register', 'Aspirant\RegisterController@createRegister')->name('api.create.register.aspirant');
 
+Route::post('/update-project-endtime/{id}', 'Aspirant\ProfileController@udpateStateProject')->name('api.update.state.project');
+
 
 
 

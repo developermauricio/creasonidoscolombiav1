@@ -23,6 +23,7 @@
 <link rel="stylesheet" type="text/css" href="/app-assets/css/pages/dashboard-ecommerce.css">
 {{--<link rel="stylesheet" type="text/css" href="/app-assets/css/plugins/charts/chart-apex.css">--}}
 <link rel="stylesheet" type="text/css" href="/app-assets/css/plugins/extensions/ext-component-toastr.css">
+<link rel="stylesheet" type="text/css" href="/app-assets/css/pages/page-auth.css">
 <!-- END: Page CSS-->
 
 <!-- BEGIN: Custom CSS-->

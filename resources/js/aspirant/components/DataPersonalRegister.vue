@@ -26,7 +26,7 @@
         <!--=====================================
                CAMPO NOMBRES
            ======================================-->
-        <h5 class="pb-1">2. Datos personales</h5>
+
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6">
                 <div class="form-group">
@@ -102,11 +102,11 @@
                             }"/>
                     <p style="margin-top: 0.3rem;font-size: 0.9rem; display: none;"
                        id="text-verify-phone-principal" class="text-danger">
-                        El teléfono es obligatorio
+                        El número de celular es obligatorio
                     </p>
                     <p style="margin-top: 0.3rem;font-size: 0.9rem; display: none;"
                        id="text-verify-phone-valid" class="text-danger">
-                        Ingrese un número de celuar válido
+                        Ingrese un número de celular válido
                     </p>
                 </div>
             </div>
@@ -132,7 +132,11 @@
                             }"/>
                     <p style="margin-top: 0.3rem;font-size: 0.9rem; display: none; font-weight: bold"
                        id="text-verify-phone" class="text-danger">
-                        El teléfono no coicide
+                        El número de celular no coincide
+                    </p>
+                    <p style="margin-top: 0.3rem;font-size: 0.9rem; display: none;"
+                       id="text-verify-phone-confir-valide" class="text-danger">
+                        La confirmación del celular es obligatorio
                     </p>
                 </div>
             </div>
@@ -477,9 +481,11 @@ export default {
         },
         'aspirant.phone_confirmed': function (val) {
             if (val !== this.aspirant.phone && this.aspirant.phone_confirmed) {
+                $('.input-tel__input').addClass('is-invalid')
                 $("#text-verify-phone").css("display", "block");
             } else {
                 $("#text-verify-phone").css("display", "none");
+                $('.input-tel__input').removeClass('is-invalid')
             }
         },
     },

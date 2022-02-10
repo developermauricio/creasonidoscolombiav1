@@ -101,13 +101,14 @@
                                         <input class="form-control @error('password') form-control-merge @enderror " id="login-password"
                                                type="password" name="password" placeholder="············"
                                                aria-describedby="login-password" tabindex="2"/>
+
+                                        <div class="input-group-append"><span class="input-group-text cursor-pointer"><i
+                                                    data-feather="eye"></i></span></div>
                                         @error('password')
                                         <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
-                                        <div class="input-group-append"><span class="input-group-text cursor-pointer"><i
-                                                    data-feather="eye"></i></span></div>
                                     </div>
                                 </div>
                                 {{--                                <div class="form-group">--}}
