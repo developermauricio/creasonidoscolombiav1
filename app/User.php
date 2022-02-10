@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\City;
 use App\Models\Curador;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -66,5 +67,9 @@ class User extends Authenticatable
 //        dd($id);
         $curador = Curador::where('user_id', $id)->first();
         return $curador;
+    }
+
+    public function city() {
+        return $this->belongsTo(City::class, 'city_id');
     }
 }

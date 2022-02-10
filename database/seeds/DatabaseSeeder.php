@@ -163,5 +163,22 @@ class DatabaseSeeder extends \Illuminate\Database\Seeder
                 });
         }
 
+        /*=============================================
+         CREAMOS LAS VARIABLES PARA LOS REPORTES
+        =============================================*/
+        $listVars = [
+            'lastRegisteredIDSync', 
+            'lastLocationIDSync', 
+            'lastTotalAspRegIDSync', 
+            'lastTotalCuradoresIDSync', 
+            'lastTotalProjectIDSync'
+        ];
+
+        foreach ($listVars as $var) {
+            $variable = new \App\Models\ReportVariable;
+            $variable->name = $var;
+            $variable->value = 0;
+            $variable->save(); 
+        }
     }
 }

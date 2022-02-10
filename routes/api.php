@@ -41,3 +41,11 @@ Route::group(['middleware' => 'auth:api'], function () {
 Route::get('/curador/projects/{id}', 'Curador\ProjectsController@getProjects')->name('curador.get.projects');
 Route::get('/curador/get-qualifications', 'Curador\ProjectsController@getQualifications')->name('curador.get.qualifications');
 
+/* consultas para los reportes. */
+Route::get('/get-all-aspirants-registers', 'Aspirant\AccountController@getAllAspirantsRegisters');
+Route::get('/get-all-aspirants', 'Aspirant\AccountController@getAllAspirants');
+Route::get('/get-all-aspirants-location', 'Aspirant\AccountController@getAllAspirantsLocation');
+
+Route::get('/get-all-curadors', 'Aspirant\AccountController@getAllCuradors');
+
+Route::get('/get-all-projects', 'Aspirant\AccountController@getAllProjects');

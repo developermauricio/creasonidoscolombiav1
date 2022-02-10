@@ -33,4 +33,8 @@ class Proyect extends Model
     public function curador(){
         return $this->belongsToMany(Curador::class, 'curador_projects', 'proyect_id', 'curador_id');
     }
+
+    public function category() {
+        return $this->belongsTo(Category::class, 'categories_id');
+    }
 }

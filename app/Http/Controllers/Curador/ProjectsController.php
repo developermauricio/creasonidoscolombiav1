@@ -26,4 +26,6 @@ class ProjectsController extends Controller
         $qualifications = Qualification::all();
         return response()->json(['data' => $qualifications]);
     }
+
+    
 }
