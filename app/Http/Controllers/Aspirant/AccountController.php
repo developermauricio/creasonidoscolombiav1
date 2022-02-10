@@ -35,7 +35,7 @@ class AccountController extends Controller
                 'user_id' => $user->id
             ]);
             $user->roles()->attach('2');
-            Mail::to($email)->send(new AccountCreate($name, $lastName, $password, $email));
+            Mail::to($email)->send(new AccountCreate(ucwords($name), ucwords($lastName), $password, $email));
         }catch (\Exception $exception){
             $success = $exception->getMessage();
             DB::rollBack();
