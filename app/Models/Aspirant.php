@@ -27,10 +27,6 @@ class Aspirant extends Model
         return $this->belongsToMany(Proyect::class, 'aspirant_proyects', 'aspirant_id', 'proyect_id');
     }
 
-    public function user(){
-        return $this->belongsTo(User::class);
-    }
-
     public function aspirant_type(){
         return $this->belongsTo(AspirantType::class, 'aspirant_type_id');
     }

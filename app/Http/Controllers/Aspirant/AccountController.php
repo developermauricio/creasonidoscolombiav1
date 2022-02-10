@@ -52,7 +52,6 @@ class AccountController extends Controller
 //       return redirect('/login')->with('success-account', 'Cuanta creada exitosamente. Hemos enviado una contraseña de acceso a tu correo electrónico.');
     }
 
-<<<<<<< HEAD
     /* Consultas para los reportes */
     public function getAllAspirantsRegisters() {
         $listAspirant = Aspirant::with('user')
@@ -91,6 +90,4 @@ class AccountController extends Controller
         $listProjects = Proyect::with('category')->get();
         return response()->json(['status' => 'ok', 'data' => $listProjects]);
     }
-=======
->>>>>>> cf049c955979d7bdf962483e054fc51539dcf8fb
 }
