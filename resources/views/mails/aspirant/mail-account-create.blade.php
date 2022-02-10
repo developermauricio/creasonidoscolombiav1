@@ -110,7 +110,7 @@
                                         <table style="font-family: 'Montserrat',Arial,sans-serif;" cellpadding="0" cellspacing="0" role="presentation">
                                             <tbody><tr>
                                                 <td style="mso-padding-alt: 16px 24px; --bg-opacity: 1; background-color: #11435b; background-color: #11435b; border-radius: 4px; font-family: Montserrat, -apple-system, 'Segoe UI', sans-serif;" bgcolor="rgba(115, 103, 240, var(--bg-opacity))">
-                                                    <a href="{{ env('APP_URL') }} }}/login" style="display: block; font-weight: 600; font-size: 14px; line-height: 100%; padding: 16px 24px; --text-opacity: 1; color: #ffffff; color: #ffffff; text-decoration: none;">Iniciar Sesión →</a>
+                                                    <a href="{{ env('APP_URL') }}/login" style="display: block; font-weight: 600; font-size: 14px; line-height: 100%; padding: 16px 24px; --text-opacity: 1; color: #ffffff; color: #ffffff; text-decoration: none;">Iniciar Sesión →</a>
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -135,9 +135,9 @@
                                 <tr>
                                     <td style="font-family: Montserrat, -apple-system, 'Segoe UI', sans-serif; font-size: 12px; padding-left: 48px; padding-right: 48px; --text-opacity: 1; color: #eceff1; color: rgba(236, 239, 241, var(--text-opacity));">
                                         <p align="center" style="cursor: default; margin-bottom: 16px; text-align: center;">
-                                            <a href="https://web.facebook.com/creasonidos" target="_blank" style="--text-opacity: 1; color: #11435b; color: rgba(38, 50, 56, var(--text-opacity)); text-decoration: none;"><img src="img/facebook.png" width="17" alt="Facebook" style="border: 0; max-width: 100%; line-height: 100%; vertical-align: middle; margin-right: 12px;"></a>
+                                            <a href="https://web.facebook.com/creasonidos" target="_blank" style="--text-opacity: 1; color: #11435b; color: rgba(38, 50, 56, var(--text-opacity)); text-decoration: none;"><img src="{{ env('APP_URL') }}/img/facebook.png" width="17" alt="Facebook" style="border: 0; max-width: 100%; line-height: 100%; vertical-align: middle; margin-right: 12px;"></a>
                                             &bull;
-                                            <a href="https://www.instagram.com/creasonidos/" target="_blank" style="--text-opacity: 1; color: #11435b; color: rgba(38, 50, 56, var(--text-opacity)); text-decoration: none;"><img src="img/instagram.png" width="17" alt="Instagram" style="border: 0; max-width: 100%; line-height: 100%; vertical-align: middle; margin-right: 12px;"></a>
+                                            <a href="https://www.instagram.com/creasonidos/" target="_blank" style="--text-opacity: 1; color: #11435b; color: rgba(38, 50, 56, var(--text-opacity)); text-decoration: none;"><img src="{{ env('APP_URL') }}/img/instagram.png" width="17" alt="Instagram" style="border: 0; max-width: 100%; line-height: 100%; vertical-align: middle; margin-right: 12px;"></a>
                                         </p>
                                         <p style="--text-opacity: 1; color: #263238; color: rgba(38, 50, 56, var(--text-opacity)); text-align: center;">
                                             El uso de nuestro servicio y sitio web está sujeto a nuestros
