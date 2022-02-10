@@ -87,7 +87,7 @@
                     <tr>
                         <td class="sm-py-32 sm-px-24" style="font-family: Montserrat, -apple-system, 'Segoe UI', sans-serif; padding: 48px; text-align: center;" align="center">
                             <a href="https://creasonidos.com/">
-                                <img src="{{ env('URL_IMG_LOGO') }}" width="250" alt="Crea Sonidos" style="border: 0; max-width: 100%; line-height: 100%; vertical-align: middle;">
+                                <img src="{{env('APP_URL')}}{{ env('URL_IMG_LOGO') }}" width="250" alt="Crea Sonidos" style="border: 0; max-width: 100%; line-height: 100%; vertical-align: middle;">
                             </a>
                         </td>
                     </tr>
