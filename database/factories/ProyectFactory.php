@@ -14,7 +14,8 @@ $factory->define(\App\Models\Proyect::class, function (Faker $faker) {
     return [
         'title'=>$title,
         'description'=>$faker->sentence,
-        'categories_id' => \App\Models\Category::all()->random()->id,
+        'name_author'=>$faker->name.' '.$faker->lastName,
+        'category_id' => \App\Models\Category::all()->random()->id,
         'state'=> \App\Models\Proyect::REVISION,
         'slug'=> \Illuminate\Support\Str::slug($title, '-'),
         'audio' => $audios[array_rand($audios)]

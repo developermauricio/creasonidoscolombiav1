@@ -2,8 +2,10 @@
 
 namespace App;
 
+use App\Models\Aspirant;
 use App\Models\City;
 use App\Models\Curador;
+use App\Models\Gender;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -63,13 +65,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function aspirant(){
+        return $this->hasOne(Aspirant::class, 'user_id');
+    }
+
+    public function gender(){
+        return $this->belongsTo(Gender::class, 'gender_id');
+    }
+
+    public function city(){
+        return $this->belongsTo(City::class, 'city_id');
+    }
+
    static public function getCurador($id){
 //        dd($id);
         $curador = Curador::where('user_id', $id)->first();
         return $curador;
-    }
-
-    public function city() {
-        return $this->belongsTo(City::class, 'city_id');
     }
 }

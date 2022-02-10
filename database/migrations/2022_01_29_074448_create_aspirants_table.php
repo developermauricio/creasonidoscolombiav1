@@ -19,7 +19,12 @@ class CreateAspirantsTable extends Migration
                 \App\Models\Aspirant::HAS_PROJECT,
                 \App\Models\Aspirant::NOT_HAS_PROJECT,
             ])->default(\App\Models\Aspirant::NOT_HAS_PROJECT);
-            $table->string('cc_pdf')->nullable();
+            $table->enum('accept_termi', [
+                \App\Models\Aspirant::CUENTA_CON_CANCIONES_INEDITAS,
+                \App\Models\Aspirant::ACEPTA_COMPOSITORES_CREA_SONIDOS,
+            ]);
+            $table->string('cc_document')->nullable();
+            $table->string('extension_document')->nullable();
             $table->text('biography')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');

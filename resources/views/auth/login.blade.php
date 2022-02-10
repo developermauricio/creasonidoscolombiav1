@@ -7,12 +7,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">
     <meta name="author" content="CREA SONIDOS COLOMBIA">
-    <title>{{ config('app.name') }} | @yield('title')</title>
+    <title>{{ config('app.name') }} | Login</title>
     <link rel="apple-touch-icon" href="/app-assets/images/ico/apple-icon-120.png">
     {{--    <link rel="shortcut icon" type="image/x-icon" href="/app-assets/images/ico/favicon.ico">--}}
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600"
           rel="stylesheet">
+    <!-- BEGIN: PROPIOS MAIN CSS-->
 
+    <link rel="stylesheet" type="text/css" href="/app-assets/css/main.css">
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/vendors.min.css">
     <!-- END: Vendor CSS-->
@@ -51,14 +53,7 @@
         <div class="content-header row">
         </div>
         <div class="content-body">
-            @if (session('success-account'))
-                <div role="alert" aria-live="polite" aria-atomic="true" class="alert alert-success">
-                    <div class="alert-body">Su cuenta ha sido creada existosamente. Hemos enviado un correo electrónico
-                        con las credenciales de acceso para participar en
-                        <span style="font-weight: bold;">Crea Sonidos Colombia</span>
-                    </div>
-                </div>
-            @endif
+
             <div class="auth-wrapper auth-v2">
                 <div class="auth-inner row m-0">
                     <!-- Brand logo-->
@@ -67,15 +62,21 @@
                     </a>
                     <!-- /Brand logo-->
                     <!-- Left Text-->
-                    <div class="d-none d-lg-flex col-lg-8 align-items-center p-5">
-                        <div class="w-100 d-lg-flex align-items-center justify-content-center px-5"><img
-                                class="img-fluid" src="/app-assets/images/pages/login-v2.svg" alt="Login V2"/></div>
+                    <div class="d-none d-lg-flex col-lg-8 align-items-center background-auth">
+{{--                        <div class="w-100 d-lg-flex align-items-center justify-content-center px-5"><img--}}
+{{--                                class="img-fluid" src="/app-assets/images/pages/login-v2.svg" alt="Login V2"/></div>--}}
                     </div>
                     <!-- /Left Text-->
                     <!-- Login-->
                     <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5">
+
                         <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
-                            <h2 class="card-title font-weight-bold mb-1">Bievenido! 👋</h2>
+                            <div role="alert" aria-live="polite" aria-atomic="true" class="alert alert-success">
+                                <div class="alert-body text-justify" id="text-alert-account" style="display: none">Su cuenta ha sido creada existosamente. Hemos enviado un correo electrónico
+                                    con las credenciales de acceso para participar en
+                                </div>
+                            </div>
+                            <h2 class="card-title font-weight-bold mb-1">Bienvenido! 👋</h2>
                             <p class="card-text mb-2">Por favor ingrese sus credenciales de acceso</p>
                             <form class="auth-login-form mt-2" action="{{ route('login') }}" method="POST">
                                 @csrf
@@ -100,13 +101,14 @@
                                         <input class="form-control @error('password') form-control-merge @enderror " id="login-password"
                                                type="password" name="password" placeholder="············"
                                                aria-describedby="login-password" tabindex="2"/>
+
+                                        <div class="input-group-append"><span class="input-group-text cursor-pointer"><i
+                                                    data-feather="eye"></i></span></div>
                                         @error('password')
                                         <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
-                                        <div class="input-group-append"><span class="input-group-text cursor-pointer"><i
-                                                    data-feather="eye"></i></span></div>
                                     </div>
                                 </div>
                                 {{--                                <div class="form-group">--}}
@@ -147,7 +149,19 @@
 <!-- BEGIN: Page JS-->
 <script src="/app-assets/js/scripts/pages/page-auth-login.js"></script>
 <!-- END: Page JS-->
+<script>
+    $(function() {
+       let email = localStorage.getItem('email')
+       let message = localStorage.getItem('message')
+        if (email || message){
+            $('#login-email').val(email);
+            $('#text-alert-account').text(message);
+            $('#text-alert-account').css("display", "block");
+            localStorage.clear()
+        }
 
+    });
+</script>
 <script>
     $(window).on('load', function () {
         if (feather) {

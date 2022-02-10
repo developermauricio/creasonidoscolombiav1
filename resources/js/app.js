@@ -44,6 +44,7 @@ Vue.component('aspirant-register-component', require('./aspirant/Register.vue').
 Vue.component('aspirant-data-personal-register-component', require('./aspirant/components/DataPersonalRegister.vue').default);
 Vue.component('aspirant-project-register-component', require('./aspirant/components/DataProjectRegister.vue').default);
 
+Vue.component('aspirant-profile-component', require('./aspirant/profile/Profile.vue').default);
 
 Vue.component('curador-project-component', require('./curador/Projects.vue').default);
 

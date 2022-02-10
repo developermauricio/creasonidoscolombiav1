@@ -19,6 +19,8 @@
     @include('partials.assets.styles')
     @stack('css')
     <script>
+        window.user_ìd = '{{ auth()->user()->id }}'
+        window.aspirant_id = '{{ auth()->user()->aspirant->id }}'
         window.user_email = '{{ auth()->user()->email }}'
         window.user_name = '{{ auth()->user()->name }}'
         window.user_last_name = '{{ auth()->user()->last_name }}'
@@ -55,6 +57,14 @@
         <div class="content-header row">
         </div>
         <div class="content-body">
+            @if (session('permission_denied'))
+                <div class="alert alert-danger" role="alert">
+                    <h4 class="alert-heading">Atención</h4>
+                    <div class="alert-body">
+                        {{ session('permission_denied') }}
+                    </div>
+                </div>
+            @endif
             @yield('content')
         </div>
     </div>
@@ -104,6 +114,7 @@
 
 <!-- BEGIN: Page JS-->
 {{--<script src="/app-assets/js/scripts/pages/dashboard-ecommerce.js"></script>--}}
+<script src="/app-assets/js/scripts/pages/page-auth-reset-password.js"></script>
 <script src="{{ asset('js/app.js') }}"></script>
 @stack('js')
 <!-- END: Page JS-->

@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\City;
 use App\Models\Departament;
 use App\Models\Gender;
+use App\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -33,5 +34,15 @@ class Controller extends BaseController
     public function getProjectCategories(){
         $categories = Category::all();
         return response()->json(['data' => $categories]);
+    }
+
+    public function validateEmail($email)
+    {
+        $check = User::whereEmail($email)->first();
+        if ($check !== null) {
+            return response()->json('El correo electrónico ya ha sido registrado, por favor ingrese otro', 200);
+        }else{
+            return response()->json(300, 200);
+        }
     }
 }

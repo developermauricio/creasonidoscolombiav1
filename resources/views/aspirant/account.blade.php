@@ -7,10 +7,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">
     <meta name="author" content="CREA SONIDOS COLOMBIA">
-    <title>{{ config('app.name') }} | @yield('title')</title>
+    <title>{{ config('app.name') }} | Crear Cuenta</title>
     <link rel="apple-touch-icon" href="/app-assets/images/ico/apple-icon-120.png">
 {{--    <link rel="shortcut icon" type="image/x-icon" href="/app-assets/images/ico/favicon.ico">--}}
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
+
+    <!-- BEGIN: PROPIOS MAIN CSS-->
+
+    <link rel="stylesheet" type="text/css" href="/app-assets/css/main.css">
 
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/vendors.min.css">
@@ -60,8 +64,8 @@
                     </a>
                     <!-- /Brand logo-->
                     <!-- Left Text-->
-                    <div class="d-none d-lg-flex col-lg-8 align-items-center p-5">
-                        <div class="w-100 d-lg-flex align-items-center justify-content-center px-5"><img class="img-fluid" src="/app-assets/images/pages/register-v2.svg" alt="Register V2" /></div>
+                    <div class="d-none d-lg-flex col-lg-8 align-items-center background-auth">
+{{--                        <div class="w-100 d-lg-flex align-items-center justify-content-center px-5"><img class="img-fluid" src="/img/background-account.png" alt="Register V2" /></div>--}}
                     </div>
                     <!-- /Left Text-->
                     <!-- Register-->

@@ -1,0 +1,341 @@
+<template>
+    <div>
+        <!--=====================================
+		      ALERTA QUE CONFIRMA LA CREACIÓN EXITOSA DE UN PROYECTO
+        ======================================-->
+        <div role="alert" aria-live="polite" aria-atomic="true" class="alert alert-success">
+            <div class="alert-body text-justify" id="text-alert-confirmed_project" v-if="message_confirmed_project">
+                {{ message_confirmed_project }}
+            </div>
+        </div>
+        <!--=====================================
+		      ALERTA QUE CONFIRMA QUE TIENE 24 HORAS PARA EDITAR LA INFORMACIÓN
+        ======================================-->
+        <div role="alert" aria-live="polite" aria-atomic="true" class="alert alert-danger" v-if="!end_time">
+            <div class="alert-body text-justify text-center" id="text-alert-info-profile">
+                Tenga en cuenta que tiene 24 horas para editar su información si es que ha ingresado
+                algún dato incorrecto. Pasado las 24 horas su proyecto será enviado a revisión.
+                <div class="text-center">
+                    <!--=====================================
+		                 CONTADOR
+                    ======================================-->
+                    <Countdown
+                        :end="this.aspirant.projects[0].end_time"></Countdown>
+                    <p>Disponible para edición</p>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <!--=====================================
+                  LINEA DE LA CONVOCATORIA
+                ======================================-->
+                <div class="row p-2">
+                    <div class="col-12 d-flex">
+                        <h4 class="pr-1">Participa como: </h4>
+                        <h5 style="margin-top: 0.2rem" v-if="aspirant.aspirant_type.id === 1">Persona
+                            natural en representación propia</h5>
+                        <h5 style="margin-top: 0.2rem" v-if="aspirant.aspirant_type.id === 2">Persona
+                            natural en representación de una agrupación</h5>
+                        <h5 style="margin-top: 0.2rem" v-if="aspirant.aspirant_type.id === 3">Persona
+                            natural en representación de un menor de edad</h5>
+                    </div>
+                </div>
+                <!--=====================================
+		            ESTADO DEL PROYECTO
+                ======================================-->
+                <div class="row pr-2 pl-2 pb-1">
+                    <div class="col-12 d-flex">
+                        <h4 class="pr-1">Estado: </h4>
+                        <div style="margin-top:-0.5rem">
+                            <div class="badge badge-glow badge-danger" v-if="aspirant.projects[0].state === '1'">
+                                Borrador
+                            </div>
+                            <div class="badge badge-glow badge-warning" v-if="aspirant.projects[0].state === '2'">En
+                                Revisión
+                            </div>
+                            <div class="badge badge-glow badge-success" v-if="aspirant.projects[0].state === '3'">
+                                Acepatdo
+                            </div>
+                            <div class="badge badge-glow badge-success" v-if="aspirant.projects[0].state === '4'">
+                                Calificado
+                            </div>
+                            <div class="badge badge-glow badge-danger" v-if="aspirant.projects[0].state === '5'">
+                                Rechazado
+                            </div>
+                            <div class="badge badge-glow badge-success" v-if="aspirant.projects[0].state === '6'">
+                                Aprobado
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!--=====================================
+		             BOTON PARA EDITAR LA INFORMACIÓON
+                 ======================================-->
+                <div class="row pr-2 pl-2 pb-2" v-if="!end_time">
+                    <div class="col-12">
+                        <button type="button" class="btn float-right btn-primary waves-effect waves-light">Editar <i
+                            data-feather='edit-2'></i></button>
+                    </div>
+                </div>
+                <vs-tabs color="#11435b">
+                    <!--=====================================
+                        INFORMACIÓN PERSONAL
+                    ======================================-->
+                    <vs-tab label="Información Personal">
+                        <div class="con-tab-ejemplo">
+                            <div class="row p-2">
+                                <div class="col-12 col-lg-3 col-md-3">
+                                    <div class="form-group">
+                                        <h5>Nombre:</h5>
+                                        <p>{{ aspirant.user.name }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-3 col-md-3">
+                                    <div class="form-group">
+                                        <h5>Apellidos:</h5>
+                                        <p>{{ aspirant.user.last_name }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-3 col-md-3">
+                                    <div class="form-group">
+                                        <h5>Correo electrónico:</h5>
+                                        <p>{{ aspirant.user.email }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-3 col-md-3">
+                                    <div class="form-group">
+                                        <h5>Celular:</h5>
+                                        <p>{{ aspirant.user.phone }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-3 col-md-3">
+                                    <div class="form-group">
+                                        <h5>Fecha de nacimiento:</h5>
+                                        <p>{{ moment(aspirant.user.birthday).locale('es').format("MMMM Do YYYY") }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-3 col-md-3">
+                                    <div class="form-group">
+                                        <h5>Edad:</h5>
+                                        <p>{{ edad }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-3 col-md-3">
+                                    <div class="form-group">
+                                        <h5>Género:</h5>
+                                        <p>{{ aspirant.user.gender.name }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-3 col-md-3">
+                                    <div class="form-group">
+                                        <h5>Departamento:</h5>
+                                        <p>{{ aspirant.user.city.departament.descripcion }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-3 col-md-3">
+                                    <div class="form-group">
+                                        <h5>Ciudad o municipio:</h5>
+                                        <p>{{ aspirant.user.city.descripcion }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-3 col-md-3">
+                                    <div class="form-group">
+                                        <h5>Dirección:</h5>
+                                        <p>{{ aspirant.user.address }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-3 col-md-3">
+                                    <div class="form-group">
+                                        <h5>Documento de identificación:</h5>
+                                        <span data-toggle="modal" data-target="#modal-show-pdf" class="pr-2"
+                                              style="color: #B53E2A; cursor: pointer">Ver documento</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </vs-tab>
+                    <!--=====================================
+                        INFORMACIÓN DEL PROYECTO
+                    ======================================-->
+                    <!--                    <vs-tab label="Propuesta Musical">-->
+                    <!--                        <h1>Propuesta musical</h1>-->
+                    <!--                    </vs-tab>-->
+                </vs-tabs>
+                <!--=====================================
+                        INFORMACIÓN DEL PROYECTO
+                ======================================-->
+                <vs-tabs color="#11435b">
+                    <!--=====================================
+                        INFORMACIÓN PERSONAL
+                    ======================================-->
+                    <vs-tab label="Información Propuesta Musical">
+                        <div class="con-tab-ejemplo">
+                            <div class="row p-2">
+                                <div class="col-12 col-lg-3 col-md-3">
+                                    <div class="form-group">
+                                        <h5>Titulo de la canción:</h5>
+                                        <p>{{ aspirant.projects[0].title }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-3 col-md-3">
+                                    <div class="form-group">
+                                        <h5>Nombre del autor o compositor:</h5>
+                                        <p>{{ aspirant.projects[0].name_author }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-3 col-md-3">
+                                    <div class="form-group">
+                                        <h5>Modalidad o categoría de la canción:</h5>
+                                        <p>{{ aspirant.projects[0].category.category }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row pr-2 pl-2">
+                                <div class="col-12">
+                                    <h5>Reseña:</h5>
+                                    <p class="text-justify">{{ aspirant.projects[0].description }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </vs-tab>
+                </vs-tabs>
+            </div>
+        </div>
+        <!--=====================================
+		        MODAL MOSTRAR CEDULA EN PDF
+            ======================================-->
+        <div class="modal fade text-left" id="modal-show-pdf" tabindex="-1" role="dialog"
+             aria-labelledby="modal-example-pdf" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel17">Documento de identificiación de
+                            {{ aspirant.user.name }} {{ aspirant.user.last_name }}</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div v-if="aspirant.extension_document ==='pdf'">
+                            <iframe :src="aspirant.cc_document" style="width:100%; height:700px;" frameborder="0">
+
+                            </iframe>
+                        </div>
+                        <div v-else>
+                            <img style="width: 100%" :src="aspirant.cc_document" alt="">
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card fixed-player">
+            <div class="card-body">
+                <vue-plyr ref="plyr">
+                    <audio controls crossorigin playsinline>
+                        <source
+                            :src="aspirant.projects[0].audio"
+                            type="audio/mp3"
+                        />
+                    </audio>
+                </vue-plyr>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+import Countdown from '../../vuejs-countdown'
+
+require("moment/min/locales.min");
+import moment from 'moment';
+
+export default {
+    name: "Profile",
+    components: {Countdown},
+    data() {
+        return {
+            moment: moment,
+            edad: null,
+            end_time: false,
+            message_confirmed_project: ''
+        }
+    },
+    props: ['aspirant'],
+
+    methods: {
+
+        /*=============================================
+            FUNCION PARA ACTUALIZAR EL ESTADO DEL PROYECTO LUEGO DE VENCER EL TIEMPO
+        =============================================*/
+        updateProject(){
+            let id_project = this.aspirant.projects[0].id
+            setTimeout(() =>{
+                this.$vs.loading({
+                    color: '#11435b',
+                    text: 'El tiempo de edición termino. Actualizando información...'
+                })
+                axios.post(`/api/update-project-endtime/${id_project}`).then(resp =>{
+                    window.location = '/perfil'
+                    localStorage.setItem('message_project_confirmed', 'El tiempo para editar termino. En este momento su propuesta musical esta en estado REVISIÓN')
+                }).catch( err => {
+                    console.log('mostrando el error: ', err)
+                    this.$toast.error({
+                        title: 'Error',
+                        message: 'Hubo un error consulte con el administrador',
+                        showDuration: 1000,
+                        hideDuration: 8000,
+                    })
+                    this.$vs.loading.close()
+                })
+            }, 200)
+        },
+        /*=============================================
+            FUNCION QUE EVALUA SI ESTA DISPONIBLE PARA EDITAR
+        =============================================*/
+        endTimeProject() {
+            let miliseconds = moment().diff(this.aspirant.projects[0].end_time) * -1
+            if (miliseconds >= 0) {
+                console.log(miliseconds)
+                setTimeout(() => {
+                   this.end_time = true
+                    /* Actualizamos el estado del proyecto*/
+                    this.updateProject()
+                }, miliseconds)
+            }else{
+                this.end_time = true
+            }
+        }
+    },
+
+    mounted() {
+        let nacimiento = this.aspirant.user.birthday;
+        let hoy = moment();
+        let anios = hoy.diff(nacimiento, "years");
+        this.edad = anios
+        this.message_confirmed_project = localStorage.getItem('message_project_confirmed')
+        localStorage.clear()
+        this.endTimeProject()
+
+    }
+}
+</script>
+
+<style scoped>
+.badge {
+    line-height: 2 !important;
+}
+
+.fixed-player {
+    position: fixed;
+    bottom: 4rem;
+    width: 100%;
+    left: 0;
+    z-index: 200 !important;
+}
+</style>

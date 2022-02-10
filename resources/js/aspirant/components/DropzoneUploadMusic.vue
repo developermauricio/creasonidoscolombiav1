@@ -88,6 +88,9 @@ export default {
 
         messagesError(file, message, xhr){
             this.$refs.myVueDropzone.removeFile(file);
+            setTimeout(() =>{
+                this.$vs.loading.close()
+            }, 500)
             this.$toast.error({
                 title: 'Error',
                 message: message,
@@ -98,22 +101,30 @@ export default {
         },
 
         sendingEvent(file, xhr, formData) {
+            this.$vs.loading({
+                color: '#11435b',
+                text: 'Subiendo audio espere un momento por favor...'
+            })
             console.log('upload file', file);
             formData.append('nameAspirant', this.name +'-'+ this.lastName);
             formData.append('nameProject', this.nameProject);
             formData.append('archiveUuid', file.upload.uuid);
         },
 
-        // maxFiles(file) {
-        //     this.$refs.myVueDropzone.removeFile(file);
-        //     this.$toast.error({
-        //         title: 'Atención',
-        //         message: 'No es posible agregar otra canción. Limite maximo 1',
-        //         showDuration: 1000,
-        //         hideDuration: 8000,
-        //         position: 'top right',
-        //     })
-        // },
+        maxFiles(file) {
+            this.$refs.myVueDropzone.removeFile(file);
+
+            setTimeout(() =>{
+                this.$vs.loading.close()
+            }, 500)
+            // this.$toast.error({
+            //     title: 'Atención',
+            //     message: 'No es posible agregar otra canción. Limite maximo 1',
+            //     showDuration: 1000,
+            //     hideDuration: 8000,
+            //     position: 'top right',
+            // })
+        },
 
         addArchiveMusicPrincipal(file, response) {
 
@@ -132,6 +143,7 @@ export default {
                     hideDuration: 5000,
                     position: 'top right',
                 })
+                this.$vs.loading.close()
             }, 1000);
             this.$emit('dataUrlMusicPrincipal', this.urlsArchiveMusicPrincipal);
         },

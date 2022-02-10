@@ -15,15 +15,20 @@ class Proyect extends Model
     const APPROVAL = 6;
     const PENDING_REGISTER = 7;
 
+    const AVAILABLE_TO_EDIT = 1;
+    const NOT_AVAILABLE_TO_EDIT = 2;
+
     protected $fillable = [
 
         'title',
         'description',
         'state',
         'audio',
+        'name_author',
         'slug',
         'end_time',
-        'categories_id'
+        'category_id',
+        'available_edit'
     ];
 
     public function aspirant(){

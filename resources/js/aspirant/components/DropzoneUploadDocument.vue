@@ -51,6 +51,9 @@ export default {
     methods:{
         messagesError(file, message, xhr){
             this.$refs.myVueDropzone.removeFile(file);
+            setTimeout(()=>{
+                this.$vs.loading.close()
+            }, 500)
             this.$toast.error({
                 title: 'Error',
                 message: message,
@@ -68,6 +71,9 @@ export default {
 
         maxFiles(file) {
             this.$refs.myVueDropzone.removeFile(file);
+            setTimeout(() =>{
+                this.$vs.loading.close()
+            }, 500)
             // this.$toast.error({
             //     title: 'Atención',
             //     message: 'No es posible agregar más archivos. Limite maximo 1',
@@ -79,6 +85,10 @@ export default {
         },
 
         uploadArchive(file){
+            this.$vs.loading({
+                color: '#11435b',
+                text: 'Subiendo documento espere un momento por favor...'
+            })
             let name = this.name
             let last_name = this.lastName
             if (name === '' && last_name === ''){
@@ -91,7 +101,9 @@ export default {
                     position: 'top right',
                 })
             }
-
+            console.log('ARCHIVO', file)
+            console.log('ARCHIVO', file.status)
+            this.$vs.loading.close()
         },
 
         addArchiveArtist(file, response) {
@@ -111,6 +123,7 @@ export default {
                     hideDuration: 5000,
                     position: 'top right',
                 })
+                this.$vs.loading.close()
             }, 1000);
             this.$emit('dataUrl', this.urlsArchiveArtist);
         },
