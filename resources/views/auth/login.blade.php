@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">
     <meta name="author" content="CREA SONIDOS COLOMBIA">
-    <title>{{ config('app.name') }} | Login</title>
+    <title>{{ config('app.name') }} | Iniciar Sesión</title>
     <link rel="apple-touch-icon" href="/app-assets/images/ico/apple-icon-120.png">
     {{--    <link rel="shortcut icon" type="image/x-icon" href="/app-assets/images/ico/favicon.ico">--}}
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600"
@@ -85,16 +85,12 @@
                                     <input class="form-control @error('email') @enderror" id="login-email" type="text" name="email"
                                            placeholder="john@example.com" value="{{ old('email') }}" aria-describedby="login-email" autofocus=""
                                            tabindex="1"/>
-                                    @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
                                 </div>
+
                                 <div class="form-group">
                                     <div class="d-flex justify-content-between">
                                         <label for="login-password">Contraseña</label><a
-                                            href="page-auth-forgot-password-v2.html"><small>Ólvido la
+                                            href="/password/reset"><small>Ólvido la
                                                 contraseña?</small></a>
                                     </div>
                                     <div class="input-group input-group-merge form-password-toggle">
@@ -104,12 +100,18 @@
 
                                         <div class="input-group-append"><span class="input-group-text cursor-pointer"><i
                                                     data-feather="eye"></i></span></div>
-                                        @error('password')
-                                        <span class="invalid-feedback" role="alert">
+                                        @error('email')
+                                        <span class="text-danger" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+
+                                    </div>
+                                    @error('password')
+                                    <span class="text-danger" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
-                                        @enderror
-                                    </div>
+                                    @enderror
                                 </div>
                                 {{--                                <div class="form-group">--}}
                                 {{--                                    <div class="custom-control custom-checkbox">--}}

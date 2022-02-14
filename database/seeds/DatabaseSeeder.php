@@ -40,6 +40,9 @@ class DatabaseSeeder extends \Illuminate\Database\Seeder
         factory(Gender::class, 1)->create([
             'name' => 'Femenino'
         ]);
+        factory(Gender::class, 1)->create([
+            'name' => 'Otros'
+        ]);
 //        factory(Gender::class, 1)->create([
 //            'name' => 'Otro'
 //        ]);
@@ -100,6 +103,14 @@ class DatabaseSeeder extends \Illuminate\Database\Seeder
             'email' => 'admin@admin.co',
         ])->each(function (\App\User $u) {
             $u->roles()->attach('1');
+        });
+
+        /*=============================================
+         CREAMOS LOS SUBSANADORES
+       =============================================*/
+        factory(User::class, 3)->create([
+        ])->each(function (\App\User $u) {
+            $u->roles()->attach('3');
         });
 
         /*=============================================

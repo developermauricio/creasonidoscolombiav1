@@ -26,12 +26,11 @@
         <!--=====================================
                CAMPO NOMBRES
            ======================================-->
-
+        <h5 class="pb-1 pt-1">2. Información Personal</h5>
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6">
                 <div class="form-group">
                     <input-form
-                        :disabled="1"
                         id="txtNameAspirant"
                         label="Nombres"
                         pattern="alf"
@@ -49,7 +48,6 @@
             <div class="col-12 col-md-6 col-lg-6">
                 <div class="form-group">
                     <input-form
-                        :disabled="1"
                         id="txtLastNameAspirant"
                         label="Apellidos"
                         pattern="alf"
@@ -84,30 +82,27 @@
            ======================================-->
             <div class="col-12 col-md-6 col-lg-6">
                 <div class="form-group">
-                    <label class="form-control-label">Celular <span class="text-danger">*</span></label>
-                    <VuePhoneNumberInput
+<!--                    <label class="form-control-label">Celular <span class="text-danger">*</span></label>-->
+                    <input-form
+                        label="Celular"
                         id="phoneAspirant"
-                        v-model="aspirant.phone"
+                        pattern="all"
+                        errorMsg="Ingrese un celular valido"
+                        requiredMsg="El número de celular es requerido"
                         :required="true"
-                        requiredMsg="Número de celular es obligatorio"
-                        @update="aspirant.phoneI=$event.formatInternational"
-                        :fetch-country="false"
-                        :no-country-selector="true"
-                        :show-code-on-list="true"
-                        :translations="{
-                                countrySelectorLabel: 'Código',
-                                countrySelectorError: 'Selecciona país',
-                                phoneNumberLabel: 'Número de celular',
-                                example: 'Ejemplo'
-                            }"/>
-                    <p style="margin-top: 0.3rem;font-size: 0.9rem; display: none;"
-                       id="text-verify-phone-principal" class="text-danger">
-                        El número de celular es obligatorio
-                    </p>
-                    <p style="margin-top: 0.3rem;font-size: 0.9rem; display: none;"
-                       id="text-verify-phone-valid" class="text-danger">
-                        Ingrese un número de celular válido
-                    </p>
+                        :modelo.sync="aspirant.phone"
+                        :msgServer.sync="errors.phone"
+                        v-mask="'(###) ###-####'"
+                    ></input-form>
+
+<!--                    <p style="margin-top: -0.5rem;font-size: 0.9rem; display: none;"-->
+<!--                       id="text-verify-phone-principal" class="text-danger">-->
+<!--                        El número de celular es obligatorio-->
+<!--                    </p>-->
+<!--                    <p style="margin-top: -0.5rem;font-size: 0.9rem; display: none;"-->
+<!--                       id="text-verify-phone-valid" class="text-danger">-->
+<!--                        Ingrese un número de celular válido-->
+<!--                    </p>-->
                 </div>
             </div>
             <!--=====================================
@@ -115,29 +110,25 @@
            ======================================-->
             <div class="col-12 col-md-6 col-lg-6">
                 <div class="form-group">
-                    <label class="form-control-label">Confirmar celular <span class="text-danger">*</span></label>
-                    <VuePhoneNumberInput
-                        v-model="aspirant.phone_confirmed"
+                    <input-form
+                        id="phoneAspirantConfirmed"
+                        label="Confirmar celular"
+                        pattern="all"
+                        errorMsg="Ingrese un celular valido"
+                        requiredMsg="La confirmación del celular es requerida"
                         :required="true"
-                        requiredMsg="Confirmar el número de Celular es obligatorio"
-                        @update="aspirant.phoneI=$event.formatInternational"
-                        :fetch-country="false"
-                        :no-country-selector="true"
-                        :show-code-on-list="true"
-                        :translations="{
-                                countrySelectorLabel: 'Código',
-                                countrySelectorError: 'Selecciona país',
-                                phoneNumberLabel: 'Número de teléfono',
-                                example: 'Ejemplo'
-                            }"/>
-                    <p style="margin-top: 0.3rem;font-size: 0.9rem; display: none; font-weight: bold"
+                        :modelo.sync="aspirant.phone_confirmed"
+                        :msgServer.sync="errors.phone_confirmed"
+                        v-mask="'(###) ###-####'"
+                    ></input-form>
+                    <p style="margin-top: -0.5rem;font-size: 0.9rem; display: none; font-weight: bold"
                        id="text-verify-phone" class="text-danger">
                         El número de celular no coincide
                     </p>
-                    <p style="margin-top: 0.3rem;font-size: 0.9rem; display: none;"
-                       id="text-verify-phone-confir-valide" class="text-danger">
-                        La confirmación del celular es obligatorio
-                    </p>
+<!--                    <p style="margin-top: -0.5rem;font-size: 0.9rem; display: none;"-->
+<!--                       id="text-verify-phone-confir-valide" class="text-danger">-->
+<!--                        La confirmación del celular es obligatorio-->
+<!--                    </p>-->
                 </div>
             </div>
             <!--=====================================
@@ -195,7 +186,7 @@
                     label="Departamento de residencia"
                     id="textDispatchDepartmentAspirant"
                     errorMsg
-                    requiredMsg="El departamento de residencia es obligatorio"
+                    requiredMsg="El departamento de residencia es requerido"
                     :required="true"
                     :modelo.sync="aspirant.homeDepartment"
                     :msgServer.sync="errors.homeDepartment"
@@ -222,7 +213,7 @@
                     label="Ciudad o municipio de residencia"
                     id="textCityAspirant"
                     errorMsg
-                    requiredMsg="La ciudad o municipio de residencia es obligatorio"
+                    requiredMsg="La ciudad o municipio de residencia es requerido"
                     :required="true"
                     :modelo.sync="aspirant.homeCity"
                     :msgServer.sync="errors.homeCity"
@@ -269,7 +260,7 @@
                                           :lastName="aspirant.user_auth_last_name"></dropzone-upload-document>
                 <p style="margin-top: 0.3rem;font-size: 0.9rem; display: none"
                    id="text-verify-archive-document-aspirant" class="text-danger">El archivo del documento es
-                    obligatorio</p>
+                    requerido</p>
             </div>
             <div class="d-flex pl-1 pt-1">
                 <span data-toggle="modal" data-target="#modal-example-pdf" class="pr-2"
@@ -474,18 +465,18 @@ export default {
     watch: {
         'aspirant.phone': function (val){
             if (val){
-                $('.input-tel__input').removeClass('is-invalid')
+                $('#phoneAspirant').removeClass('is-invalid')
             }else{
                 this.aspirant.phone_confirmed = ''
             }
         },
         'aspirant.phone_confirmed': function (val) {
             if (val !== this.aspirant.phone && this.aspirant.phone_confirmed) {
-                $('.input-tel__input').addClass('is-invalid')
+                $('#phoneAspirantConfirmed').addClass('is-invalid')
                 $("#text-verify-phone").css("display", "block");
             } else {
                 $("#text-verify-phone").css("display", "none");
-                $('.input-tel__input').removeClass('is-invalid')
+                $('#phoneAspirantConfirmed').removeClass('is-invalid')
             }
         },
     },

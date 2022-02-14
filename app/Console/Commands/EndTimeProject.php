@@ -6,6 +6,7 @@ use App\Models\Proyect;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
+use \PhpMqtt\Client\Facades\MQTT;
 
 class EndTimeProject extends Command
 {
@@ -51,8 +52,10 @@ class EndTimeProject extends Command
             $project->available_edit = 2;
             $project->state = 2;
             $project->save();
+
+            MQTT::publish('subsanador_project', 'Nuevo proyecto en la bandeja');
             Mail::to($project->aspirant[0]->user->email)->send(new \App\Mail\Aspirant\EndTimeProject($email, $name, $last_name, $project_name, $project_category));
-          ;
+
         }
     }
 }

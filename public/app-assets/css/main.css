@@ -71,3 +71,18 @@
 .plyr__menu__container .plyr__control[role=menuitemradio][aria-checked=true]::before {
     background: #11435b !important;
 }
+.multiselect__option--highlight{
+    background: #11435b !important;
+}
+.vdp-datepicker__calendar .cell.selected{
+    background: #11435b !important;
+    color: #ffffff !important;
+}
+
+.vdp-datepicker__calendar .cell:not(.blank):not(.disabled).day:hover, .vdp-datepicker__calendar .cell:not(.blank):not(.disabled).month:hover, .vdp-datepicker__calendar .cell:not(.blank):not(.disabled).year:hover{
+    border: 1px solid #11435b !important;
+}
+
+#dpz-archives-register-minor{
+    text-align: center !important;
+}

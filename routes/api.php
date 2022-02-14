@@ -22,7 +22,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/aspirant/account-create', 'Aspirant\AccountController@createAccount')->name('aspirant.create.account');
 Route::get('/get-aspirant-types', 'Aspirant\RegisterController@getAspirantType')->name('aspirant.get.aspirant.type');
 Route::post('/upload-archive-aspirant', 'Aspirant\RegisterController@uploadArchiveAspirant')->name('api.upload.archive.aspirant');
-Route::post('/removed-archive-aspirant', 'Aspirant\RegisterController@removedArchiveAspirant')->name('api.removed.archive.aspirant');
+Route::post('/upload-archive-minor', 'Aspirant\RegisterController@uploadArchiveMinor')->name('api.upload.archive.minor');
+Route::post('/removed-archive-minor', 'Aspirant\RegisterController@removedArchiveMinor')->name('api.removed.archive.minor');
 Route::post('/upload-archive-music-principal', 'Aspirant\RegisterController@uploadArchiveMusic')->name('api.upload.archive.music.aspirant');
 Route::post('/removed-archive-music-principal', 'Aspirant\RegisterController@removedArchiveMusicPrincipal')->name('api.remove.archive.music.principal');
 Route::post('/upload-archive-music-opcional', 'Aspirant\RegisterController@uploadArchiveMusicOpcional')->name('api.upload.archive.music.aspirant');
@@ -30,6 +31,7 @@ Route::post('/removed-archive-music-opcional', 'Aspirant\RegisterController@remo
 Route::post('/create-register', 'Aspirant\RegisterController@createRegister')->name('api.create.register.aspirant');
 
 Route::post('/update-project-endtime/{id}', 'Aspirant\ProfileController@udpateStateProject')->name('api.update.state.project');
+Route::post('/update-profile-register', 'Aspirant\ProfileController@editProfile')->name('api.update.profile.aspirant');
 
 
 

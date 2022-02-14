@@ -106,7 +106,7 @@
                                             <span style="--text-opacity: 1; color: #B53E2A; text-decoration: none;">TENGA EN CUENTA QUE TIENE 24 HORAS PARA EDITAR TU INFORMACIÓN SI ES QUE HAS INGRESADO ALGÚN DATO INCORRECTO.</span>
                                             Para editar puedes iniciar sesión con tus credenciales de acceso.
                                         </p>
-                                        <p>Esta la información principal de su propuesta musical:</p>
+                                        <p>Esta es la información principal de su propuesta musical:</p>
                                         <ul style="margin-bottom: 24px;">
                                             <li><span style="font-weight: bold">Titulo de la canción:</span> <span style="color: #11435b; font-weight: bold">{{ $project_name }}</span></li>
                                             <li><span style="font-weight: bold">Modalidad o categoría de la canción:</span>  <span style="color: #11435b; font-weight: bold">{{ $project_category }}</span></li>

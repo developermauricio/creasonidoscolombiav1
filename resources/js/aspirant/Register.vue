@@ -6,10 +6,21 @@
             ======================================-->
             <aspirant-data-personal-register-component
                 v-on:dataRegisterPersonal="dataRegisterPersonal"></aspirant-data-personal-register-component>
+
+            <!--=====================================
+             COMPONENTE DATOS MENOR DE EDAD
+            ======================================-->
+
+            <div class="pt-2 pb-1" v-if="select_type_artist">
+                <hr>
+                <aspirant-data-minor-register-component v-on:dataRegisterMinor="dataRegisterMinor"></aspirant-data-minor-register-component>
+            </div>
+
             <hr>
             <!--=====================================
              COMPONENTE DATOS DEL PROYECTO
             ======================================-->
+            <h5 class="pb-1 pt-2">{{ select_type_artist ? '4.' : '3.' }} Datos de la propuesta musical</h5>
             <aspirant-project-register-component v-on:dataRegisterProject="dataRegisterProject" :name="user_auth_name"
                                                  :last_name="user_auth_last_name"></aspirant-project-register-component>
 
@@ -17,7 +28,7 @@
              CAMBIAR LA CONTRASEÑA
             ======================================-->
             <hr>
-            <h5 class="pb-1 pt-2">4. Cambiar contraseña</h5>
+            <h5 class="pb-1 pt-2">{{ select_type_artist ? '5.' : '4.' }} Cambiar contraseña</h5>
             <div class="row">
                 <div class="col-12 col-lg-4 col-md-4">
                     <!--                    <div class="input-group input-group-merge form-password-toggle">-->
@@ -74,7 +85,7 @@
             <div class="pt-2">
                 <p>Por favor, antes de registrar su información, responda. Usted cuentan con mínimo seis (6) canciones
                     inéditas (obras musicales sin publicar); o de lo contrario “aceptar” en la casilla que están
-                    dispuestos a colaborar con autores - compositores emanados del proceso CREASONIDOS.</p>
+                    dispuestos a colaborar con autores - compositores vinculados a CREASONIDOS.</p>
                 <div class="form-group">
                     <div class="row">
                         <div class="col-12">
@@ -118,6 +129,7 @@ export default {
         return {
             password: '',
             confirmed_password: '',
+            select_type_artist: false,
 
             acceptTerm: null,
             validate: false,
@@ -127,6 +139,7 @@ export default {
             user_auth_last_name: window.user_last_name,
             project: null,
             aspirant: null,
+            minor: null,
             errors: {}
         }
     },
@@ -139,6 +152,13 @@ export default {
 
         dataRegisterProject(data) {
             this.project = data
+        },
+
+        dataRegisterMinor(data){
+            setTimeout(()=>{
+                this.minor = data
+            }, 200)
+
         },
         registerInformation() {
             eventBus.$emit("validarFormulario");
@@ -163,6 +183,11 @@ export default {
                     if (this.aspirant.urlDataArchive.length === 0) {
                         $("#text-verify-archive-document-aspirant").css("display", "block");
                         $('#dpz-archives-register-aspirant').addClass('is-invalid')
+                    }
+
+                    if (this.minor.urlDataArchive.length === 0) {
+                        $("#text-verify-archive-document-minor").css("display", "block");
+                        $('#dpz-archives-register-minor').addClass('is-invalid')
                     }
 
                     if (this.project.dataArchiveMusicPrincipal.length === 0) {
@@ -215,6 +240,23 @@ export default {
                 } else {
                     $("#text-verify-phone-confir-valide").css("display", "none");
                     $('.input-tel__input').removeClass('is-invalid')
+
+                }
+
+                if (this.minor.urlDataArchive.length === 0) {
+                    $("#text-verify-archive-document-minor").css("display", "block");
+                    $('#dpz-archives-register-minor').addClass('is-invalid')
+                    this.$toast.error({
+                        title: 'Error',
+                        message: 'Por favor revise que todos los campos esten llenos o bien diligenciados',
+                        showDuration: 1000,
+                        hideDuration: 6000,
+                        position: 'top right',
+                    })
+                    return;
+                }else {
+                    $("#text-verify-archive-document-minor").css("display", "none");
+                    $('#dpz-archives-register-minor').removeClass('is-invalid')
 
                 }
 
@@ -290,6 +332,18 @@ export default {
                 data.append('project_description', this.project.description);
                 data.append('project_category', JSON.stringify(this.project.category));
                 data.append('project_audio', JSON.stringify(this.project.dataArchiveMusicPrincipal));
+
+
+                /*=============================================
+                   DATOS DEL MENOR DE EDAD
+               =============================================*/
+                if (this.aspirant.selectAspirantType === 3){
+                    data.append('name_minor', this.minor.name);
+                    data.append('last_name_minor', this.minor.last_name);
+                    data.append('birthday_minor', moment(this.minor.birthday).format("YYYY-MM-DD HH:mm:ss"))
+                    data.append('archive_minor', JSON.stringify(this.minor.urlDataArchive));
+                }
+
                 /*=============================================
                     CONTRASEÑA
                 =============================================*/
@@ -361,24 +415,6 @@ export default {
                 $("#text-verify-phone-principal").css("display", "none");
                 $("#text-verify-phone-confir-valide").css("display", "none");
             }
-            if (val) {
-                setTimeout(() => {
-                    let valid = $(".input-phone-number").hasClass("is-valid")
-
-                    if (valid) {
-                        $('#phoneAspirant-7_phone_number').removeClass('is-invalid')
-                        $("#text-verify-phone-valid").css("display", "none");
-
-                        $("#text-verify-phone-confir-valide").css("display", "none");
-                        $("#text-verify-phone-principal").css("display", "none");
-                    } else {
-                        $('#phoneAspirant-7_phone_number').addClass('is-invalid')
-                        $("#text-verify-phone-valid").css("display", "block");
-
-                    }
-                }, 200)
-
-            }
         },
         'aspirant.phone_confirmed': function (val) {
             if (this.aspirant.phone_confirmed !== "") {
@@ -396,11 +432,17 @@ export default {
                     $("#text-verify-line-participation").css("display", "none");
                     $('#text-line-participation').removeClass('is-invalid')
                 }
+                if (val === 3){
+                    this.select_type_artist = true
+                }else{
+                    this.select_type_artist = false
+                }
             }, 200)
         },
     },
 
     mounted() {
+
         $('.form-password-toggle .input-group-text').on('click', function (e) {
             e.preventDefault();
             var $this = $(this),

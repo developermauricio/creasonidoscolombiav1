@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Mail\Aspirant\RegisterProject;
 use App\Models\Aspirant;
 use App\Models\AspirantType;
+use App\Models\Minor;
+use App\Models\ParentApirant;
 use App\Models\Proyect;
 use App\User;
 use Carbon\Carbon;
@@ -28,8 +30,39 @@ class RegisterController extends Controller
         return response()->json(['data' => $aspirantType]);
     }
 
+    public function uploadArchiveMinor(Request $request)
+    {
+        $nameAspirant = $request->input('nameMinor');
+        $documentAspirant = $request->input('documentMinor');
+        $uuid = $request->input('archiveUuid');
+        $archive = $request->file('archive');
+        $archiveExtension = $archive->getClientOriginalExtension();
+        $ramdon = Str::random(10);
+        $nameArchive = Str::slug(strtolower($nameAspirant) . '-' . Str::random(15), '-');
+        $path = Storage::disk('public')->put('/archives/' . $nameArchive . '.' . $archiveExtension, file_get_contents($archive));
+
+        $urlFinal = '/storage/archives/' . $nameArchive . '.' . $archiveExtension;
+        return response()->json(['data' => $urlFinal, 'uuid' => $uuid, 'extension' => $archiveExtension]);
+    }
+
+    public function removedArchiveMinor(Request $request)
+    {
+        $pathArchive = $request->get('archiveMinor');
+        $partes_ruta = pathinfo($pathArchive);
+        Storage::delete('archives/' . $partes_ruta['basename']);
+
+        return response()->json('Se eliminó correctamente');
+    }
+
     public function uploadArchiveAspirant(Request $request)
     {
+//        $editAspirant = $request->input('editAspirant');
+//
+//        if ($editAspirant){
+//            $pathArchive = $request->get('documentAspirant');
+//            $partes_ruta = pathinfo($pathArchive);
+//            Storage::delete('archives/' . $partes_ruta['basename']);
+//        }
 
         $nameAspirant = $request->input('nameAspirant');
         $documentAspirant = $request->input('documentAspirant');
@@ -55,6 +88,7 @@ class RegisterController extends Controller
 
     public function uploadArchiveMusic(Request $request)
     {
+
         $nameProject = $request->input('nameProject');
         $nameAspirant = $request->input('nameAspirant');
         $uuid = $request->input('archiveUuid');
@@ -163,6 +197,33 @@ class RegisterController extends Controller
                 'user_id' => $user_id,
                 'aspirant_type_id' => $aspirantType,
             ]);
+
+            /*=============================================
+               DATOS SI ES REPRESENTANTE DE UN MENOR DE EDAD
+            =============================================*/
+            if ($aspirantType === "3") {
+
+                $document_minor = json_decode($request->archive_minor);
+                $name_minor = $request->name_minor;
+                $last_name_minor = $request->last_name_minor;
+                $birthday_minor = $request->birthday_minor;
+
+                $parent = ParentApirant::create([
+                    'user_id' => $user_id,
+                    'aspirant_id' => $aspirant_id
+                ]);
+
+                $minor = Minor::create([
+                    'document' => $document_minor[0]->urlArchive,
+                    'extension_document' => $document_minor[0]->extension,
+                    'name' => ucwords($name_minor),
+                    'last_name' => ucwords($last_name_minor),
+                    'birthday' => $birthday_minor,
+                    'parent_id' => $parent->id
+                ]);
+            }
+
+
             /*=============================================
                     CREAMOS EL PROYECTO
             =============================================*/
@@ -177,7 +238,6 @@ class RegisterController extends Controller
             ]);
 
             $project->aspirant()->attach($aspirant_id);
-
             Mail::to($email)->send(new RegisterProject($email, $name, $last_name, ucwords($project_name), $project_category->category));
         } catch (\Exception $exception) {
             $success = $exception->getMessage();

@@ -83,7 +83,7 @@ export default {
             },
         }
     },
-    props:['nameProject', 'name', 'lastName'],
+    props:['nameProject', 'name', 'lastName', 'editArchiveAudio', 'urlArchiveAudio'],
     methods:{
 
         messagesError(file, message, xhr){
@@ -109,6 +109,11 @@ export default {
             formData.append('nameAspirant', this.name +'-'+ this.lastName);
             formData.append('nameProject', this.nameProject);
             formData.append('archiveUuid', file.upload.uuid);
+            formData.append('archiveUuid', file.upload.uuid);
+            if (this.editArchiveAudio){
+                formData.append('editArchiveAudio', this.editArchiveAudio);
+                formData.append('urlArchive', this.urlArchiveAudio);
+            }
         },
 
         maxFiles(file) {

@@ -46,7 +46,7 @@ export default {
         }
     },
 
-    props:['name', 'lastName'],
+    props:['name', 'lastName', 'documentAspirant', 'editAspirant'],
 
     methods:{
         messagesError(file, message, xhr){
@@ -67,6 +67,10 @@ export default {
             console.log('upload file', file);
             formData.append('nameAspirant', this.name +'-'+ this.lastName);
             formData.append('archiveUuid', file.upload.uuid);
+            if (this.editAspirant){
+                formData.append('editAspirant', this.editAspirant);
+                formData.append('documentAspirant', this.documentAspirant);
+            }
         },
 
         maxFiles(file) {

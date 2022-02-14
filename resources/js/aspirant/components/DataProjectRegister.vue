@@ -1,6 +1,5 @@
 <template>
 <div class="pt-1">
-    <h5 class="pb-1">3. Datos de la propuesta musical</h5>
     <div class="row">
         <div class="col-12 col-lg-6 col-md-6">
             <input-form

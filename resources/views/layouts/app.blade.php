@@ -5,13 +5,13 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-{{--    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">--}}
-{{--    <meta name="description" content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">--}}
-{{--    <meta name="keywords" content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">--}}
+    {{--    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">--}}
+    {{--    <meta name="description" content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">--}}
+    {{--    <meta name="keywords" content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">--}}
     <meta name="author" content="CREA SONIDOS COLOMBIA">
     <title>{{ config('app.name') }} | @yield('title')</title>
     <link rel="apple-touch-icon" href="/app-assets/images/ico/apple-icon-120.png">
-{{--    <link rel="shortcut icon" type="image/x-icon" href="/app-assets/images/ico/favicon.ico">--}}
+    {{--    <link rel="shortcut icon" type="image/x-icon" href="/app-assets/images/ico/favicon.ico">--}}
 
 <!--=====================================
     ESTILOS CSS
@@ -19,21 +19,29 @@
     @include('partials.assets.styles')
     @stack('css')
     <script>
-        window.user_ìd = '{{ auth()->user()->id }}'
-        window.aspirant_id = '{{ auth()->user()->aspirant->id }}'
-        window.user_email = '{{ auth()->user()->email }}'
+        @auth()
+            @if(auth()->user()->id)
+            window.user_ìd = '{{ auth()->user()->id }}'
+        @endif
+            @if( auth()->user()->aspirant)
+            window.aspirant_id = '{{ auth()->user()->aspirant->id }}'
+        @endif
+            window.user_email = '{{ auth()->user()->email }}'
         window.user_name = '{{ auth()->user()->name }}'
         window.user_last_name = '{{ auth()->user()->last_name }}'
+        @endauth
     </script>
 </head>
 <!-- END: Head-->
 
 <!-- BEGIN: Body-->
 
-<body class="horizontal-layout horizontal-menu  navbar-floating footer-fixed" data-open="hover" data-menu="horizontal-menu" data-col="">
+<body class="horizontal-layout horizontal-menu  navbar-floating footer-fixed" data-open="hover"
+      data-menu="horizontal-menu" data-col="">
 
 <!-- BEGIN: Header-->
-<nav class="header-navbar navbar-expand-lg navbar navbar-fixed align-items-center navbar-shadow navbar-brand-center" data-nav="brand-center">
+<nav class="header-navbar navbar-expand-lg navbar navbar-fixed align-items-center navbar-shadow navbar-brand-center"
+     data-nav="brand-center">
     <!--=====================================
 		 HEADER
     ======================================-->
@@ -43,9 +51,9 @@
 
 
 <!-- BEGIN: Main Menu-->
-    <!--=====================================
-		 MENU PRINCIPAL
-    ======================================-->
+<!--=====================================
+     MENU PRINCIPAL
+======================================-->
 {{--@include('partials.menu.menu-prinicipal')--}}
 <!-- END: Main Menu-->
 
@@ -57,6 +65,13 @@
         <div class="content-header row">
         </div>
         <div class="content-body">
+            @if (session('status'))
+                <div class="alert alert-success" role="alert">
+                    <div class="alert-body">
+                    {{ session('status') }}
+
+                </div>
+            @endif
             @if (session('permission_denied'))
                 <div class="alert alert-danger" role="alert">
                     <h4 class="alert-heading">Atención</h4>
@@ -120,7 +135,7 @@
 <!-- END: Page JS-->
 
 <script>
-    $(window).on('load', function() {
+    $(window).on('load', function () {
         if (feather) {
             feather.replace({
                 width: 14,

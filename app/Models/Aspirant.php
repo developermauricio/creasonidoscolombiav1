@@ -31,8 +31,12 @@ class Aspirant extends Model
         return $this->belongsTo(AspirantType::class, 'aspirant_type_id');
     }
 
+    public function parent(){
+        return $this->hasOne(ParentApirant::class, 'aspirant_id');
+    }
+
     static public function getDataAspirant($id){
-        $aspirant = Aspirant::where('user_id', $id)->with('user.gender', 'user.city.departament', 'aspirant_type', 'projects.category')->first();
+        $aspirant = Aspirant::where('user_id', $id)->with('user.gender', 'user.city.departament', 'aspirant_type', 'projects.category', 'parent.minor')->first();
         return $aspirant;
     }
 

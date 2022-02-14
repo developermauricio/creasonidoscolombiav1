@@ -28,7 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/dashboard';
 
     /**
      * Create a new controller instance.
@@ -45,6 +45,7 @@ class LoginController extends Controller
         $userAdministrator = \auth()->user()->hasRole('Administrador');
         $userAspirant = \auth()->user()->hasRole('Aspirante');
         $userCurador = \auth()->user()->hasRole('Curador');
+        $userSubsanador = \auth()->user()->hasRole('Subsadanor');
 
         /*=============================================
             VALIDAMOS EL ROL
@@ -63,6 +64,8 @@ class LoginController extends Controller
             }
         }else if($userCurador){
             return route('curador.projects.page');
+        }else if ($userSubsanador){
+            return route('subsanador.projects.page');
         }
     }
 

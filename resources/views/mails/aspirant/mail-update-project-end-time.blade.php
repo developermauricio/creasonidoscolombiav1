@@ -100,11 +100,11 @@
                                         <p style="font-weight: 700; font-size: 20px; margin-top: 0; --text-opacity: 1; color: #11435b;">
                                             {{ $name }} {{ $last_name }}</p>
                                         <p class="sm-leading-32" style="font-weight: 600; font-size: 15px; margin: 0 0 16px; --text-opacity: 1; color: #263238; color: rgba(38, 50, 56, var(--text-opacity));">
-                                            Su propuesta musical ha cambiado de estado en REVISIÓN. En estos momentos estamos válidando que la información enviada
-                                            por usted este correcta. Pronto nos comunicaremos con usted.
+                                            Su propuesta musical ha cambiado de estado ha REVISIÓN. En estos momentos estamos válidando que la información enviada
+                                            registrada este correcta. Pronto nos comunicaremos con usted.
                                         </p>
 
-                                        <p>Esta la información principal de su propuesta musical:</p>
+                                        <p>Esta es la información principal de su propuesta musical:</p>
                                         <ul style="margin-bottom: 24px;">
                                             <li><span style="font-weight: bold">Titulo de la canción:</span> <span style="color: #11435b; font-weight: bold">{{ $project_name }}</span></li>
                                             <li><span style="font-weight: bold">Modalidad o categoría de la canción:</span>  <span style="color: #11435b; font-weight: bold">{{ $project_category }}</span></li>

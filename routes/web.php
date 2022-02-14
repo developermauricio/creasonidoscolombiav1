@@ -19,14 +19,11 @@ Route::get('/', function () {
 
 Route::get('/cuenta', function () {
     return view('aspirant.account');
-});
+})->middleware('midd_aspirant_account');
 
-//Route::get('/pruebas', function (){
-//    $dateNow = \Carbon\Carbon::now()->day
-//    $dateTomorrow = \Carbon\Carbon::tomorrow();
-////    dd($dateTomorrow->isoFormat('Y-m-d H:i:s').' '.$dateNow->isoFormat('H:mm:ss'));
-//    dd($dateNow);
-//});
+Route::get('/pruebas', function (){
+    \PhpMqtt\Client\Facades\MQTT::publish('subsanador_project', 'Nuevo proyecto en la badeja');
+});
 
 Route::get('/email', function () {
     return new \App\Mail\Aspirant\RegisterProject('silviotista93@gmail.com', 'Mauricio', 'Gutierrez', 'Amores como el nuestro', 'Salsa');
@@ -51,6 +48,13 @@ RUTAS DE LOS CURADORES
 =============================================*/
 Route::group(['middleware' => 'auth', 'namespace' => 'Curador'], function () {
     Route::get('/curador', 'ProjectsController@index')->name('curador.projects.page');
+});
+
+/*=============================================
+RUTAS DE LOS SUBSANADORES
+=============================================*/
+Route::group(['middleware' => 'auth', 'namespace' => 'Subsanador'], function () {
+    Route::get('/subsanador', 'ProjectsController@index')->name('subsanador.projects.page');
 });
 
 /*=============================================

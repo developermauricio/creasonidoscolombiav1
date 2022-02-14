@@ -2,13 +2,11 @@
 {{-- Header --}}
 @slot('header')
 @component('mail::header', ['url' => config('app.url')])
-{{ config('app.name') }}
+<img src="{{ env('APP_URL') }}/{{ env('URL_IMG_LOGO') }}" alt="" width="100">
 @endcomponent
 @endslot
-
 {{-- Body --}}
 {{ $slot }}
-
 {{-- Subcopy --}}
 @isset($subcopy)
 @slot('subcopy')

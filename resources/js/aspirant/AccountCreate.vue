@@ -7,7 +7,7 @@
                 <div class="form-group">
                     <input-form
                         id="txtNameAspirant"
-                        label="Nombres Completos"
+                        label="Nombres completos"
                         pattern="alf"
                         errorMsg="Ingrese un nombre válido"
                         requiredMsg="Su nombre es requerido"
@@ -19,7 +19,7 @@
                 <div class="form-group">
                     <input-form
                         id="txtLastNameAspirant"
-                        label="Apellidos Completos"
+                        label="Apellidos completos"
                         pattern="alf"
                         errorMsg="Ingrese un nombre válido"
                         requiredMsg="Sus apellidos son requeridos"
@@ -197,6 +197,11 @@ export default {
 
             }
         }
+    },
+
+    mounted() {
+        // this.$cookie.delete('creasonidos_colombia_session')
+        // this.$cookie.delete('XSRF-TOKEN')
     }
 }
 </script>

@@ -14,7 +14,7 @@ class UsuarioTableSeeder extends Seeder
     {
         Role::create(['name' => 'Administrador']);
         Role::create(['name' => 'Aspirante']);
-        Role::create(['name' => 'Subsadanor']);
+        Role::create(['name' => 'Subsanador']);
         Role::create(['name' => 'Curador']);
     }
 }
