@@ -168,6 +168,7 @@
                                 <!--=====================================
                                      INFORMACIÓN DEL MENOR DE EDAD
                                  ======================================-->
+
                                 <div v-if="aspirant.aspirant_type_id === 3">
                                     <h5 class="pb-1 pt-2">2. Información del Menor de Edad</h5>
                                     <div class="row p-2">
@@ -287,7 +288,7 @@
             <!--=====================================
                     MODAL MOSTRAR CEDULA EN PDF MENOR DE EDAD
                 ======================================-->
-            <div class="modal fade text-left" id="modal-show-minor-pdf" tabindex="-1" role="dialog"
+            <div v-if="aspirant.aspirant_type_id === 3" class="modal fade text-left" id="modal-show-minor-pdf" tabindex="-1" role="dialog"
                  aria-labelledby="modal-example-pdf" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                     <div class="modal-content">
@@ -414,12 +415,12 @@ export default {
         let hoy = moment();
         let anios = hoy.diff(nacimiento, "years");
         this.edad = anios
-
-        let nacimiento_minor = this.aspirant.parent.minor.birthday;
-        let hoy_minor = moment();
-        let anios_minor = hoy_minor.diff(nacimiento_minor, "years");
-        this.edad_minor = anios_minor
-
+        if (this.aspirant.aspirant_type_id === 3){
+            let nacimiento_minor = this.aspirant.parent.minor.birthday;
+            let hoy_minor = moment();
+            let anios_minor = hoy_minor.diff(nacimiento_minor, "years");
+            this.edad_minor = anios_minor
+        }
 
         this.message_confirmed_project = localStorage.getItem('message_project_confirmed')
         localStorage.clear()

@@ -12,7 +12,6 @@ export default {
             let key = 'notification_subsanardor_31231'
             let topic = 'subsanador_project'
 
-
             subscriberMQTT(key, topic, this.loadDataProjects)
         },
 

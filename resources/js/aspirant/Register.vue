@@ -185,10 +185,13 @@ export default {
                         $('#dpz-archives-register-aspirant').addClass('is-invalid')
                     }
 
-                    if (this.minor.urlDataArchive.length === 0) {
-                        $("#text-verify-archive-document-minor").css("display", "block");
-                        $('#dpz-archives-register-minor').addClass('is-invalid')
+                    if(this.minor !== null){
+                        if (this.minor.urlDataArchive.length === 0) {
+                            $("#text-verify-archive-document-minor").css("display", "block");
+                            $('#dpz-archives-register-minor').addClass('is-invalid')
+                        }
                     }
+
 
                     if (this.project.dataArchiveMusicPrincipal.length === 0) {
                         $("#text-verify-archive-music-principal").css("display", "block");
@@ -242,22 +245,23 @@ export default {
                     $('.input-tel__input').removeClass('is-invalid')
 
                 }
+                if(this.minor !== null) {
+                    if (this.minor.urlDataArchive.length === 0) {
+                        $("#text-verify-archive-document-minor").css("display", "block");
+                        $('#dpz-archives-register-minor').addClass('is-invalid')
+                        this.$toast.error({
+                            title: 'Error',
+                            message: 'Por favor revise que todos los campos esten llenos o bien diligenciados',
+                            showDuration: 1000,
+                            hideDuration: 6000,
+                            position: 'top right',
+                        })
+                        return;
+                    } else {
+                        $("#text-verify-archive-document-minor").css("display", "none");
+                        $('#dpz-archives-register-minor').removeClass('is-invalid')
 
-                if (this.minor.urlDataArchive.length === 0) {
-                    $("#text-verify-archive-document-minor").css("display", "block");
-                    $('#dpz-archives-register-minor').addClass('is-invalid')
-                    this.$toast.error({
-                        title: 'Error',
-                        message: 'Por favor revise que todos los campos esten llenos o bien diligenciados',
-                        showDuration: 1000,
-                        hideDuration: 6000,
-                        position: 'top right',
-                    })
-                    return;
-                }else {
-                    $("#text-verify-archive-document-minor").css("display", "none");
-                    $('#dpz-archives-register-minor').removeClass('is-invalid')
-
+                    }
                 }
 
                 if (this.aspirant.urlDataArchive.length === 0) {
