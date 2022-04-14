@@ -68,8 +68,12 @@ class ProfileController extends Controller
         $phone = $request->phone;
         $birthday = $request->birthday;
         $address = $request->address;
+        $headHousehold = $request->headHousehold;
+        $victimConflict = $request->victimConflict;
+        $disability = $request->disability;
         $acceptTerm = $request->acceptTerm;
         $genero = json_decode($request->genero);
+        $ethnic = json_decode($request->ethnic_id);
         $city = json_decode($request->city);
         $archive = $request->archive;
         $extension_archive = $request->extension_archive;
@@ -109,6 +113,10 @@ class ProfileController extends Controller
             'extension_document' => $extension_archive,
             'user_id' => $user_id,
             'aspirant_type_id' => $aspirantType,
+            'ethnic_id' => $ethnic->id,
+            'head_house_hold' => $headHousehold,
+            'victim_conflict' => $victimConflict,
+            'disability' => $disability,
         ]);
 
         /*=============================================

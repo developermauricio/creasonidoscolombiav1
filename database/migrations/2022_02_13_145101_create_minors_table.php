@@ -15,8 +15,10 @@ class CreateMinorsTable extends Migration
     {
         Schema::create('minors', function (Blueprint $table) {
             $table->id();
-            $table->string('document')->nullable();
-            $table->string('extension_document')->nullable();
+            $table->string('document_pdf')->nullable();
+//            $table->string('extension_document')->nullable();
+            $table->string('document_photo_frontal')->nullable();
+            $table->string('document_photo_back')->nullable();
             $table->string('name');
             $table->string('last_name');
             $table->date('birthday');

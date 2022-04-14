@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Minor extends Model
 {
     protected  $fillable = [
-        'document',
-        'extension_document',
+        'document_pdf',
+        'document_photo_frontal',
+        'document_photo_back',
         'name',
         'last_name',
         'birthday',

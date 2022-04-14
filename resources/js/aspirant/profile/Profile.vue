@@ -129,7 +129,7 @@
                                     <div class="col-12 col-lg-3 col-md-3">
                                         <div class="form-group">
                                             <h5>Edad:</h5>
-                                            <p>{{ edad }}</p>
+                                            <p>{{ edad }} años</p>
                                         </div>
                                     </div>
                                     <div class="col-12 col-lg-3 col-md-3">
@@ -140,13 +140,13 @@
                                     </div>
                                     <div class="col-12 col-lg-3 col-md-3">
                                         <div class="form-group">
-                                            <h5>Departamento:</h5>
+                                            <h5>Departamento de residencia:</h5>
                                             <p>{{ aspirant.user.city.departament.descripcion }}</p>
                                         </div>
                                     </div>
                                     <div class="col-12 col-lg-3 col-md-3">
                                         <div class="form-group">
-                                            <h5>Ciudad o municipio:</h5>
+                                            <h5>Ciudad o municipio de residencia:</h5>
                                             <p>{{ aspirant.user.city.descripcion }}</p>
                                         </div>
                                     </div>
@@ -154,6 +154,30 @@
                                         <div class="form-group">
                                             <h5>Dirección:</h5>
                                             <p>{{ aspirant.user.address }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3">
+                                        <div class="form-group">
+                                            <h5>Perspectiva étnica:</h5>
+                                            <p>{{ aspirant.ethnic.name }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3">
+                                        <div class="form-group">
+                                            <h5>¿Es padre o madre cabeza de hogar?</h5>
+                                            <p>{{ aspirant.head_house_hold }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3">
+                                        <div class="form-group">
+                                            <h5>¿Reporta ser víctima del conflicto? </h5>
+                                            <p>{{ aspirant.victim_conflict }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3">
+                                        <div class="form-group">
+                                            <h5>¿Posee alguna discapacidad? </h5>
+                                            <p>{{ aspirant.disability }}</p>
                                         </div>
                                     </div>
                                     <div class="col-12 col-lg-3 col-md-3">
@@ -170,6 +194,7 @@
                                  ======================================-->
 
                                 <div v-if="aspirant.aspirant_type_id === 3">
+                                    <hr>
                                     <h5 class="pb-1 pt-2">2. Información del Menor de Edad</h5>
                                     <div class="row p-2">
                                         <div class="col-12 col-lg-3 col-md-3">
@@ -187,7 +212,7 @@
                                         <div class="col-12 col-lg-3 col-md-3">
                                             <div class="form-group">
                                                 <h5>Edad:</h5>
-                                                <p>{{ edad_minor }}</p>
+                                                <p>{{ edad_minor }} años</p>
                                             </div>
                                         </div>
                                         <div class="col-12 col-lg-3 col-md-3">
@@ -201,7 +226,8 @@
                                         <div class="col-12 col-lg-3 col-md-3">
                                             <div class="form-group">
                                                 <h5>Documento de identificación del menor edad:</h5>
-                                                <span data-toggle="modal" data-target="#modal-show-minor-pdf" class="pr-2"
+                                                <span data-toggle="modal" data-target="#modal-show-minor-pdf"
+                                                      class="pr-2"
                                                       style="color: #B53E2A; cursor: pointer">Ver documento</span>
                                             </div>
                                         </div>
@@ -212,7 +238,8 @@
                                 <!--=====================================
                                     INFORMACIÓN DEL PROYECTO
                                 ======================================-->
-                                <h5 class="pb-1 pt-2">{{ aspirant.aspirant_type_id === 3 ? '3.' : '2.'}} Información Propuesta Musical </h5>
+                                <h5 class="pb-1 pt-2">{{ aspirant.aspirant_type_id === 3 ? '3.' : '2.' }} Información
+                                    Propuesta Musical </h5>
                                 <div class="row p-2">
                                     <div class="col-12 col-lg-3 col-md-3">
                                         <div class="form-group">
@@ -222,16 +249,22 @@
                                     </div>
                                     <div class="col-12 col-lg-3 col-md-3">
                                         <div class="form-group">
-                                            <h5>Nombre del autor o compositor:</h5>
+                                            <h5>Nombre del interprete o agrupación:</h5>
                                             <p>{{ aspirant.projects[0].name_author }}</p>
                                         </div>
                                     </div>
                                     <div class="col-12 col-lg-3 col-md-3">
                                         <div class="form-group">
-                                            <h5>Modalidad o categoría de la canción:</h5>
-                                            <p>{{ aspirant.projects[0].category.category }}</p>
+                                            <h5>Género musical de la canción</h5>
+                                            <p>{{ aspirant.projects[0].category_by_aspirant }}</p>
                                         </div>
                                     </div>
+                                    <!--                                    <div class="col-12 col-lg-3 col-md-3">-->
+                                    <!--                                        <div class="form-group">-->
+                                    <!--                                            <h5>Modalidad o categoría de la canción:</h5>-->
+                                    <!--                                            <p>{{ aspirant.projects[0].category.category }}</p>-->
+                                    <!--                                        </div>-->
+                                    <!--                                    </div>-->
                                 </div>
                                 <div class="row pr-2 pl-2">
                                     <div class="col-12">
@@ -268,13 +301,21 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <div v-if="aspirant.extension_document ==='pdf'">
-                                <iframe :src="aspirant.cc_document" style="width:100%; height:700px;" frameborder="0">
+                            <div v-if="aspirant.cc_document_pdf">
+                                <iframe :src="aspirant.cc_document_pdf" style="width:100%; height:700px;"
+                                        frameborder="0">
 
                                 </iframe>
                             </div>
                             <div v-else>
-                                <img style="width: 100%" :src="aspirant.cc_document" alt="">
+                                <div class="p-2">
+                                    <h4 class="text-center">Lado frontal del documento</h4>
+                                    <img style="width: 100%" :src="aspirant.cc_document_frontal" alt="">
+                                </div>
+                                <div class="p-2">
+                                    <h4 class="text-center">Lado posterior del documento</h4>
+                                    <img style="width: 100%" :src="aspirant.cc_document_back" alt="">
+                                </div>
                             </div>
 
                         </div>
@@ -288,7 +329,8 @@
             <!--=====================================
                     MODAL MOSTRAR CEDULA EN PDF MENOR DE EDAD
                 ======================================-->
-            <div v-if="aspirant.aspirant_type_id === 3" class="modal fade text-left" id="modal-show-minor-pdf" tabindex="-1" role="dialog"
+            <div v-if="aspirant.aspirant_type_id === 3" class="modal fade text-left" id="modal-show-minor-pdf"
+                 tabindex="-1" role="dialog"
                  aria-labelledby="modal-example-pdf" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                     <div class="modal-content">
@@ -300,13 +342,21 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <div v-if="aspirant.parent.minor.extension_document ==='pdf'">
-                                <iframe :src="aspirant.parent.minor.document" style="width:100%; height:700px;" frameborder="0">
+                            <div v-if="aspirant.parent.minor.document_pdf">
+                                <iframe :src="aspirant.parent.minor.document_pdf" style="width:100%; height:700px;"
+                                        frameborder="0">
 
                                 </iframe>
                             </div>
                             <div v-else>
-                                <img style="width: 100%" :src="aspirant.parent.minor.document" alt="">
+                                <div class="p-2">
+                                    <h4 class="text-center">Lado frontal del documento</h4>
+                                    <img style="width: 100%" :src="aspirant.parent.minor.document_photo_frontal" alt="">
+                                </div>
+                                <div class="p-2">
+                                    <h4 class="text-center">Lado posterior del documento</h4>
+                                    <img style="width: 100%" :src="aspirant.parent.minor.document_photo_back" alt="">
+                                </div>
                             </div>
 
                         </div>
@@ -415,10 +465,11 @@ export default {
         let hoy = moment();
         let anios = hoy.diff(nacimiento, "years");
         this.edad = anios
-        if (this.aspirant.aspirant_type_id === 3){
+        if (this.aspirant.aspirant_type_id === 3) {
             let nacimiento_minor = this.aspirant.parent.minor.birthday;
             let hoy_minor = moment();
             let anios_minor = hoy_minor.diff(nacimiento_minor, "years");
+            console.log(this.aspirant.parent.minor.birthday)
             this.edad_minor = anios_minor
         }
 

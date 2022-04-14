@@ -28,6 +28,7 @@ class Proyect extends Model
         'slug',
         'end_time',
         'category_id',
+        'category_by_aspirant',
         'available_edit'
     ];
 

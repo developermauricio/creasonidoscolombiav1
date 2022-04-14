@@ -87,7 +87,7 @@
                     <tr>
                         <td class="sm-py-32 sm-px-24" style="font-family: Montserrat, -apple-system, 'Segoe UI', sans-serif; padding: 48px; text-align: center;" align="center">
                             <a href="https://creasonidos.com/">
-                                <img src="{{env('APP_URL')}}{{ env('URL_IMG_LOGO') }}" width="250" alt="Crea Sonidos" style="border: 0; max-width: 100%; line-height: 100%; vertical-align: middle;">
+                                <img src="{{env('APP_URL')}}{{ env('URL_IMG_LOGO') }}" width="250" alt="Creasonidos" style="border: 0; max-width: 100%; line-height: 100%; vertical-align: middle;">
                             </a>
                         </td>
                     </tr>
@@ -109,7 +109,7 @@
                                         <p>Esta es la información principal de su propuesta musical:</p>
                                         <ul style="margin-bottom: 24px;">
                                             <li><span style="font-weight: bold">Titulo de la canción:</span> <span style="color: #11435b; font-weight: bold">{{ $project_name }}</span></li>
-                                            <li><span style="font-weight: bold">Modalidad o categoría de la canción:</span>  <span style="color: #11435b; font-weight: bold">{{ $project_category }}</span></li>
+{{--                                            <li><span style="font-weight: bold">Modalidad o categoría de la canción:</span>  <span style="color: #11435b; font-weight: bold">{{ $project_category }}</span></li>--}}
                                         </ul>
                                         <table style="font-family: 'Montserrat',Arial,sans-serif;" cellpadding="0" cellspacing="0" role="presentation">
                                             <tbody><tr>
@@ -131,7 +131,7 @@
                                             Necesita ayuda? Por favor contáctenos
                                             <a href="#" class="hover-underline" style="--text-opacity: 1; color: #B53E2A; text-decoration: none;">haciendo clic aquí</a>.
                                         </p>
-                                        <p style="margin: 0 0 16px;">Gracias, <br>Equipo Crea Sonidos</p>
+                                        <p style="margin: 0 0 16px;">Gracias, <br>Equipo Creasonidos</p>
                                     </td>
                                 </tr>
                                 <tr>

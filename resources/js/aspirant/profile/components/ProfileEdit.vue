@@ -12,7 +12,7 @@
                     <div class="col-12">
                         <h5 class="pb-1" id="text-line-participation">1. Selecciona tu linea de participación</h5>
                         <div class="d-flex" v-for="types in aspirantType" :key="types.id">
-                            <vs-radio color="#11435b" v-model="aspirant.aspirant_type_id" :vs-value="types.id">{{
+                            <vs-radio color="#11435b" v-model="aspirant.aspirant_type_id" :vs-value="types.id" :vs-name="types.id">{{
                                     types.name
                                 }}
                             </vs-radio>
@@ -255,6 +255,34 @@
                             ></input-form>
                         </div>
                     </div>
+                    <!--=====================================
+                       PERSPECTIVA ETNICA
+                   ======================================-->
+                    <div class="col-12 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <input-form
+                                label="Perspectiva étnica"
+                                id="textEthnicApirant"
+                                errorMsg
+                                requiredMsg="La perspectiva étnica es requerida"
+                                :required="true"
+                                :modelo.sync="aspirant.ethnic"
+                                :msgServer.sync="errors.ethnic"
+                                type="multiselect"
+                                selectLabel="Seleccione"
+                                :multiselect="{ options: optionsEthnic,
+                                           selectLabel:'Seleccionar',
+                                           selectedLabel:'Seleccionado',
+                                           deselectLabel:'Desmarcar',
+                                           placeholder:'Perspectiva étnica',
+                                          taggable : false,
+                                          'track-by':'id',
+                                          label: 'name',
+                                          'custom-label': ethnic=>ethnic.name
+                                        }"
+                            ></input-form>
+                        </div>
+                    </div>
                     <div class="col-12 col-lg-3 col-md-3">
                         <div class="form-group">
                             <h5>Documento de identificación:</h5>
@@ -267,6 +295,29 @@
                                       @click="(() => editDocument = false)">Cancelar edición</span>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <!--=====================================
+               PREGUNTAS PERSONALES
+           ======================================-->
+                <div class="row mt-1 mb-1">
+                    <div class="col-12">
+                        <h5 id="text-line-questions">Responda las siguientes preguntas</h5>
+                    </div>
+                    <div class="col-12 col-md-3 col-lg-3">
+                        <label for="" id="title-headHousehold">¿Es padre o madre cabeza de hogar? <span class="text-danger"> *</span></label>
+                        <vs-radio color="#11435b" v-model="aspirant.head_house_hold" vs-name="headHousehold1" vs-value="Si">Si</vs-radio>
+                        <vs-radio color="#11435b" v-model="aspirant.head_house_hold" vs-name="headHousehold2" vs-value="No">No</vs-radio>
+                    </div>
+                    <div class="col-12 col-md-3 col-lg-3">
+                        <label for="" id="title-victimConflict">¿Reporta ser víctima del conflicto?<span class="text-danger"> *</span></label>
+                        <vs-radio color="#11435b" v-model="aspirant.victim_conflict" vs-name="victimConflict1" vs-value="Si">Si</vs-radio>
+                        <vs-radio color="#11435b" v-model="aspirant.victim_conflict" vs-name="victimConflict2" vs-value="No">No</vs-radio>
+                    </div>
+                    <div class="col-12 col-md-3 col-lg-3">
+                        <label for="" id="title-disability">¿Posee alguna discapacidad?<span class="text-danger"> *</span></label>
+                        <vs-radio color="#11435b" v-model="aspirant.disability" vs-name="disability1" vs-value="Si">Si</vs-radio>
+                        <vs-radio color="#11435b" v-model="aspirant.disability" vs-name="disability2" vs-value="No">No</vs-radio>
                     </div>
                 </div>
 
@@ -337,18 +388,28 @@
                             </div>
                         </div>
                     </div>
+                    <hr>
                 </div>
                 <!--=====================================
                      SUBIR DOCUMENTO DE IDENTIFICACIÓN
                  ======================================-->
                 <div class="row" v-if="editDocument">
                     <div class="col-12">
-                        <label class="form-control-label" id="add-archive-dropzone-aspirant">Subir documento de
-                            identificación
-                            <span style="color: red"> *</span></label>
-                        <dropzone-upload-document v-on:dataUrl="datUrlDropzone" :name="aspirant.user.name"
+                        <div class="col-12 mt-1">
+                            <h5 id="text-line-type-document">Seleccione como va a subir su documento de identificación</h5>
+                            <p style="margin-top: 0.3rem;font-size: 0.9rem; display: none"
+                               id="text-verify-type-document" class="text-danger">Debe agergar la foto o documento de identificación</p>
+                            <vs-radio color="#11435b" v-model="typeDocument" vs-name="typeDocument1" vs-value="1">Agregar documento en pdf
+                            </vs-radio>
+                            <vs-radio color="#11435b" v-model="typeDocument" vs-name="typeDocument2" vs-value="2">Agregar fotografía del documento
+                            </vs-radio>
+                        </div>
+                        <dropzone-upload-document v-on:dataUrl="datUrlDropzone"
+                                                  :name="aspirant.user.name"
                                                   :lastName="aspirant.user.last_name"
-                                                  :documentAspirant="aspirant.cc_document"
+                                                  :documentAspirantPdf="aspirant.cc_document_pdf"
+                                                  :documentAspirantPhotoFrontal="aspirant.cc_document_frontal"
+                                                  :documentAspirantPhotoBack="aspirant.cc_document_back"
                                                   :editAspirant="1"></dropzone-upload-document>
                         <p style="margin-top: 0.3rem;font-size: 0.9rem; display: none"
                            id="text-verify-archive-document-aspirant" class="text-danger">El archivo del documento es
@@ -426,12 +487,12 @@
                             requerido</p>
                     </div>
                 </div>
+
             </div>
 
             <!--=====================================
                    DATOS DEL PROYECTO
                 ======================================-->
-            <hr>
             <div class="pt-1">
                 <h5 class="pb-1">{{ aspirant.aspirant_type_id === 3 ? '4.' : '3.' }} Datos de la propuesta musical</h5>
                 <div class="row">
@@ -441,7 +502,7 @@
                             label="Título de la canción"
                             pattern="all"
                             errorMsg="Ingrese un título válido"
-                            requiredMsg="El título de la canción es obligatorio"
+                            requiredMsg="El título de la canción es requerido"
                             :modelo.sync="aspirant.projects[0].title"
                             :required="true"
                             :msgServer.sync="errors.name"
@@ -453,7 +514,7 @@
                             label="Nombre del autor o compositor"
                             pattern="all"
                             errorMsg="Ingrese un nombre del autor o compositor válido"
-                            requiredMsg="El nombre del autor o compositor es obligatorio"
+                            requiredMsg="El nombre del autor o compositor es requerido"
                             :modelo.sync="aspirant.projects[0].name_author"
                             :required="true"
                             :msgServer.sync="errors.nameAuthor"
@@ -461,26 +522,36 @@
                     </div>
                     <div class="col-12 col-md-6 col-lg-6">
                         <input-form
-                            label="Modalidad o categoría de la canción"
-                            id="textProjectCategory"
-                            errorMsg
-                            requiredMsg="La modalidad o categoría es obligatorio"
+                            id="txtProjectGenderMusic"
+                            label="Género musical de la canción"
+                            pattern="all"
+                            errorMsg="Ingrese un nombre de género musical válido"
+                            requiredMsg="El género musical es requerido"
+                            :modelo.sync="aspirant.projects[0].category_by_aspirant"
                             :required="true"
-                            :modelo.sync="category"
-                            :msgServer.sync="errors.category"
-                            type="multiselect"
-                            selectLabel="Tipo de documento"
-                            :multiselect="{ options: optionsProjectCategory,
-                                           selectLabel:'Seleccionar',
-                                           selectedLabel:'Seleccionado',
-                                           deselectLabel:'Desmarcar',
-                                           placeholder:'Seleccione Modalidad',
-                                          taggable : false,
-                                          'track-by':'id',
-                                          label: 'category',
-                                          'custom-label': category=>category.category
-                                        }"
+                            :msgServer.sync="errors.nameAuthor"
                         ></input-form>
+<!--                        <input-form-->
+<!--                            label="Modalidad o categoría de la canción"-->
+<!--                            id="textProjectCategory"-->
+<!--                            errorMsg-->
+<!--                            requiredMsg="La modalidad o categoría es obligatorio"-->
+<!--                            :required="true"-->
+<!--                            :modelo.sync="category"-->
+<!--                            :msgServer.sync="errors.category"-->
+<!--                            type="multiselect"-->
+<!--                            selectLabel="Tipo de documento"-->
+<!--                            :multiselect="{ options: optionsProjectCategory,-->
+<!--                                           selectLabel:'Seleccionar',-->
+<!--                                           selectedLabel:'Seleccionado',-->
+<!--                                           deselectLabel:'Desmarcar',-->
+<!--                                           placeholder:'Seleccione Modalidad',-->
+<!--                                          taggable : false,-->
+<!--                                          'track-by':'id',-->
+<!--                                          label: 'category',-->
+<!--                                          'custom-label': category=>category.category-->
+<!--                                        }"-->
+<!--                        ></input-form>-->
                     </div>
                     <div class="col-12 col-md-6 col-lg-6 mt-2">
                         <span v-if="!editArchiveAudio" class="pr-2" style="color: #B53E2A; cursor: pointer"
@@ -535,7 +606,7 @@
                             </vs-radio>
                             <vs-radio color="#11435b" v-model="aspirant.accept_termi" vs-name="radios1" vs-value="2">
                                 Acepto
-                                compositores emanados del proceso CREA SONIDOS
+                                compositores emanados del proceso CREASONIDOS
                             </vs-radio>
                         </div>
                     </div>
@@ -598,6 +669,7 @@ export default {
             birthday_minor:null,
             currentDate: null,
             currentDate_minor: null,
+            typeDocument: null,
             state_minor: {
                 disabledDates: {
                     from: null, // Disable all dates up to specific date
@@ -611,7 +683,8 @@ export default {
                     // from: new Date(2016, 0, 26), // Disable all dates after specific date
                 },
                 date: new Date()
-            }
+            },
+            optionsEthnic: []
         }
     },
 
@@ -757,10 +830,14 @@ export default {
                 data.append('phone', this.aspirant.user.phone);
                 data.append('birthday', moment(this.birthday).format("YYYY-MM-DD HH:mm:ss"))
                 data.append('genero', JSON.stringify(this.aspirant.user.gender));
+                data.append('ethnic_id', JSON.stringify(this.aspirant.ethnic));
                 data.append('city', JSON.stringify(this.city));
                 data.append('address', this.aspirant.user.address);
                 data.append('archive', this.aspirant.cc_document);
                 data.append('extension_archive', this.aspirant.extension_document);
+                data.append('headHousehold', this.aspirant.headHousehold);
+                data.append('victimConflict', this.aspirant.victimConflict);
+                data.append('disability', this.aspirant.disability);
                 data.append('acceptTerm', this.aspirant.accept_termi);
 
                 /*=============================================
@@ -838,6 +915,20 @@ export default {
         },
         datUrlDropzoneUrlAudio(data) {
             this.aspirant.projects[0].audio = data[0].urlArchive
+        },
+        getEthnics() {
+            axios.get('/api/get-ethnics').then(resp => {
+                this.optionsEthnic = resp.data.data
+            }).catch(err => {
+                console.log(err)
+                this.$toast.error({
+                    title: 'Error',
+                    message: 'Algo salió mal, consulte al administrador',
+                    showDuration: 1000,
+                    hideDuration: 6000,
+                    position: 'top right',
+                })
+            })
         },
         getProjectCategories() {
             this.$vs.loading({
@@ -972,13 +1063,18 @@ export default {
     },
     mounted() {
         // this.$emit('dataRegisterPersonal', this.aspirant);
-
         this.getAspirantType();
+        this.getEthnics();
         this.getDeparments();
         this.getGenders();
         this.getProjectCategories()
         this.addDaysToDate(this.aspirant.user.birthday, 1)
-        this.addDaysToDateMinor(this.aspirant.parent.minor.birthday, 1)
+        if (this.aspirant.parent !== null){
+            this.addDaysToDateMinor(this.aspirant.parent.minor.birthday, 1)
+        }
+
+        console.log(this.aspirant.user.phone)
+        this.phone_confirmed = this.aspirant.user.phone
 
         this.departament = this.aspirant.user.city.departament
         this.city = this.aspirant.user.city

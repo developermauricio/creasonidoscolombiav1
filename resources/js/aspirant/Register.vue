@@ -13,7 +13,8 @@
 
             <div class="pt-2 pb-1" v-if="select_type_artist">
                 <hr>
-                <aspirant-data-minor-register-component v-on:dataRegisterMinor="dataRegisterMinor"></aspirant-data-minor-register-component>
+                <aspirant-data-minor-register-component
+                    v-on:dataRegisterMinor="dataRegisterMinor"></aspirant-data-minor-register-component>
             </div>
 
             <hr>
@@ -52,7 +53,9 @@
                             <label for="reset-password-new">Nueva contraseña</label>
                         </div>
                         <div class="input-group input-group-merge form-password-toggle">
-                            <input type="password" v-model="password" class="form-control form-control-merge" id="reset-password-new" name="reset-password-new" placeholder="nueva contraseña" aria-describedby="reset-password-new" tabindex="1" />
+                            <input type="password" v-model="password" class="form-control form-control-merge"
+                                   id="reset-password-new" name="reset-password-new" placeholder="nueva contraseña"
+                                   aria-describedby="reset-password-new" tabindex="1"/>
                             <div class="input-group-append">
                                 <span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span>
                             </div>
@@ -65,7 +68,10 @@
                             <label for="reset-password-confirm">Confirmar contraseña</label>
                         </div>
                         <div class="input-group input-group-merge form-password-toggle">
-                            <input type="password" v-model="confirmed_password" class="form-control form-control-merge" id="reset-password-confirm" name="reset-password-confirm" placeholder="confirmar contraseña" aria-describedby="reset-password-confirm" tabindex="2" />
+                            <input type="password" v-model="confirmed_password" class="form-control form-control-merge"
+                                   id="reset-password-confirm" name="reset-password-confirm"
+                                   placeholder="confirmar contraseña" aria-describedby="reset-password-confirm"
+                                   tabindex="2"/>
                             <div class="input-group-append">
                                 <span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span>
                             </div>
@@ -93,7 +99,7 @@
                                 mínimo seis (6) canciones ineditas
                             </vs-radio>
                             <vs-radio color="#11435b" v-model="acceptTerm" vs-name="radios1" vs-value="2">Acepto
-                                compositores emanados del proceso CREA SONIDOS
+                                compositores emanados del proceso CREASONIDOS
                             </vs-radio>
                         </div>
                     </div>
@@ -154,8 +160,8 @@ export default {
             this.project = data
         },
 
-        dataRegisterMinor(data){
-            setTimeout(()=>{
+        dataRegisterMinor(data) {
+            setTimeout(() => {
                 this.minor = data
             }, 200)
 
@@ -179,19 +185,52 @@ export default {
                         }
                     }, 200)
 
-
-                    if (this.aspirant.urlDataArchive.length === 0) {
-                        $("#text-verify-archive-document-aspirant").css("display", "block");
-                        $('#dpz-archives-register-aspirant').addClass('is-invalid')
-                    }
-
-                    if(this.minor !== null){
-                        if (this.minor.urlDataArchive.length === 0) {
-                            $("#text-verify-archive-document-minor").css("display", "block");
-                            $('#dpz-archives-register-minor').addClass('is-invalid')
+                    if (this.aspirant.typeDocument === '1') {
+                        if (this.aspirant.urlDataArchive.length === 0) {
+                            $("#text-verify-archive-document-aspirant").css("display", "block");
+                            $('#dpz-archives-register-aspirant').addClass('is-invalid')
                         }
                     }
 
+                    if (this.aspirant.typeDocument === '2') {
+                        if (this.aspirant.urlDataDocumentPhotoFrontal.length === 0) {
+                            $("#text-verify-archive-document-aspirant-photo-frontal").css("display", "block");
+                            $('#dpz-archives-register-aspirant-photo-frontal').addClass('is-invalid')
+                        }
+                        if (this.aspirant.urlDataDocumentPhotoBack.length === 0) {
+                            $("#text-verify-archive-document-aspirant-photo-back").css("display", "block");
+                            $('#dpz-archives-register-aspirant-photo-back').addClass('is-invalid')
+                        }
+                    }
+                    if (this.aspirant.typeDocument === null || this.aspirant.typeDocument === '') {
+                        $("#text-verify-type-document").css("display", "block");
+                        $('#text-line-type-document').addClass('is-invalid')
+                    }
+
+
+
+                    if (this.aspirant.selectAspirantType === 3) {
+                        if (this.minor.typeDocumentMinor === null || this.aspirant.typeDocumentMinor === '') {
+                            $("#text-verify-type-document-minor").css("display", "block");
+                            $('#text-line-type-document-minor').addClass('is-invalid')
+                        }
+                        if (this.minor.typeDocumentMinor === '1'){
+                            if (this.minor.urlDataArchive.length === 0) {
+                                $("#text-verify-archive-document-minor").css("display", "block");
+                                $('#dpz-archives-register-minor').addClass('is-invalid')
+                            }
+                        }
+                        if (this.minor.typeDocumentMinor === '2'){
+                            if (this.minor.urlDataDocumentPhotoFrontal.length === 0) {
+                                $("#text-verify-archive-document-minor-frontal").css("display", "block");
+                                $('#dpz-archives-register-minor-frontal').addClass('is-invalid')
+                            }
+                            if (this.minor.urlDataDocumentPhotoBack.length === 0) {
+                                $("#text-verify-archive-document-minor-back").css("display", "block");
+                                $('#dpz-archives-register-minor-back').addClass('is-invalid')
+                            }
+                        }
+                    }
 
                     if (this.project.dataArchiveMusicPrincipal.length === 0) {
                         $("#text-verify-archive-music-principal").css("display", "block");
@@ -202,9 +241,19 @@ export default {
                         $('#text-line-participation').addClass('is-invalid')
                     }
 
+                    if (this.aspirant.headHousehold === null) {
+                        $('#title-headHousehold').addClass('is-invalid')
+                    }
+                    if (this.aspirant.victimConflict === null) {
+                        $('#title-victimConflict').addClass('is-invalid')
+                    }
+                    if (this.aspirant.disability === null) {
+                        $('#title-disability').addClass('is-invalid')
+                    }
+
                     this.$toast.error({
                         title: 'Error',
-                        message: 'Por favor revise que todos los campos esten llenos o bien diligenciados',
+                        message: 'Por favor revise que los campos que son requeridos estén llenos o bien diligenciados',
                         showDuration: 1000,
                         hideDuration: 6000,
                         position: 'top right',
@@ -218,7 +267,7 @@ export default {
                     $('.input-tel__input').addClass('is-invalid')
                     this.$toast.error({
                         title: 'Error',
-                        message: 'Por favor revise que todos los campos esten llenos o bien diligenciados',
+                        message: 'Por favor revise que los campos que son requeridos estén llenos o bien diligenciados',
                         showDuration: 1000,
                         hideDuration: 6000,
                         position: 'top right',
@@ -234,7 +283,7 @@ export default {
                     $('.input-tel__input').addClass('is-invalid')
                     this.$toast.error({
                         title: 'Error',
-                        message: 'Por favor revise que todos los campos esten llenos o bien diligenciados',
+                        message: 'Por favor revise que los campos que son requeridos estén llenos o bien diligenciados',
                         showDuration: 1000,
                         hideDuration: 6000,
                         position: 'top right',
@@ -245,41 +294,99 @@ export default {
                     $('.input-tel__input').removeClass('is-invalid')
 
                 }
-                if(this.minor !== null) {
-                    if (this.minor.urlDataArchive.length === 0) {
-                        $("#text-verify-archive-document-minor").css("display", "block");
-                        $('#dpz-archives-register-minor').addClass('is-invalid')
+                if (this.aspirant.selectAspirantType === 3) {
+                    if (this.minor.typeDocumentMinor === '1'){
+                        if (this.minor.urlDataArchive.length === 0) {
+                            $("#text-verify-archive-document-minor").css("display", "block");
+                            $('#dpz-archives-register-minor').addClass('is-invalid')
+                            this.$toast.error({
+                                title: 'Error',
+                                message: 'Por favor revise que los campos que son requeridos estén llenos o bien diligenciados',
+                                showDuration: 1000,
+                                hideDuration: 6000,
+                                position: 'top right',
+                            })
+                            return;
+                        } else {
+                            $("#text-verify-archive-document-minor").css("display", "none");
+                            $('#dpz-archives-register-minor').removeClass('is-invalid')
+
+                        }
+                    }
+
+                    if (this.minor.typeDocumentMinor === '2'){
+                        if (this.minor.urlDataDocumentPhotoFrontal.length === 0) {
+                            $("#text-verify-archive-document-minor-frontal").css("display", "block");
+                            $('#dpz-archives-register-minor-frontal').addClass('is-invalid')
+                        }else{
+                            $("#text-verify-archive-document-minor-frontal").css("display", "none");
+                            $('#dpz-archives-register-minor-frontal').removeClass('is-invalid')
+                        }
+                        if (this.minor.urlDataDocumentPhotoBack.length === 0) {
+                            $("#text-verify-archive-document-minor-back").css("display", "block");
+                            $('#dpz-archives-register-minor-back').addClass('is-invalid')
+                        }else{
+                            $("#text-verify-archive-document-minor-back").css("display", "none");
+                            $('#dpz-archives-register-minor-back').removeClass('is-invalid')
+                        }
+                    }
+
+                }
+                if (this.aspirant.typeDocument === '1') {
+                    if (this.aspirant.urlDataArchive.length === 0) {
+                        $("#text-verify-archive-document-aspirant").css("display", "block");
+                        $('#dpz-archives-register-aspirant').addClass('is-invalid')
                         this.$toast.error({
                             title: 'Error',
-                            message: 'Por favor revise que todos los campos esten llenos o bien diligenciados',
+                            message: 'Por favor revise que los campos que son requeridos estén llenos o bien diligenciados',
                             showDuration: 1000,
                             hideDuration: 6000,
                             position: 'top right',
                         })
                         return;
+
                     } else {
-                        $("#text-verify-archive-document-minor").css("display", "none");
-                        $('#dpz-archives-register-minor').removeClass('is-invalid')
+                        $("#text-verify-archive-document-aspirant").css("display", "none");
+                        $('#dpz-archives-register-aspirant').removeClass('is-invalid')
 
                     }
                 }
+                if (this.aspirant.typeDocument === '2') {
+                    if (this.aspirant.urlDataDocumentPhotoFrontal.length === 0) {
+                        $("#text-verify-archive-document-aspirant-photo-frontal").css("display", "block");
+                        $('#dpz-archives-register-aspirant-photo-frontal').addClass('is-invalid')
+                        this.$toast.error({
+                            title: 'Error',
+                            message: 'Por favor revise que los campos que son requeridos estén llenos o bien diligenciados',
+                            showDuration: 1000,
+                            hideDuration: 6000,
+                            position: 'top right',
+                        })
+                        return;
 
-                if (this.aspirant.urlDataArchive.length === 0) {
-                    $("#text-verify-archive-document-aspirant").css("display", "block");
-                    $('#dpz-archives-register-aspirant').addClass('is-invalid')
-                    this.$toast.error({
-                        title: 'Error',
-                        message: 'Por favor revise que todos los campos esten llenos o bien diligenciados',
-                        showDuration: 1000,
-                        hideDuration: 6000,
-                        position: 'top right',
-                    })
-                    return;
+                    } else {
+                        $("#text-verify-archive-document-aspirant-photo-frontal").css("display", "none");
+                        $('#dpz-archives-register-aspirant-photo-frontal').removeClass('is-invalid')
 
-                } else {
-                    $("#text-verify-archive-document-aspirant").css("display", "none");
-                    $('#dpz-archives-register-aspirant').removeClass('is-invalid')
+                    }
+                    if (this.aspirant.urlDataDocumentPhotoBack.length === 0) {
 
+                        $("#text-verify-archive-document-aspirant-photo-back").css("display", "block");
+                        $('#dpz-archives-register-aspirant-photo-back').addClass('is-invalid')
+                        this.$toast.error({
+                            title: 'Error',
+                            message: 'Por favor revise que los campos que son requeridos estén llenos o bien diligenciados',
+                            showDuration: 1000,
+                            hideDuration: 6000,
+                            position: 'top right',
+                        })
+                        return;
+
+                    } else {
+                        $("#text-verify-archive-document-aspirant-photo-back").css("display", "none");
+                        $('#dpz-archives-register-aspirant-photo-back').removeClass('is-invalid')
+
+                    }
                 }
 
                 if (this.project.dataArchiveMusicPrincipal.length === 0) {
@@ -287,7 +394,7 @@ export default {
                     $('#dpz-archives-music-principal').addClass('is-invalid')
                     this.$toast.error({
                         title: 'Error',
-                        message: 'Por favor revise que todos los campos esten llenos o bien diligenciados',
+                        message: 'Por favor revise que los campos que son requeridos estén llenos o bien diligenciados',
                         showDuration: 1000,
                         hideDuration: 6000,
                         position: 'top right',
@@ -310,6 +417,19 @@ export default {
 
                 }
 
+                if (this.aspirant.headHousehold === null) {
+                    $('#title-headHousehold').addClass('is-invalid')
+                    return
+                }
+                if (this.aspirant.victimConflict === null) {
+                    $('#title-victimConflict').addClass('is-invalid')
+                    return
+                }
+                if (this.aspirant.disability === null) {
+                    $('#title-disability').addClass('is-invalid')
+                    return
+                }
+
                 const data = new FormData()
 
                 /*=============================================
@@ -324,9 +444,15 @@ export default {
                 data.append('phone', this.aspirant.phone);
                 data.append('birthday', moment(this.aspirant.birthday).format("YYYY-MM-DD HH:mm:ss"))
                 data.append('genero', JSON.stringify(this.aspirant.genero));
+                data.append('ethnic_id', JSON.stringify(this.aspirant.ethnic));
                 data.append('city', JSON.stringify(this.aspirant.homeCity));
                 data.append('address', this.aspirant.address);
                 data.append('archive', JSON.stringify(this.aspirant.urlDataArchive));
+                data.append('archiveDocumentPhotoFrontal', JSON.stringify(this.aspirant.urlDataDocumentPhotoFrontal));
+                data.append('archiveDocumentPhotoBack', JSON.stringify(this.aspirant.urlDataDocumentPhotoBack));
+                data.append('headHousehold', this.aspirant.headHousehold);
+                data.append('victimConflict', this.aspirant.victimConflict);
+                data.append('disability', this.aspirant.disability);
                 data.append('acceptTerm', this.acceptTerm);
                 /*=============================================
                     DATOS DEL PROYECTO
@@ -335,15 +461,18 @@ export default {
                 data.append('project_name_author', this.project.nameAuthor);
                 data.append('project_description', this.project.description);
                 data.append('project_category', JSON.stringify(this.project.category));
+                data.append('project_category_by_aspirant', this.project.categoryByAspirant);
                 data.append('project_audio', JSON.stringify(this.project.dataArchiveMusicPrincipal));
 
 
                 /*=============================================
                    DATOS DEL MENOR DE EDAD
                =============================================*/
-                if (this.aspirant.selectAspirantType === 3){
+                if (this.aspirant.selectAspirantType === 3) {
                     data.append('name_minor', this.minor.name);
                     data.append('last_name_minor', this.minor.last_name);
+                    data.append('archiveDocumentMinorPhotoFrontal', JSON.stringify(this.minor.urlDataDocumentPhotoFrontal));
+                    data.append('archiveDocumentMinorPhotoBack', JSON.stringify(this.minor.urlDataDocumentPhotoBack));
                     data.append('birthday_minor', moment(this.minor.birthday).format("YYYY-MM-DD HH:mm:ss"))
                     data.append('archive_minor', JSON.stringify(this.minor.urlDataArchive));
                 }
@@ -436,9 +565,9 @@ export default {
                     $("#text-verify-line-participation").css("display", "none");
                     $('#text-line-participation').removeClass('is-invalid')
                 }
-                if (val === 3){
+                if (val === 3) {
                     this.select_type_artist = true
-                }else{
+                } else {
                     this.select_type_artist = false
                 }
             }, 200)
@@ -457,12 +586,12 @@ export default {
             if (formPasswordToggleInput.attr('type') === 'text') {
                 formPasswordToggleInput.attr('type', 'password');
                 if (feather) {
-                    formPasswordToggleIcon.find('svg').replaceWith(feather.icons['eye'].toSvg({ class: 'font-small-4' }));
+                    formPasswordToggleIcon.find('svg').replaceWith(feather.icons['eye'].toSvg({class: 'font-small-4'}));
                 }
             } else if (formPasswordToggleInput.attr('type') === 'password') {
                 formPasswordToggleInput.attr('type', 'text');
                 if (feather) {
-                    formPasswordToggleIcon.find('svg').replaceWith(feather.icons['eye-off'].toSvg({ class: 'font-small-4' }));
+                    formPasswordToggleIcon.find('svg').replaceWith(feather.icons['eye-off'].toSvg({class: 'font-small-4'}));
                 }
             }
         });

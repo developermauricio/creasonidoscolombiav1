@@ -43,6 +43,9 @@ Vue.component('dropzone-upload-document', require('./aspirant/components/Dropzon
 Vue.component('dropzone-minor-upload-document', require('./aspirant/components/DropzoneMinorUploadDocument.vue').default);
 Vue.component('dropzone-upload-music', require('./aspirant/components/DropzoneUploadMusic.vue').default);
 
+Vue.component('dropzone-personal-document-photo', require('./aspirant/components/DropzonePersonalDocumentPhoto.vue').default);
+Vue.component('dropzone-minor-document-photo', require('./aspirant/components/DropzoneMinorDocumentPhoto.vue').default);
+
 Vue.component('aspirant-account-create-component', require('./aspirant/AccountCreate.vue').default);
 Vue.component('aspirant-register-component', require('./aspirant/Register.vue').default);
 Vue.component('aspirant-data-personal-register-component', require('./aspirant/components/DataPersonalRegister.vue').default);

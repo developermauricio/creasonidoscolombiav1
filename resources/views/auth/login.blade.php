@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">
-    <meta name="author" content="CREA SONIDOS COLOMBIA">
+    <meta name="author" content="CREASONIDOS COLOMBIA">
     <title>{{ config('app.name') }} | Iniciar Sesión</title>
     <link rel="apple-touch-icon" href="/app-assets/images/ico/apple-icon-120.png">
     {{--    <link rel="shortcut icon" type="image/x-icon" href="/app-assets/images/ico/favicon.ico">--}}
@@ -94,25 +94,26 @@
                                                 contraseña?</small></a>
                                     </div>
                                     <div class="input-group input-group-merge form-password-toggle">
-                                        <input class="form-control @error('password') form-control-merge @enderror " id="login-password"
+                                        <input class="form-control @error('password')@enderror form-control-merge " id="login-password"
                                                type="password" name="password" placeholder="············"
                                                aria-describedby="login-password" tabindex="2"/>
 
                                         <div class="input-group-append"><span class="input-group-text cursor-pointer"><i
                                                     data-feather="eye"></i></span></div>
-                                        @error('email')
-                                        <span class="text-danger" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
+
 
                                     </div>
-                                    @error('password')
-                                    <span class="text-danger" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                    @enderror
                                 </div>
+                                @error('email')
+                                <span class="text-danger pb-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span><br>
+                                @enderror
+                                @error('password')
+                                <span class="text-danger pb-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                                 {{--                                <div class="form-group">--}}
                                 {{--                                    <div class="custom-control custom-checkbox">--}}
                                 {{--                                        <input class="custom-control-input" id="remember-me" type="checkbox" tabindex="3" />--}}
@@ -121,7 +122,7 @@
                                 {{--                                </div>--}}
                                 <button class="btn btn-primary btn-block" type="submit" tabindex="4">Ingresar</button>
                             </form>
-                            <p class="text-center mt-2"><span>Aun no te registras?</span><a href="/cuenta"><span>&nbsp;Crea una cuenta</span></a>
+                            <p class="text-center mt-2"><span>¿Aún no se encuentra registrado?</span><a href="/cuenta"><span>&nbsp;Registrarme</span></a>
                             </p>
                         </div>
                     </div>

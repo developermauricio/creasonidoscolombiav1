@@ -31,9 +31,9 @@ export default {
                 maxFilesize: 10,  //Tamaño en MB
                 maxFiles: 1, // Catidad maxima que se puede subir
                 paramName: 'archive',
-                acceptedFiles: "image/*,application/pdf",
+                acceptedFiles: "application/pdf",
                 addRemoveLinks: true,
-                dictDefaultMessage: 'Clic aquí o arrastra tu documento pdf o imagen en formato png, jpg, jpeg. El Peso maximo del archivo debe ser de 10Mb',
+                dictDefaultMessage: 'Clic aquí o arrastre su documento pdf. El Peso maximo del archivo debe ser de 10Mb',
                 dictMaxFilesExceeded: 'No es posible agregar más archivos. Limite maximo 1',
                 dictFileTooBig: 'El archivo es demasiado grande, su peso es' + " ({{filesize}} Mb). " + 'El tamaño máximo del archivo debe ser de' + " {{maxFilesize}} Mb.",
                 dictRemoveFile: 'Remover Archivo',

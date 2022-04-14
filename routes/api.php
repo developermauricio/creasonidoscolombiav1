@@ -22,6 +22,19 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/aspirant/account-create', 'Aspirant\AccountController@createAccount')->name('aspirant.create.account');
 Route::get('/get-aspirant-types', 'Aspirant\RegisterController@getAspirantType')->name('aspirant.get.aspirant.type');
 Route::post('/upload-archive-aspirant', 'Aspirant\RegisterController@uploadArchiveAspirant')->name('api.upload.archive.aspirant');
+Route::post('/upload-archive-document-photo-frontal', 'Aspirant\RegisterController@uploadArchiveAspirantPhotoFrontal')->name('api.upload.archive.aspirant.photo.frontal');
+Route::post('/removed-archive-aspirant-photo-frontal', 'Aspirant\RegisterController@removedArchivePhotoFrontal')->name('api.removed.archive.photo.frontal');
+Route::post('/upload-archive-document-photo-back', 'Aspirant\RegisterController@uploadArchiveAspirantPhotoBack')->name('api.upload.archive.aspirant.photo.back');
+Route::post('/removed-archive-aspirant-photo-back', 'Aspirant\RegisterController@removedArchivePhotoBack')->name('api.removed.archive.photo.back');
+Route::post('/removed-archive-aspirant-pdf', 'Aspirant\RegisterController@removedArchivePdf')->name('api.removed.archive.pdf');
+
+Route::post('/upload-archive-document-minor-photo-frontal', 'Aspirant\RegisterController@uploadArchiveMinorPhotoFrontal')->name('api.upload.archive.minor.photo.frontal');
+Route::post('/upload-archive-document-minor-photo-back', 'Aspirant\RegisterController@uploadArchiveMinorPhotoBack')->name('api.upload.archive.minor.photo.back');
+Route::post('/removed-archive-minor-photo-frontal', 'Aspirant\RegisterController@removedArchiveMinorPhotoFrontal')->name('api.removed.archive.minor.photo.frontal');
+Route::post('/removed-archive-minor-photo-back', 'Aspirant\RegisterController@removedArchiveMinorPhotoBack')->name('api.removed.archive.minor.photo.back');
+
+
+
 Route::post('/upload-archive-minor', 'Aspirant\RegisterController@uploadArchiveMinor')->name('api.upload.archive.minor');
 Route::post('/removed-archive-minor', 'Aspirant\RegisterController@removedArchiveMinor')->name('api.removed.archive.minor');
 Route::post('/upload-archive-music-principal', 'Aspirant\RegisterController@uploadArchiveMusic')->name('api.upload.archive.music.aspirant');
@@ -35,7 +48,7 @@ Route::post('/update-profile-register', 'Aspirant\ProfileController@editProfile'
 
 
 
-
+Route::get('/get-ethnics', 'Controller@getEthnics')->name('get.ethnics');
 Route::get('/get-genders', 'Controller@getGenders')->name('get.genders');
 Route::get('/get-cities/{id}', 'Controller@getCities')->name('get.cities');
 Route::get('/get-departaments', 'Controller@getDepartaments')->name('get.departaments');

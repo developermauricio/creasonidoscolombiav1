@@ -1,5 +1,6 @@
 <?php
 
+use \App\Models\Ethnic;
 use App\Models\Aspirant;
 use App\Models\AspirantType;
 use App\Models\DocumentType;
@@ -43,6 +44,9 @@ class DatabaseSeeder extends \Illuminate\Database\Seeder
         factory(Gender::class, 1)->create([
             'name' => 'Otros'
         ]);
+        factory(Gender::class, 1)->create([
+            'name' => 'No reporta género'
+        ]);
 //        factory(Gender::class, 1)->create([
 //            'name' => 'Otro'
 //        ]);
@@ -58,6 +62,19 @@ class DatabaseSeeder extends \Illuminate\Database\Seeder
             'name' => 'CE'
         ]);
 
+        //Perspectiva étnica
+        factory(Ethnic::class, 1)->create([
+           'name' => 'Indigena',
+        ]);
+        factory(Ethnic::class, 1)->create([
+            'name' => 'Afrodescendiente',
+        ]);
+        factory(Ethnic::class, 1)->create([
+            'name' => 'Rom',
+        ]);
+        factory(Ethnic::class, 1)->create([
+            'name' => 'No reporta',
+        ]);
 
         // tipos de aspirantes
         factory(AspirantType::class, 1)->create([
@@ -178,10 +195,10 @@ class DatabaseSeeder extends \Illuminate\Database\Seeder
          CREAMOS LAS VARIABLES PARA LOS REPORTES
         =============================================*/
         $listVars = [
-            'lastRegisteredIDSync', 
-            'lastLocationIDSync', 
-            'lastTotalAspRegIDSync', 
-            'lastTotalCuradoresIDSync', 
+            'lastRegisteredIDSync',
+            'lastLocationIDSync',
+            'lastTotalAspRegIDSync',
+            'lastTotalCuradoresIDSync',
             'lastTotalProjectIDSync'
         ];
 
@@ -189,7 +206,7 @@ class DatabaseSeeder extends \Illuminate\Database\Seeder
             $variable = new \App\Models\ReportVariable;
             $variable->name = $var;
             $variable->value = 0;
-            $variable->save(); 
+            $variable->save();
         }
     }
 }

@@ -39,30 +39,68 @@ class RegisterController extends Controller
         $archiveExtension = $archive->getClientOriginalExtension();
         $ramdon = Str::random(10);
         $nameArchive = Str::slug(strtolower($nameAspirant) . '-' . Str::random(15), '-');
-        $path = Storage::disk('public')->put('/archives/' . $nameArchive . '.' . $archiveExtension, file_get_contents($archive));
+        $path = Storage::disk('public')->put('/archives/document-pdf/minor/' . $nameArchive . '.' . $archiveExtension, file_get_contents($archive));
 
-        $urlFinal = '/storage/archives/' . $nameArchive . '.' . $archiveExtension;
+        $urlFinal = '/storage/archives/document-pdf/minor/' . $nameArchive . '.' . $archiveExtension;
         return response()->json(['data' => $urlFinal, 'uuid' => $uuid, 'extension' => $archiveExtension]);
+    }
+
+    public function uploadArchiveMinorPhotoFrontal(Request $request)
+    {
+        $nameAspirant = $request->input('nameAspirant');
+        $uuid = $request->input('archiveUuid');
+        $archive = $request->file('archive');
+        $archiveExtension = $archive->getClientOriginalExtension();
+        $ramdon = Str::random(10);
+        $nameArchive = Str::slug(strtolower($nameAspirant) . '-' .'frontal'.'-'.Str::random(15), '-');
+        $path = Storage::disk('public')->put('/archives/document-photo/minor/' . $nameArchive . '.' . $archiveExtension, file_get_contents($archive));
+
+        $urlFinal = '/storage/archives/document-photo/minor/' . $nameArchive . '.' . $archiveExtension;
+        return response()->json(['data' => $urlFinal, 'uuid' => $uuid, 'extension' => $archiveExtension]);
+    }
+
+    public function uploadArchiveMinorPhotoBack(Request $request)
+    {
+
+        $nameAspirant = $request->input('nameAspirant');
+        $uuid = $request->input('archiveUuid');
+        $archive = $request->file('archive');
+        $archiveExtension = $archive->getClientOriginalExtension();
+        $ramdon = Str::random(10);
+        $nameArchive = Str::slug(strtolower($nameAspirant) . '-' .'back'.'-'.Str::random(15), '-');
+        $path = Storage::disk('public')->put('/archives/document-photo/minor/' . $nameArchive . '.' . $archiveExtension, file_get_contents($archive));
+
+        $urlFinal = '/storage/archives/document-photo/minor/' . $nameArchive . '.' . $archiveExtension;
+        return response()->json(['data' => $urlFinal, 'uuid' => $uuid, 'extension' => $archiveExtension]);
+    }
+
+    public function removedArchiveMinorPhotoFrontal(Request $request)
+    {
+        $pathArchive = $request->get('archiveArtistPhotoFrontal');
+        $partes_ruta = pathinfo($pathArchive);
+        Storage::delete('archives/document-photo/minor/' . $partes_ruta['basename']);
+
+        return response()->json('Se eliminó correctamente');
+    }
+    public function removedArchiveMinorPhotoBack(Request $request)
+    {
+        $pathArchive = $request->get('archiveArtistPhotoBack');
+        $partes_ruta = pathinfo($pathArchive);
+        Storage::delete('archives/document-photo/minor/' . $partes_ruta['basename']);
+        return response()->json('Se eliminó correctamente');
     }
 
     public function removedArchiveMinor(Request $request)
     {
         $pathArchive = $request->get('archiveMinor');
         $partes_ruta = pathinfo($pathArchive);
-        Storage::delete('archives/' . $partes_ruta['basename']);
+        Storage::delete('archives/document-pdf/minor/' . $partes_ruta['basename']);
 
         return response()->json('Se eliminó correctamente');
     }
 
     public function uploadArchiveAspirant(Request $request)
     {
-//        $editAspirant = $request->input('editAspirant');
-//
-//        if ($editAspirant){
-//            $pathArchive = $request->get('documentAspirant');
-//            $partes_ruta = pathinfo($pathArchive);
-//            Storage::delete('archives/' . $partes_ruta['basename']);
-//        }
 
         $nameAspirant = $request->input('nameAspirant');
         $documentAspirant = $request->input('documentAspirant');
@@ -71,10 +109,63 @@ class RegisterController extends Controller
         $archiveExtension = $archive->getClientOriginalExtension();
         $ramdon = Str::random(10);
         $nameArchive = Str::slug(strtolower($nameAspirant) . '-' . Str::random(15), '-');
-        $path = Storage::disk('public')->put('/archives/' . $nameArchive . '.' . $archiveExtension, file_get_contents($archive));
+        $path = Storage::disk('public')->put('/archives/document-pdf/' . $nameArchive . '.' . $archiveExtension, file_get_contents($archive));
 
-        $urlFinal = '/storage/archives/' . $nameArchive . '.' . $archiveExtension;
+        $urlFinal = '/storage/archives/document-pdf/' . $nameArchive . '.' . $archiveExtension;
         return response()->json(['data' => $urlFinal, 'uuid' => $uuid, 'extension' => $archiveExtension]);
+    }
+
+    public function uploadArchiveAspirantPhotoFrontal(Request $request)
+    {
+
+        $nameAspirant = $request->input('nameAspirant');
+        $uuid = $request->input('archiveUuid');
+        $archive = $request->file('archive');
+        $archiveExtension = $archive->getClientOriginalExtension();
+        $ramdon = Str::random(10);
+        $nameArchive = Str::slug(strtolower($nameAspirant) . '-' .'frontal'.'-'.Str::random(15), '-');
+        $path = Storage::disk('public')->put('/archives/document-photo/' . $nameArchive . '.' . $archiveExtension, file_get_contents($archive));
+
+        $urlFinal = '/storage/archives/document-photo/' . $nameArchive . '.' . $archiveExtension;
+        return response()->json(['data' => $urlFinal, 'uuid' => $uuid, 'extension' => $archiveExtension]);
+    }
+    public function uploadArchiveAspirantPhotoBack(Request $request)
+    {
+
+        $nameAspirant = $request->input('nameAspirant');
+        $uuid = $request->input('archiveUuid');
+        $archive = $request->file('archive');
+        $archiveExtension = $archive->getClientOriginalExtension();
+        $ramdon = Str::random(10);
+        $nameArchive = Str::slug(strtolower($nameAspirant) . '-' .'back'.'-'.Str::random(15), '-');
+        $path = Storage::disk('public')->put('/archives/document-photo/' . $nameArchive . '.' . $archiveExtension, file_get_contents($archive));
+
+        $urlFinal = '/storage/archives/document-photo/' . $nameArchive . '.' . $archiveExtension;
+        return response()->json(['data' => $urlFinal, 'uuid' => $uuid, 'extension' => $archiveExtension]);
+    }
+
+    public function removedArchivePhotoFrontal(Request $request)
+    {
+        $pathArchive = $request->get('archiveArtistPhotoFrontal');
+        $partes_ruta = pathinfo($pathArchive);
+        Storage::delete('archives/document-photo/' . $partes_ruta['basename']);
+
+        return response()->json('Se eliminó correctamente');
+    }
+    public function removedArchivePhotoBack(Request $request)
+    {
+        $pathArchive = $request->get('archiveArtistPhotoBack');
+        $partes_ruta = pathinfo($pathArchive);
+        Storage::delete('archives/document-photo/' . $partes_ruta['basename']);
+        return response()->json('Se eliminó correctamente');
+    }
+    public function removedArchivePdf(Request $request)
+    {
+        $pathArchive = $request->get('archiveArtist');
+        $partes_ruta = pathinfo($pathArchive);
+        Storage::delete('archives/document-pdf/' . $partes_ruta['basename']);
+
+        return response()->json('Se eliminó correctamente');
     }
 
     public function removedArchiveAspirant(Request $request)
@@ -149,10 +240,16 @@ class RegisterController extends Controller
         $phone = $request->phone;
         $birthday = $request->birthday;
         $address = $request->address;
+        $headHousehold = $request->headHousehold;
+        $victimConflict = $request->victimConflict;
+        $disability = $request->disability;
         $acceptTerm = $request->acceptTerm;
         $genero = json_decode($request->genero);
+        $ethnic = json_decode($request->ethnic_id);
         $city = json_decode($request->city);
         $archive = json_decode($request->archive);
+        $archiveDocumentPhotoFrontal = json_decode($request->archiveDocumentPhotoFrontal);
+        $archiveDocumentPhotoBack = json_decode($request->archiveDocumentPhotoBack);
 
         /*=============================================
                 DATOS DEL PROYECTO
@@ -161,6 +258,7 @@ class RegisterController extends Controller
         $project_name_author = $request->project_name_author;
         $project_description = $request->project_description;
         $project_category = json_decode($request->project_category);
+        $project_category_by_aspirant = $request->project_category_by_aspirant;
         $project_audio = json_decode($request->project_audio);
 
         /*=============================================
@@ -171,9 +269,9 @@ class RegisterController extends Controller
         /*=============================================
                 ACTUALIZAMOS EL USUARIO
         =============================================*/
-        $success = true;
-        DB::beginTransaction();
-        try {
+//        $success = true;
+//        DB::beginTransaction();
+//        try {
             $user = User::where('id', $user_id)->update([
                 'name' => ucwords($name),
                 'last_name' => ucwords($last_name),
@@ -192,10 +290,16 @@ class RegisterController extends Controller
             $aspirant = Aspirant::where('id', $aspirant_id)->update([
                 'has_project' => 1,
                 'accept_termi' => $acceptTerm,
-                'cc_document' => $archive[0]->urlArchive,
-                'extension_document' => $archive[0]->extension,
+                'cc_document_pdf' => $archive ? $archive[0]->urlArchive : null,
+                'cc_document_frontal' => $archiveDocumentPhotoFrontal ? $archiveDocumentPhotoFrontal[0]->urlArchive : null,
+                'cc_document_back' => $archiveDocumentPhotoBack ? $archiveDocumentPhotoBack[0]->urlArchive : null,
+//                'extension_document' => $archive[0]->extension,
                 'user_id' => $user_id,
                 'aspirant_type_id' => $aspirantType,
+                'ethnic_id' => $ethnic->id,
+                'head_house_hold' => $headHousehold,
+                'victim_conflict' => $victimConflict,
+                'disability' => $disability,
             ]);
 
             /*=============================================
@@ -203,7 +307,9 @@ class RegisterController extends Controller
             =============================================*/
             if ($aspirantType === "3") {
 
-                $document_minor = json_decode($request->archive_minor);
+                $document_minor_pdf = json_decode($request->archive_minor);
+                $document_minor_photo_frontal = json_decode($request->archiveDocumentMinorPhotoFrontal);
+                $document_minor_photo_back = json_decode($request->archiveDocumentMinorPhotoBack);
                 $name_minor = $request->name_minor;
                 $last_name_minor = $request->last_name_minor;
                 $birthday_minor = $request->birthday_minor;
@@ -214,8 +320,9 @@ class RegisterController extends Controller
                 ]);
 
                 $minor = Minor::create([
-                    'document' => $document_minor[0]->urlArchive,
-                    'extension_document' => $document_minor[0]->extension,
+                    'document_pdf' => $document_minor_pdf ? $document_minor_pdf[0]->urlArchive : null,
+                    'document_photo_frontal' => $document_minor_photo_frontal ? $document_minor_photo_frontal[0]->urlArchive : null,
+                    'document_photo_back' => $document_minor_photo_back ? $document_minor_photo_back[0]->urlArchive : null,
                     'name' => ucwords($name_minor),
                     'last_name' => ucwords($last_name_minor),
                     'birthday' => $birthday_minor,
@@ -223,31 +330,32 @@ class RegisterController extends Controller
                 ]);
             }
 
-
             /*=============================================
                     CREAMOS EL PROYECTO
             =============================================*/
             $project = Proyect::create([
                 'title' => ucwords($project_name),
                 'name_author' => ucwords($project_name_author),
-                'description' => $project_description,
-                'category_id' => $project_category->id,
+                'description' => ucwords($project_description),
+                'category_id' => $project_category ? $project_category->id : null,
+                'category_by_aspirant' => ucwords($project_category_by_aspirant),
                 'audio' => $project_audio[0]->urlArchive,
                 'end_time' => Carbon::now()->addDay(),
                 'slug' => Str::slug($project_name . '-' . Str::random(10))
             ]);
 
             $project->aspirant()->attach($aspirant_id);
-            Mail::to($email)->send(new RegisterProject($email, $name, $last_name, ucwords($project_name), $project_category->category));
-        } catch (\Exception $exception) {
-            $success = $exception->getMessage();
-        }
-        if ($success === true) {
-            DB::commit();
-            return response()->json('Transacción realizada exitosamente', 200);
-        } else {
-            return response()->json('Error al realizar la transacción', 500);
-
-        }
+            Mail::to($email)->send(new RegisterProject($email, $name, $last_name, ucwords($project_name)));
+//        } catch (\Exception $exception) {
+//            $success = $exception->getMessage();
+//        }
+//        if ($success === true) {
+//            DB::commit();
+//            return response()->json('Transacción realizada exitosamente', 200);
+//        } else {
+//            return response()->json('Error al realizar la transacción', 500);
+//
+//        }
+        return 'sisas';
     }
 }

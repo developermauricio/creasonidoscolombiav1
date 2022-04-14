@@ -53,13 +53,31 @@
             </div>
         </div>
         <div class="row pt-1">
-            <div class="col-12">
+            <div class="col-12 mt-1">
+                <h5 id="text-line-type-document-minor">Seleccione como va a subir el documento de identificación del menor de edad</h5>
+                <p style="margin-top: 0.3rem;font-size: 0.9rem; display: none"
+                   id="text-verify-type-document-minor" class="text-danger">Debe agergar la foto o documento de identificación del menor de edad</p>
+                <vs-radio color="#11435b" v-model="minor.typeDocumentMinor" vs-name="typeDocumentMinor1" vs-value="1">Agregar documento en pdf
+                </vs-radio>
+                <vs-radio color="#11435b" v-model="minor.typeDocumentMinor" vs-name="typeDocumentMinor2" vs-value="2">Agregar fotografía del documento
+                </vs-radio>
+            </div>
+            <div class="col-12" v-if="minor.typeDocumentMinor === '1'">
                 <label class="form-control-label" id="add-archive-dropzone-aspirant">Subir documento de identificación del menor de edad
                     <span style="color: red"> *</span></label>
                 <dropzone-minor-upload-document v-on:dataUrl="datUrlDropzone" :name="minor.name" :lastName="minor.last_name"></dropzone-minor-upload-document>
                 <p style="margin-top: 0.3rem;font-size: 0.9rem; display: none"
                    id="text-verify-archive-document-minor" class="text-danger">El archivo del documento del menor de edad es
                     requerido</p>
+            </div>
+            <div class="col-12 mt-1" v-if="minor.typeDocumentMinor === '2'">
+                <dropzone-minor-document-photo
+                    :name="minor.name"
+                    :lastName="minor.last_name"
+                    v-on:documentUrlPhotoFrontal="datUrlDropzonePhotoFrontal"
+                    v-on:documentUrlPhotoBack="datUrlDropzonePhotoBack"
+                >
+                </dropzone-minor-document-photo>
             </div>
         </div>
     </div>
@@ -75,6 +93,9 @@ export default {
                 last_name: '',
                 birthday: null,
                 urlDataArchive: [],
+                typeDocumentMinor: null,
+                urlDataDocumentPhotoFrontal: [],
+                urlDataDocumentPhotoBack: [],
             },
             errors: {},
             currentDate: null,
@@ -89,9 +110,56 @@ export default {
     },
 
     methods:{
+        datUrlDropzonePhotoFrontal(data){
+            this.minor.urlDataDocumentPhotoFrontal = data
+        },
+        datUrlDropzonePhotoBack(data){
+            this.minor.urlDataDocumentPhotoBack = data
+        },
         datUrlDropzone(data) {
             this.minor.urlDataArchive = data
         },
+    },
+
+    watch: {
+        'minor.typeDocumentMinor': function (val){
+            if (val){
+                $("#text-verify-type-document-minor").css("display", "none");
+                $('#text-line-type-document-minor').removeClass('is-invalid')
+            }else{
+                $("#text-verify-type-document-minor").css("display", "block");
+                $('#text-line-type-document-minor').addClass('is-invalid')
+            }
+        },
+        'minor.urlDataArchive': function (val){
+            if (val){
+                $("#text-verify-archive-document-minor").css("display", "none");
+                $('#dpz-archives-register-minor').removeClass('is-invalid')
+            }else{
+                $("#text-verify-archive-document-minor").css("display", "block");
+                $('#dpz-archives-register-minor').addClass('is-invalid')
+            }
+        },
+        'minor.urlDataDocumentPhotoFrontal': function (val){
+            if (val){
+                $("#text-verify-archive-document-minor-frontal").css("display", "none");
+                $('#dpz-archives-register-minor-frontal').removeClass('is-invalid')
+            }else{
+                $("#text-verify-archive-document-minor-frontal").css("display", "block");
+                $('#dpz-archives-register-minor-frontal').addClass('is-invalid')
+            }
+        },
+
+        'minor.urlDataDocumentPhotoBack': function (val){
+            if (val){
+                $("#text-verify-archive-document-minor-back").css("display", "none");
+                $('#dpz-archives-register-minor-back').removeClass('is-invalid')
+            }else{
+                $("#text-verify-archive-document-minor-back").css("display", "block");
+                $('#dpz-archives-register-minor-back').addClass('is-invalid')
+            }
+        },
+
     },
 
     mounted() {
@@ -108,5 +176,7 @@ export default {
 </script>
 
 <style scoped>
-
+.con-vs-radio{
+    justify-content: flex-start !important;
+}
 </style>

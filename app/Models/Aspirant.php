@@ -15,16 +15,25 @@ class Aspirant extends Model
 
     protected $fillable = [
         'has_project',
-        'cc_document',
+        'cc_document_pdf',
+        'cc_document_frontal',
+        'cc_document_back',
         'accept_termi',
         'extension_document',
         'biography',
         'user_id',
-        'aspirant_type_id'
+        'aspirant_type_id',
+        'head_house_hold',
+        'victim_conflict',
+        'disability',
     ];
 
     public function projects(){
         return $this->belongsToMany(Proyect::class, 'aspirant_proyects', 'aspirant_id', 'proyect_id');
+    }
+
+    public function ethnic(){
+        return $this->belongsTo(Ethnic::class, 'ethnic_id');
     }
 
     public function aspirant_type(){
@@ -36,7 +45,7 @@ class Aspirant extends Model
     }
 
     static public function getDataAspirant($id){
-        $aspirant = Aspirant::where('user_id', $id)->with('user.gender', 'user.city.departament', 'aspirant_type', 'projects.category', 'parent.minor')->first();
+        $aspirant = Aspirant::where('user_id', $id)->with('user.gender', 'user.city.departament', 'aspirant_type', 'projects.category', 'parent.minor', 'ethnic')->first();
         return $aspirant;
     }
 

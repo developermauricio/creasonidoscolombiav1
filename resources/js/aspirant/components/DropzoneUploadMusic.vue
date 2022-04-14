@@ -54,7 +54,7 @@ export default {
                 paramName: 'archiveMusic',
                 acceptedFiles: "audio/*,mp3, wav",
                 addRemoveLinks: true,
-                dictDefaultMessage: 'Clic aquí o arrastra tu canción en formato mp3 o wav',
+                dictDefaultMessage: 'Clic aquí o arrastra su canción en formato mp3 o wav',
                 dictMaxFilesExceeded: 'No es posible agregar más archivos. Limite maximo 1',
                 dictFileTooBig: 'El archivo es demasiado grande, su peso es' + " ({{filesize}} MiB). " + 'El tamaño máximo del archivo debe ser de' + " {{maxFilesize}} MiB.",
                 dictRemoveFile: 'Remover Archivo',

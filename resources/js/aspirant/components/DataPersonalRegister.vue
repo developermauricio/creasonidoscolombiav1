@@ -82,7 +82,6 @@
            ======================================-->
             <div class="col-12 col-md-6 col-lg-6">
                 <div class="form-group">
-<!--                    <label class="form-control-label">Celular <span class="text-danger">*</span></label>-->
                     <input-form
                         label="Celular"
                         id="phoneAspirant"
@@ -94,15 +93,6 @@
                         :msgServer.sync="errors.phone"
                         v-mask="'(###) ###-####'"
                     ></input-form>
-
-<!--                    <p style="margin-top: -0.5rem;font-size: 0.9rem; display: none;"-->
-<!--                       id="text-verify-phone-principal" class="text-danger">-->
-<!--                        El número de celular es obligatorio-->
-<!--                    </p>-->
-<!--                    <p style="margin-top: -0.5rem;font-size: 0.9rem; display: none;"-->
-<!--                       id="text-verify-phone-valid" class="text-danger">-->
-<!--                        Ingrese un número de celular válido-->
-<!--                    </p>-->
                 </div>
             </div>
             <!--=====================================
@@ -115,7 +105,7 @@
                         label="Confirmar celular"
                         pattern="all"
                         errorMsg="Ingrese un celular valido"
-                        requiredMsg="La confirmación del celular es requerida"
+                        requiredMsg="La confirmación del número celular es requerida"
                         :required="true"
                         :modelo.sync="aspirant.phone_confirmed"
                         :msgServer.sync="errors.phone_confirmed"
@@ -248,12 +238,70 @@
                     ></input-form>
                 </div>
             </div>
+            <!--=====================================
+               CAMPO PERSPECTIVA ÉTNICA
+           ======================================-->
+            <div class="col-12 col-md-6 col-lg-6">
+                <input-form
+                    label="Perspectiva étnica"
+                    id="textEthnicApirant"
+                    errorMsg
+                    requiredMsg="La perspectiva étnica es requerida"
+                    :required="true"
+                    :modelo.sync="aspirant.ethnic"
+                    :msgServer.sync="errors.ethnic"
+                    type="multiselect"
+                    selectLabel="Seleccione"
+                    :multiselect="{ options: optionsEthnic,
+                                           selectLabel:'Seleccionar',
+                                           selectedLabel:'Seleccionado',
+                                           deselectLabel:'Desmarcar',
+                                           placeholder:'Perspectiva étnica',
+                                          taggable : false,
+                                          'track-by':'id',
+                                          label: 'name',
+                                          'custom-label': ethnic=>ethnic.name
+                                        }"
+                ></input-form>
+            </div>
+        </div>
+        <!--=====================================
+               PREGUNTAS PERSONALES
+           ======================================-->
+        <div class="row mt-1 mb-1">
+            <div class="col-12">
+                <h5 id="text-line-questions">Responda las siguientes preguntas</h5>
+            </div>
+            <div class="col-12 col-md-3 col-lg-3">
+                <label for="" id="title-headHousehold">¿Es padre o madre cabeza de hogar? <span class="text-danger"> *</span></label>
+                <vs-radio color="#11435b" v-model="aspirant.headHousehold" vs-name="headHousehold1" vs-value="Si">Si</vs-radio>
+                <vs-radio color="#11435b" v-model="aspirant.headHousehold" vs-name="headHousehold2" vs-value="No">No</vs-radio>
+            </div>
+            <div class="col-12 col-md-3 col-lg-3">
+                <label for="" id="title-victimConflict">¿Reporta ser víctima del conflicto?<span class="text-danger"> *</span></label>
+                <vs-radio color="#11435b" v-model="aspirant.victimConflict" vs-name="victimConflict1" vs-value="Si">Si</vs-radio>
+                <vs-radio color="#11435b" v-model="aspirant.victimConflict" vs-name="victimConflict2" vs-value="No">No</vs-radio>
+            </div>
+            <div class="col-12 col-md-3 col-lg-3">
+                <label for="" id="title-disability">¿Posee alguna discapacidad?<span class="text-danger"> *</span></label>
+                <vs-radio color="#11435b" v-model="aspirant.disability" vs-name="disability1" vs-value="Si">Si</vs-radio>
+                <vs-radio color="#11435b" v-model="aspirant.disability" vs-name="disability2" vs-value="No">No</vs-radio>
+            </div>
         </div>
         <!--=====================================
              SUBIR DOCUMENTO DE IDENTIFICACIÓN
          ======================================-->
         <div class="row">
-            <div class="col-12">
+            <div class="col-12 mt-1">
+                <h5 id="text-line-type-document">Seleccione como va a subir su documento de identificación</h5>
+                <p style="margin-top: 0.3rem;font-size: 0.9rem; display: none"
+                   id="text-verify-type-document" class="text-danger">Debe agergar la foto o documento de identificación</p>
+                <vs-radio color="#11435b" v-model="aspirant.typeDocument" vs-name="typeDocument1" vs-value="1">Agregar documento en pdf
+                </vs-radio>
+                <vs-radio color="#11435b" v-model="aspirant.typeDocument" vs-name="typeDocument2" vs-value="2">Agregar fotografía del documento
+                </vs-radio>
+            </div>
+            <div class="col-12 mt-2" v-if="aspirant.typeDocument === '1'">
                 <label class="form-control-label" id="add-archive-dropzone-aspirant">Subir documento de identificación
                     <span style="color: red"> *</span></label>
                 <dropzone-upload-document v-on:dataUrl="datUrlDropzone" :name="aspirant.user_auth_name"
@@ -261,6 +309,15 @@
                 <p style="margin-top: 0.3rem;font-size: 0.9rem; display: none"
                    id="text-verify-archive-document-aspirant" class="text-danger">El archivo del documento es
                     requerido</p>
+            </div>
+            <div class="col-12 mt-1" v-if="aspirant.typeDocument === '2'">
+                <dropzone-personal-document-photo
+                    :name="aspirant.user_auth_name"
+                    :lastName="aspirant.user_auth_last_name"
+                    v-on:documentUrlPhotoFrontal="datUrlDropzonePhotoFrontal"
+                    v-on:documentUrlPhotoBack="datUrlDropzonePhotoBack"
+                >
+                </dropzone-personal-document-photo>
             </div>
             <div class="d-flex pl-1 pt-1">
                 <span data-toggle="modal" data-target="#modal-example-pdf" class="pr-2"
@@ -328,6 +385,7 @@ import Datepicker from 'vuejs-datepicker';
 import {en, es} from 'vuejs-datepicker/dist/locale'
 import vue2Dropzone from 'vue2-dropzone'
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
+import Swal from "sweetalert2";
 
 export default {
     name: "DataPersonalRegister",
@@ -349,24 +407,28 @@ export default {
                 user_auth_last_name: window.user_last_name,
 
                 urlDataArchive: [],
-
-                // name: '',
-                // last_name: '',
-                // email: '',
+                urlDataDocumentPhotoFrontal: [],
+                urlDataDocumentPhotoBack: [],
                 phone: '',
                 phone_confirmed: '',
                 address: '',
                 birthday: null,
                 genero: null,
+                ethnic: null,
                 homeDepartment: null,
                 homeCity: null,
                 selectAspirantType: null,
+                typeDocument: null,
+                headHousehold: null,
+                victimConflict: null,
+                disability: null,
             },
 
             aspirantType: [],
             optionsDepartaments: [],
             optionsCities: [],
             optionsGender: [],
+            optionsEthnic: [],
 
             errors: {},
             currentDate: null,
@@ -385,10 +447,31 @@ export default {
         datUrlDropzone(data) {
             this.aspirant.urlDataArchive = data
         },
+        datUrlDropzonePhotoFrontal(data){
+            this.aspirant.urlDataDocumentPhotoFrontal = data;
+        },
+        datUrlDropzonePhotoBack(data){
+            this.aspirant.urlDataDocumentPhotoBack = data;
+        },
 
         getGenders() {
             axios.get('/api/get-genders').then(resp => {
                 this.optionsGender = resp.data.data
+            }).catch(err => {
+                console.log(err)
+                this.$toast.error({
+                    title: 'Error',
+                    message: 'Algo salió mal, consulte al administrador',
+                    showDuration: 1000,
+                    hideDuration: 6000,
+                    position: 'top right',
+                })
+            })
+        },
+
+        getEthnics() {
+            axios.get('/api/get-ethnics').then(resp => {
+                this.optionsEthnic = resp.data.data
             }).catch(err => {
                 console.log(err)
                 this.$toast.error({
@@ -470,6 +553,50 @@ export default {
                 this.aspirant.phone_confirmed = ''
             }
         },
+        'aspirant.headHousehold': function (val){
+            if (val){
+                $('#title-headHousehold').removeClass('is-invalid')
+            }
+        },
+        'aspirant.victimConflict': function (val){
+            if (val){
+                $('#title-victimConflict').removeClass('is-invalid')
+            }
+        },
+        'aspirant.disability': function (val){
+            if (val){
+                $('#title-disability').removeClass('is-invalid')
+            }
+        },
+        'aspirant.typeDocument': function (val){
+            if (val){
+                $("#text-verify-type-document").css("display", "none");
+                $('#text-line-type-document').removeClass('is-invalid')
+            }else{
+                $("#text-verify-type-document").css("display", "block");
+                $('#text-line-type-document').addClass('is-invalid')
+            }
+            if(val === '1' && this.aspirant.urlDataArchive.length > 0){
+                Swal.fire({
+                    title: 'Confirmar',
+                    text: '¿Esta seguro que desea cambiar el documento?',
+                    confirmButtonColor: "#11435b",
+                    cancelButtonColor: "#B53E2A",
+                    confirmButtonText: 'Aceptar',
+                    cancelButtonText: 'Cancelar',
+                    customClass: "swal-confirmation",
+                    showCancelButton: true,
+                    reverseButtons: true,
+                    allowOutsideClick: false,
+                }).then(result => {
+                    if (result.value) {
+                        this.aspirant.typeDocument = '2'
+                    }else{
+                        this.aspirant.typeDocument = '1'
+                    }
+                });
+            }
+        },
         'aspirant.phone_confirmed': function (val) {
             if (val !== this.aspirant.phone && this.aspirant.phone_confirmed) {
                 $('#phoneAspirantConfirmed').addClass('is-invalid')
@@ -485,6 +612,7 @@ export default {
         this.getAspirantType();
         this.getDeparments();
         this.getGenders();
+        this.getEthnics();
         this.currentDate = new Date()
         this.currentDate.setFullYear(this.currentDate.getFullYear() - 18)
         this.currentDate = this.currentDate.getFullYear() + 1

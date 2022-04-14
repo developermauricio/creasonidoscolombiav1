@@ -47,6 +47,15 @@
 .is-invalid .multiselect__tags {
     border: 1px solid #f00 !important;
 }
+#title-headHousehold.is-invalid{
+    color: red;
+}
+#title-victimConflict.is-invalid{
+    color: red;
+}
+#title-disability.is-invalid{
+    color: red;
+}
 
 .background-auth {
     background-size: contain;
@@ -85,4 +94,8 @@
 
 #dpz-archives-register-minor{
     text-align: center !important;
+}
+
+.vue-dropzone>.dz-preview .dz-details{
+    background-color: #00CDC7 !important;
 }
