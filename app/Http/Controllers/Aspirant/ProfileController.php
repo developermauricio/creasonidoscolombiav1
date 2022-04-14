@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Mail\Aspirant\EndTimeProject;
 use App\Models\Aspirant;
 use App\Models\Minor;
+use App\Models\ParentApirant;
 use App\Models\Proyect;
 use App\User;
 use Carbon\Carbon;
@@ -74,9 +75,16 @@ class ProfileController extends Controller
         $acceptTerm = $request->acceptTerm;
         $genero = json_decode($request->genero);
         $ethnic = json_decode($request->ethnic_id);
+        $category_aspirant = json_decode($request->category_aspirant_id);
         $city = json_decode($request->city);
         $archive = $request->archive;
-        $extension_archive = $request->extension_archive;
+        $createMinor = $request->createMinor;
+//        $extension_archive = $request->extension_archive;
+        $archiveDocumentPhotoFrontal = json_decode($request->archiveDocumentPhotoFrontal);
+        $archiveDocumentPhotoBack = json_decode($request->archiveDocumentPhotoBack);
+        $vinculado_ecopetrol = $request->vinculado_ecopetrol;
+        $primer_empleo_ecopetrol = $request->primer_empleo_ecopetrol;
+        $bachilleres_colombia_ecopetrol = $request->bachilleres_colombia_ecopetrol;
 
         /*=============================================
                DATOS DEL PROYECTO
@@ -85,8 +93,14 @@ class ProfileController extends Controller
         $project_name = $request->project_name;
         $project_name_author = $request->project_name_author;
         $project_description = $request->project_description;
-        $project_category = json_decode($request->project_category);
+//        $project_category = json_decode($request->project_category);
         $project_audio = $request->project_audio;
+
+        /*=============================================
+           NUEVA CONTRASEÑA
+        =============================================*/
+        $password = $request->password;
+        $pass = bcrypt($password);
 
         /*=============================================
                 ACTUALIZAMOS EL USUARIO
@@ -96,6 +110,7 @@ class ProfileController extends Controller
             'last_name' => ucwords($last_name),
             'email' => $email,
             'phone' => $phone,
+            'password' => $pass,
             'birthday' => $birthday,
             'address' => $address,
             'gender_id' => $genero->id,
@@ -106,36 +121,91 @@ class ProfileController extends Controller
         /*=============================================
                     ACTUALIZAMOS EL ASPIRANTE
             =============================================*/
+        if($archiveDocumentPhotoFrontal && $archiveDocumentPhotoBack){
+            $archive = '';
+        }
+        if ($archive){
+            $archiveDocumentPhotoFrontal = '';
+            $archiveDocumentPhotoBack = '';
+        }
         $aspirant = Aspirant::where('id', $aspirant_id)->update([
             'has_project' => 1,
             'accept_termi' => $acceptTerm,
-            'cc_document' => $archive,
-            'extension_document' => $extension_archive,
+            'cc_document_pdf' => $archive ? $archive : null,
+            'cc_document_frontal' => $archiveDocumentPhotoFrontal ? $archiveDocumentPhotoFrontal: null,
+            'cc_document_back' => $archiveDocumentPhotoBack ? $archiveDocumentPhotoBack : null,
+//            'extension_document' => $extension_archive,
             'user_id' => $user_id,
             'aspirant_type_id' => $aspirantType,
+            'category_aspirant_id' => $category_aspirant->id,
             'ethnic_id' => $ethnic->id,
             'head_house_hold' => $headHousehold,
             'victim_conflict' => $victimConflict,
             'disability' => $disability,
+            'vinculado_ecopetrol' => $vinculado_ecopetrol,
+            'primer_empleo_ecopetrol' => $vinculado_ecopetrol === 'Si' ? $primer_empleo_ecopetrol : '',
+            'bachilleres_colombia_ecopetrol' => $vinculado_ecopetrol === 'Si' ? $bachilleres_colombia_ecopetrol : '',
         ]);
-
+        if ($aspirantType != '3') {
+            $minor_id = $request->minor_id;
+            $parent_id = $request->parent_id;
+            if ($parent_id) {
+                Minor::where('id', $minor_id)->delete();
+                ParentApirant::where('id', $parent_id)->delete();
+            }
+        }
         /*=============================================
                     DATOS DEL MENOR DE EDAD
             =============================================*/
-        if ($aspirantType === '3') {
+        if ($aspirantType === '3' && $createMinor === null) {
             $minor_id = $request->minor_id;
             $name_minor = $request->name_minor;
             $birthday_minor = $request->birthday_minor;
             $last_name_minor = $request->last_name_minor;
-            $document_minor = $request->document_minor;
-            $extension_document_minor = $request->extension_document_minor;
+            $document_minor = $request->document_pdf_minor;
+            $document_minor_photo_frontal = json_decode($request->archiveDocumentMinorPhotoFrontal);
+            $document_minor_photo_back = json_decode($request->archiveDocumentMinorPhotoBack);
+            if($document_minor_photo_frontal && $document_minor_photo_back){
+                $document_minor = '';
+            }
+            if ($document_minor){
+                $document_minor_photo_frontal = '';
+                $document_minor_photo_back = '';
+            }
+            if($minor_id){
+                //            $extension_document_minor = $request->extension_document_minor;
+                Minor::where('id', $minor_id)->update([
+                    'name' => ucwords($name_minor),
+                    'last_name' => ucwords($last_name_minor),
+                    'birthday' => $birthday_minor,
+                    'document_pdf' => $document_minor ? $document_minor : null,
+                    'document_photo_frontal' => $document_minor_photo_frontal ? $document_minor_photo_frontal : null,
+                    'document_photo_back' => $document_minor_photo_back ? $document_minor_photo_back : null,
+//                'extension_document' => $extension_document_minor
+                ]);
+            }
+        }else if($aspirantType === '3' && $createMinor ==='1'){
+            $name_minor_create = $request->name_minor_create;
+            $birthday_minor_create = $request->birthday_minor_create;
+            $last_name_minor_create = $request->last_name_minor_create;
+            $document_minor_create = $request->document_pdf_minor_create;
+            $document_minor_photo_frontal_create = json_decode($request->archiveDocumentMinorPhotoFrontalCreate);
+            $document_minor_photo_back_create = json_decode($request->archiveDocumentMinorPhotoBackCreate);
 
-            Minor::where('id', $minor_id)->update([
-                'name' => ucwords($name_minor),
-                'last_name' => ucwords($last_name_minor),
-                'birthday' => $birthday_minor,
-                'document' => $document_minor,
-                'extension_document' => $extension_document_minor
+
+            $parent = ParentApirant::create([
+                'user_id' => $user_id,
+                'aspirant_id' => $aspirant_id
+            ]);
+
+            $minor = Minor::create([
+                'document_pdf' => $document_minor_create ? $document_minor_create : null,
+                'document_photo_frontal' => $document_minor_photo_frontal_create ? $document_minor_photo_frontal_create : null,
+                'document_photo_back' => $document_minor_photo_back_create ? $document_minor_photo_back_create : null,
+                'name' => ucwords($name_minor_create),
+                'last_name' => ucwords($last_name_minor_create),
+                'birthday' => $birthday_minor_create,
+                'parent_id' => $parent->id
             ]);
         }
 
@@ -146,7 +216,7 @@ class ProfileController extends Controller
             'title' => ucwords($project_name),
             'name_author' => ucwords($project_name_author),
             'description' => $project_description,
-            'category_id' => $project_category->id,
+//            'category_id' => $project_category->id,
             'audio' => $project_audio,
             'slug' => Str::slug($project_name . '-' . Str::random(10))
         ]);

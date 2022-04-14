@@ -246,10 +246,14 @@ class RegisterController extends Controller
         $acceptTerm = $request->acceptTerm;
         $genero = json_decode($request->genero);
         $ethnic = json_decode($request->ethnic_id);
+        $category_aspirant = json_decode($request->category_aspirant_id);
         $city = json_decode($request->city);
         $archive = json_decode($request->archive);
         $archiveDocumentPhotoFrontal = json_decode($request->archiveDocumentPhotoFrontal);
         $archiveDocumentPhotoBack = json_decode($request->archiveDocumentPhotoBack);
+        $vinculado_ecopetrol = $request->vinculado_ecopetrol;
+        $primer_empleo_ecopetrol = $request->primer_empleo_ecopetrol;
+        $bachilleres_colombia_ecopetrol = $request->bachilleres_colombia_ecopetrol;
 
         /*=============================================
                 DATOS DEL PROYECTO
@@ -297,9 +301,13 @@ class RegisterController extends Controller
                 'user_id' => $user_id,
                 'aspirant_type_id' => $aspirantType,
                 'ethnic_id' => $ethnic->id,
+                'category_aspirant_id' => $category_aspirant->id,
                 'head_house_hold' => $headHousehold,
                 'victim_conflict' => $victimConflict,
                 'disability' => $disability,
+                'vinculado_ecopetrol' => $vinculado_ecopetrol,
+                'primer_empleo_ecopetrol' => $primer_empleo_ecopetrol,
+                'bachilleres_colombia_ecopetrol' => $bachilleres_colombia_ecopetrol,
             ]);
 
             /*=============================================

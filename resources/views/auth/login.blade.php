@@ -57,9 +57,9 @@
             <div class="auth-wrapper auth-v2">
                 <div class="auth-inner row m-0">
                     <!-- Brand logo-->
-                    <a class="brand-logo" href="javascript:void(0);">
-                        <img width="200" src="{{ env('URL_IMG_LOGO') }}" alt="">
-                    </a>
+{{--                    <a class="brand-logo" href="javascript:void(0);">--}}
+{{--                        <img width="200" src="{{ env('URL_IMG_LOGO') }}" alt="">--}}
+{{--                    </a>--}}
                     <!-- /Brand logo-->
                     <!-- Left Text-->
                     <div class="d-none d-lg-flex col-lg-8 align-items-center background-auth">
@@ -68,7 +68,7 @@
                     </div>
                     <!-- /Left Text-->
                     <!-- Login-->
-                    <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5">
+                    <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5" style="margin-top: -12rem">
 
                         <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
                             <div role="alert" aria-live="polite" aria-atomic="true" class="alert alert-success">

@@ -47,7 +47,7 @@ Route::post('/update-project-endtime/{id}', 'Aspirant\ProfileController@udpateSt
 Route::post('/update-profile-register', 'Aspirant\ProfileController@editProfile')->name('api.update.profile.aspirant');
 
 
-
+Route::get('/get-category-aspirant', 'Controller@categoryAspirant')->name('get.category.aspirant');
 Route::get('/get-ethnics', 'Controller@getEthnics')->name('get.ethnics');
 Route::get('/get-genders', 'Controller@getGenders')->name('get.genders');
 Route::get('/get-cities/{id}', 'Controller@getCities')->name('get.cities');

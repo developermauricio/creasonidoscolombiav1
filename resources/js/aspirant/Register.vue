@@ -32,22 +32,6 @@
             <h5 class="pb-1 pt-2">{{ select_type_artist ? '5.' : '4.' }} Cambiar contraseña</h5>
             <div class="row">
                 <div class="col-12 col-lg-4 col-md-4">
-                    <!--                    <div class="input-group input-group-merge form-password-toggle">-->
-                    <!--                        <input-form-->
-                    <!--                            type="password"-->
-                    <!--                            id="login-password"-->
-                    <!--                            label="Nueva contraseña"-->
-                    <!--                            pattern="all"-->
-                    <!--                            errorMsg="Ingrese una contraseña válida"-->
-                    <!--                            requiredMsg=""-->
-                    <!--                            :modelo.sync="password"-->
-                    <!--                            :required="false"-->
-                    <!--                            :msgServer.sync="errors.password"-->
-                    <!--                        ></input-form>-->
-                    <!--                        <div class="input-group-append"><span class="input-group-text cursor-pointer"><i-->
-                    <!--                            data-feather="eye"></i></span></div>-->
-                    <!--                    </div>-->
-                    <!--                </div>-->
                     <div class="form-group">
                         <div class="d-flex justify-content-between">
                             <label for="reset-password-new">Nueva contraseña</label>
@@ -82,9 +66,32 @@
                         La contraseña no coincide
                     </p>
                 </div>
-
             </div>
             <hr>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="pb-1 pt-2">Por favor responda:</h5>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3 col-lg-3 mb-1">
+                        <label for="" id="title-vinculad-ecopetrol">¿Usted tiene vínculo con Ecopetrol? <span class="text-danger"> *</span></label>
+                        <vs-radio color="#11435b" v-model="vinculado_ecopetrol" vs-name="headHousehold1" vs-value="Si">Si</vs-radio>
+                        <vs-radio color="#11435b" v-model="vinculado_ecopetrol" vs-name="headHousehold2" vs-value="No">No</vs-radio>
+                    </div>
+                    <div class="col-12 col-md-3 col-lg-3 mb-1" v-if="vinculado_ecopetrol ==='Si'">
+                        <label for="" id="title-primero-empleo_ecopetrol">¿Su primer empleo ha sido con Ecopetrol?<span class="text-danger"> *</span></label>
+                        <vs-radio color="#11435b" v-model="primer_empleo_ecopetrol" vs-name="victimConflict1" vs-value="Si">Si</vs-radio>
+                        <vs-radio color="#11435b" v-model="primer_empleo_ecopetrol" vs-name="victimConflict2" vs-value="No">No</vs-radio>
+                    </div>
+                    <div class="col-12 col-md-3 col-lg-3" v-if="vinculado_ecopetrol ==='Si'">
+                        <label for="" id="title-bachiller-colombia-ecopetrol">¿Usted ha sido beneficiario del programa bachilleres por Colombia de Ecopetrol?<span class="text-danger"> *</span></label>
+                        <vs-radio color="#11435b" v-model="bachilleres_colombia_ecopetrol" vs-name="disability1" vs-value="Si">Si</vs-radio>
+                        <vs-radio color="#11435b" v-model="bachilleres_colombia_ecopetrol" vs-name="disability2" vs-value="No">No</vs-radio>
+                    </div>
+                </div>
+            </div>
             <!--=====================================
              ACEPTA LOS TERMINOS Y CONDICIONES
             ======================================-->
@@ -136,7 +143,9 @@ export default {
             password: '',
             confirmed_password: '',
             select_type_artist: false,
-
+            vinculado_ecopetrol: null,
+            primer_empleo_ecopetrol: null,
+            bachilleres_colombia_ecopetrol: null,
             acceptTerm: null,
             validate: false,
             user_auth_id: window.user_ìd,
@@ -174,6 +183,19 @@ export default {
 
                 if (document.querySelectorAll(".is-invalid").length > 0) {
 
+                    if (this.vinculado_ecopetrol === null || this.vinculado_ecopetrol === ''){
+                        $('#title-vinculad-ecopetrol').addClass('is-invalid')
+                    }
+                    if(this.vinculado_ecopetrol === 'Si'){
+                        if (this.primer_empleo_ecopetrol === null || this.primer_empleo_ecopetrol === ''){
+                            $('#title-primero-empleo_ecopetrol').addClass('is-invalid')
+                        }
+                        if (this.bachilleres_colombia_ecopetrol === null || this.bachilleres_colombia_ecopetrol === ''){
+                            $('#title-bachiller-colombia-ecopetrol').addClass('is-invalid')
+                        }
+                    }
+
+
                     if (this.aspirant.phone === '' || this.aspirant.phone === null) {
                         $("#text-verify-phone-principal").css("display", "block");
                         $('.input-tel__input').addClass('is-invalid')
@@ -208,19 +230,18 @@ export default {
                     }
 
 
-
                     if (this.aspirant.selectAspirantType === 3) {
                         if (this.minor.typeDocumentMinor === null || this.aspirant.typeDocumentMinor === '') {
                             $("#text-verify-type-document-minor").css("display", "block");
                             $('#text-line-type-document-minor').addClass('is-invalid')
                         }
-                        if (this.minor.typeDocumentMinor === '1'){
+                        if (this.minor.typeDocumentMinor === '1') {
                             if (this.minor.urlDataArchive.length === 0) {
                                 $("#text-verify-archive-document-minor").css("display", "block");
                                 $('#dpz-archives-register-minor').addClass('is-invalid')
                             }
                         }
-                        if (this.minor.typeDocumentMinor === '2'){
+                        if (this.minor.typeDocumentMinor === '2') {
                             if (this.minor.urlDataDocumentPhotoFrontal.length === 0) {
                                 $("#text-verify-archive-document-minor-frontal").css("display", "block");
                                 $('#dpz-archives-register-minor-frontal').addClass('is-invalid')
@@ -295,7 +316,7 @@ export default {
 
                 }
                 if (this.aspirant.selectAspirantType === 3) {
-                    if (this.minor.typeDocumentMinor === '1'){
+                    if (this.minor.typeDocumentMinor === '1') {
                         if (this.minor.urlDataArchive.length === 0) {
                             $("#text-verify-archive-document-minor").css("display", "block");
                             $('#dpz-archives-register-minor').addClass('is-invalid')
@@ -314,18 +335,18 @@ export default {
                         }
                     }
 
-                    if (this.minor.typeDocumentMinor === '2'){
+                    if (this.minor.typeDocumentMinor === '2') {
                         if (this.minor.urlDataDocumentPhotoFrontal.length === 0) {
                             $("#text-verify-archive-document-minor-frontal").css("display", "block");
                             $('#dpz-archives-register-minor-frontal').addClass('is-invalid')
-                        }else{
+                        } else {
                             $("#text-verify-archive-document-minor-frontal").css("display", "none");
                             $('#dpz-archives-register-minor-frontal').removeClass('is-invalid')
                         }
                         if (this.minor.urlDataDocumentPhotoBack.length === 0) {
                             $("#text-verify-archive-document-minor-back").css("display", "block");
                             $('#dpz-archives-register-minor-back').addClass('is-invalid')
-                        }else{
+                        } else {
                             $("#text-verify-archive-document-minor-back").css("display", "none");
                             $('#dpz-archives-register-minor-back').removeClass('is-invalid')
                         }
@@ -430,6 +451,13 @@ export default {
                     return
                 }
 
+                if (this.vinculado_ecopetrol === null || this.vinculado_ecopetrol === ''){
+                    $('#title-vinculad-ecopetrol').addClass('is-invalid')
+                    return
+                }else{
+                    $('#title-vinculad-ecopetrol').removeClass('is-invalid')
+                }
+
                 const data = new FormData()
 
                 /*=============================================
@@ -445,6 +473,7 @@ export default {
                 data.append('birthday', moment(this.aspirant.birthday).format("YYYY-MM-DD HH:mm:ss"))
                 data.append('genero', JSON.stringify(this.aspirant.genero));
                 data.append('ethnic_id', JSON.stringify(this.aspirant.ethnic));
+                data.append('category_aspirant_id', JSON.stringify(this.aspirant.categoryAspirant));
                 data.append('city', JSON.stringify(this.aspirant.homeCity));
                 data.append('address', this.aspirant.address);
                 data.append('archive', JSON.stringify(this.aspirant.urlDataArchive));
@@ -454,6 +483,9 @@ export default {
                 data.append('victimConflict', this.aspirant.victimConflict);
                 data.append('disability', this.aspirant.disability);
                 data.append('acceptTerm', this.acceptTerm);
+                data.append('vinculado_ecopetrol', this.vinculado_ecopetrol);
+                data.append('primer_empleo_ecopetrol', this.primer_empleo_ecopetrol);
+                data.append('bachilleres_colombia_ecopetrol', this.bachilleres_colombia_ecopetrol);
                 /*=============================================
                     DATOS DEL PROYECTO
                 =============================================*/
@@ -527,6 +559,25 @@ export default {
     },
 
     watch: {
+        vinculado_ecopetrol: function (val) {
+          if (val){
+              $('#title-vinculad-ecopetrol').removeClass('is-invalid')
+              if (val === 'No'){
+                  this.primer_empleo_ecopetrol = ''
+                  this.bachilleres_colombia_ecopetrol = ''
+              }
+          }
+        },
+        primer_empleo_ecopetrol: function (val) {
+            if (val){
+                $('#title-primero-empleo_ecopetrol').removeClass('is-invalid')
+            }
+        },
+        bachilleres_colombia_ecopetrol: function (val) {
+            if (val){
+                $('#title-bachiller-colombia-ecopetrol').removeClass('is-invalid')
+            }
+        },
         'confirmed_password': function (val) {
             if (val) {
                 if (val !== this.password) {

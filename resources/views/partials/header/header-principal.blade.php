@@ -5,7 +5,7 @@
     <ul class="nav navbar-nav">
         <li class="nav-item">
             <a class="navbar-brand" href="#">
-                <img class="logo-header" width="180" src="{{ env('URL_IMG_LOGO') }}" alt="">
+                <img class="logo-header" width="110" src="{{ env('URL_IMG_LOGO') }}" alt="">
             </a>
         </li>
     </ul>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\CategoryAspirant;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,6 +27,10 @@ class Aspirant extends Model
         'head_house_hold',
         'victim_conflict',
         'disability',
+        'category_aspirant_id',
+        'vinculado_ecopetrol',
+        'primer_empleo_ecopetrol',
+        'bachilleres_colombia_ecopetrol',
     ];
 
     public function projects(){
@@ -34,6 +39,10 @@ class Aspirant extends Model
 
     public function ethnic(){
         return $this->belongsTo(Ethnic::class, 'ethnic_id');
+    }
+
+    public function categoryAspirant(){
+        return $this->belongsTo(CategoryAspirant::class, 'category_aspirant_id');
     }
 
     public function aspirant_type(){
@@ -45,7 +54,7 @@ class Aspirant extends Model
     }
 
     static public function getDataAspirant($id){
-        $aspirant = Aspirant::where('user_id', $id)->with('user.gender', 'user.city.departament', 'aspirant_type', 'projects.category', 'parent.minor', 'ethnic')->first();
+        $aspirant = Aspirant::where('user_id', $id)->with('user.gender', 'user.city.departament', 'aspirant_type', 'projects.category', 'parent.minor', 'ethnic', 'categoryAspirant')->first();
         return $aspirant;
     }
 

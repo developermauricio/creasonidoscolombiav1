@@ -65,13 +65,17 @@
         <div class="content-header row">
         </div>
         <div class="content-body">
-            @if (session('status'))
-                <div class="alert alert-success" role="alert">
-                    <div class="alert-body">
-                    {{ session('status') }}
+            <div class="mb-2">
+                @if (session('status'))
+                    <div class="alert alert-success" role="alert">
+                        <div class="alert-body">
+                            {{ session('status') }}
 
-                </div>
-            @endif
+                        </div>
+                        @endif
+                    </div>
+            </div>
+
             @if (session('permission_denied'))
                 <div class="alert alert-danger" role="alert">
                     <h4 class="alert-heading">Atención</h4>
@@ -98,12 +102,12 @@
     <p class="clearfix mb-0">
         <span class="float-md-left d-block d-md-inline-block mt-25">
             Con el apoyo de:
-            <img class="ml-2" width="155" src="/img/logo-fundacion-yuri.png" alt="">
-            <img class="ml-2" width="150" src="/img/logo-ecopetrol.png" alt="" style="margin-top: -1.5rem;">
-            <img class="ml-2" width="150" src="/img/logo-bancolombia.png" alt="" style="margin-top: -0.6rem;">
+            <img class="ml-2" width="180" src="/images/logo-fundacion-yuri-buenaventura.png" alt="">
+            <img class="ml-2" width="140" src="/images/logo-ecopetrol.png" alt="" style="margin-top: -1.5rem;">
+            <img class="ml-2" width="175" src="/images/logo-bancolombia.png" alt="" style="margin-top: -0.010rem;">
         </span>
         <span class="float-md-right d-none d-md-block" style="font-size: 0.8rem !important; margin-top: 1rem;">
-            Creasonidos Colombia 2022 © Todos los derechos reservados.
+            Creasonidos 2022 © Todos los derechos reservados.
         </span>
     </p>
 </footer>

@@ -7,6 +7,7 @@ use App\Models\DocumentType;
 use App\Models\Gender;
 use App\Models\Zonas;
 use App\User;
+use \App\CategoryAspirant;
 use  \Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 
@@ -75,6 +76,21 @@ class DatabaseSeeder extends \Illuminate\Database\Seeder
         factory(Ethnic::class, 1)->create([
             'name' => 'No reporta',
         ]);
+
+        //Categorias de aspirantes
+        factory(\App\CategoryAspirant::class, 1)->create([
+            'name' => 'Inicial',
+            'description' => 'Músicos, cantantes, intérpretes y/o compositores no inscritos a Sayco – Acinpro, ni a ninguna sociedad de gestión, que no hayan participado en ninguna grabación musical.'
+        ]);
+        factory(\App\CategoryAspirant::class, 1)->create([
+            'name' => 'Mediana',
+            'description' => 'Músicos, cantantes, intérpretes y/o compositores inscritos a Sayco – Acinpro, o a alguna sociedad de gestión, y que hayan participado en alguna grabación musical, pero que nunca hayan tenido contrato con disquera.'
+        ]);
+        factory(\App\CategoryAspirant::class, 1)->create([
+            'name' => 'Profesional',
+            'description' => 'Músicos, intérpretes y/o compositores inscritos a Sayco – Acinpro o alguna sociedad de gestión, que tengan grabación musical a su nombre, y un contrato con una disquera y/o casa editorial.'
+        ]);
+
 
         // tipos de aspirantes
         factory(AspirantType::class, 1)->create([

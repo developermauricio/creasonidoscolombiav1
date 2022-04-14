@@ -30,6 +30,8 @@ class CreateAspirantsTable extends Migration
             $table->text('biography')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('category_aspirant_id')->nullable();
+            $table->foreign('category_aspirant_id')->references('id')->on('category_aspirants');
             $table->unsignedBigInteger('aspirant_type_id')->nullable();
             $table->foreign('aspirant_type_id')->references('id')->on('aspirant_types');
             $table->unsignedBigInteger('ethnic_id')->nullable();
@@ -37,6 +39,9 @@ class CreateAspirantsTable extends Migration
             $table->string('head_house_hold')->nullable();
             $table->string('victim_conflict')->nullable();
             $table->string('disability')->nullable();
+            $table->string('vinculado_ecopetrol')->nullable();
+            $table->string('primer_empleo_ecopetrol')->nullable();
+            $table->string('bachilleres_colombia_ecopetrol')->nullable();
             $table->timestamps();
         });
     }

@@ -46,6 +46,10 @@
                             <h5 style="margin-top: 0.2rem" v-if="aspirant.aspirant_type.id === 3">Persona
                                 natural en representación de un menor de edad</h5>
                         </div>
+                        <div class="col-12 d-flex mt-1">
+                            <h4 class="pr-1">Categoría de trayectoria: </h4>
+                            <h5 style="margin-top: 0.2rem" >{{ aspirant.category_aspirant.name }}</h5>
+                        </div>
                     </div>
                     <!--=====================================
                         ESTADO DEL PROYECTO
@@ -86,7 +90,7 @@
                     <!--                                data-feather='edit-2'></i></button>-->
                     <!--                        </div>-->
                     <!--                    </div>-->
-                    <vs-tabs color="#11435b" class="pt-1">
+                    <vs-tabs color="#114455" class="pt-1">
                         <!--=====================================
                             INFORMACIÓN PERSONAL
                         ======================================-->
@@ -182,9 +186,28 @@
                                     </div>
                                     <div class="col-12 col-lg-3 col-md-3">
                                         <div class="form-group">
+                                            <h5>¿Usted tiene vínculo con Ecopetrol? </h5>
+                                            <p>{{ aspirant.vinculado_ecopetrol }}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-lg-3 col-md-3" v-if="aspirant.vinculado_ecopetrol === 'Si'">
+                                        <div class="form-group">
+                                            <h5>¿Su primer empleo ha sido con Ecopetrol? </h5>
+                                            <p>{{ aspirant.primer_empleo_ecopetrol }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3" v-if="aspirant.vinculado_ecopetrol === 'Si'">
+                                        <div class="form-group">
+                                            <h5>¿Usted ha sido beneficiario del programa bachilleres por Colombia de Ecopetrol? </h5>
+                                            <p>{{ aspirant.bachilleres_colombia_ecopetrol }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3">
+                                        <div class="form-group">
                                             <h5>Documento de identificación:</h5>
                                             <span data-toggle="modal" data-target="#modal-show-pdf" class="pr-2"
-                                                  style="color: #B53E2A; cursor: pointer">Ver documento</span>
+                                                  style="color: #114455; cursor: pointer">Ver documento</span>
                                         </div>
                                     </div>
                                 </div>
@@ -228,7 +251,7 @@
                                                 <h5>Documento de identificación del menor edad:</h5>
                                                 <span data-toggle="modal" data-target="#modal-show-minor-pdf"
                                                       class="pr-2"
-                                                      style="color: #B53E2A; cursor: pointer">Ver documento</span>
+                                                      style="color: #114455; cursor: pointer">Ver documento</span>
                                             </div>
                                         </div>
                                     </div>
@@ -469,7 +492,6 @@ export default {
             let nacimiento_minor = this.aspirant.parent.minor.birthday;
             let hoy_minor = moment();
             let anios_minor = hoy_minor.diff(nacimiento_minor, "years");
-            console.log(this.aspirant.parent.minor.birthday)
             this.edad_minor = anios_minor
         }
 

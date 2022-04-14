@@ -66,84 +66,84 @@ export default {
         sendingEvent(file, xhr, formData) {
             formData.append('nameAspirant', this.name +'-'+ this.lastName);
             formData.append('archiveUuid', file.upload.uuid);
-            if (this.editAspirant){
-                console.log('ESTAMOS AQUI', this.documentAspirantPhotoFrontal)
-                if (this.documentAspirantPdf){
-                    const data = new FormData();
-                    data.append("archiveArtist", this.documentAspirantPdf);
-                    axios.post('/api/removed-archive-aspirant-pdf', data)
-                        .then(resp => {
-                            this.$toast.success({
-                                title: '¡Muy bien!',
-                                message: 'El archivo se quitó correctamente',
-                                showDuration: 1000,
-                                hideDuration: 5000,
-                                position: 'top right',
-                            })
-                            this.urlsArchiveArtist.splice(i, 1);
-                        }).catch(err => {
-                        this.$toast.error({
-                            title: 'Error',
-                            message: '¡Algo salió mal!',
-                            showDuration: 1000,
-                            hideDuration: 5000,
-                            position: 'top right',
-                        })
-                    });
-                }
-
-                /*=============================================
-                    ELIMINAMOS LAS FOTOS
-                =============================================*/
-                if (this.documentAspirantPhotoFrontal && this.documentAspirantPhotoBack){
-                    /*=============================================
-                        ELIMINACIÓN FOTO FRONTAL
-                     =============================================*/
-                    console.log('URL', this.documentAspirantPhotoFrontal)
-                    const data = new FormData();
-                    data.append("archiveArtistPhotoFrontal", this.documentAspirantPhotoFrontal);
-                    axios.post('/api/removed-archive-aspirant-photo-frontal', data)
-                        .then(resp => {
-                            this.$toast.success({
-                                title: '¡Muy bien!',
-                                message: 'La foto se quitó correctamente',
-                                showDuration: 1000,
-                                hideDuration: 5000,
-                                position: 'top right',
-                            })
-                            this.urlsArchiveArtistFrontal.splice(i, 1);
-                        }).catch(err => {
-                        this.$toast.error({
-                            title: 'Error',
-                            message: '¡Algo salió mal!',
-                            showDuration: 1000,
-                            hideDuration: 5000,
-                            position: 'top right',
-                        })
-                    });
-
-                    data.append("archiveArtistPhotoBack", this.documentAspirantPhotoBack);
-                    axios.post('/api/removed-archive-aspirant-photo-back', data)
-                        .then(resp => {
-                            this.$toast.success({
-                                title: '¡Muy bien!',
-                                message: 'La foto se quitó correctamente',
-                                showDuration: 1000,
-                                hideDuration: 5000,
-                                position: 'top right',
-                            })
-                            this.urlsArchiveArtistBack.splice(i, 1);
-                        }).catch(err => {
-                        this.$toast.error({
-                            title: 'Error',
-                            message: '¡Algo salió mal!',
-                            showDuration: 1000,
-                            hideDuration: 5000,
-                            position: 'top right',
-                        })
-                    });
-                }
-            }
+            // if (this.editAspirant){
+            //     console.log('ESTAMOS AQUI', this.documentAspirantPhotoFrontal)
+            //     if (this.documentAspirantPdf){
+            //         const data = new FormData();
+            //         data.append("archiveArtist", this.documentAspirantPdf);
+            //         axios.post('/api/removed-archive-aspirant-pdf', data)
+            //             .then(resp => {
+            //                 this.$toast.success({
+            //                     title: '¡Muy bien!',
+            //                     message: 'El archivo se quitó correctamente',
+            //                     showDuration: 1000,
+            //                     hideDuration: 5000,
+            //                     position: 'top right',
+            //                 })
+            //                 this.urlsArchiveArtist.splice(i, 1);
+            //             }).catch(err => {
+            //             this.$toast.error({
+            //                 title: 'Error',
+            //                 message: '¡Algo salió mal!',
+            //                 showDuration: 1000,
+            //                 hideDuration: 5000,
+            //                 position: 'top right',
+            //             })
+            //         });
+            //     }
+            //
+            //     /*=============================================
+            //         ELIMINAMOS LAS FOTOS
+            //     =============================================*/
+            //     if (this.documentAspirantPhotoFrontal && this.documentAspirantPhotoBack){
+            //         /*=============================================
+            //             ELIMINACIÓN FOTO FRONTAL
+            //          =============================================*/
+            //         console.log('URL', this.documentAspirantPhotoFrontal)
+            //         const data = new FormData();
+            //         data.append("archiveArtistPhotoFrontal", this.documentAspirantPhotoFrontal);
+            //         axios.post('/api/removed-archive-aspirant-photo-frontal', data)
+            //             .then(resp => {
+            //                 this.$toast.success({
+            //                     title: '¡Muy bien!',
+            //                     message: 'La foto se quitó correctamente',
+            //                     showDuration: 1000,
+            //                     hideDuration: 5000,
+            //                     position: 'top right',
+            //                 })
+            //                 this.urlsArchiveArtistFrontal.splice(i, 1);
+            //             }).catch(err => {
+            //             this.$toast.error({
+            //                 title: 'Error',
+            //                 message: '¡Algo salió mal!',
+            //                 showDuration: 1000,
+            //                 hideDuration: 5000,
+            //                 position: 'top right',
+            //             })
+            //         });
+            //
+            //         data.append("archiveArtistPhotoBack", this.documentAspirantPhotoBack);
+            //         axios.post('/api/removed-archive-aspirant-photo-back', data)
+            //             .then(resp => {
+            //                 this.$toast.success({
+            //                     title: '¡Muy bien!',
+            //                     message: 'La foto se quitó correctamente',
+            //                     showDuration: 1000,
+            //                     hideDuration: 5000,
+            //                     position: 'top right',
+            //                 })
+            //                 this.urlsArchiveArtistBack.splice(i, 1);
+            //             }).catch(err => {
+            //             this.$toast.error({
+            //                 title: 'Error',
+            //                 message: '¡Algo salió mal!',
+            //                 showDuration: 1000,
+            //                 hideDuration: 5000,
+            //                 position: 'top right',
+            //             })
+            //         });
+            //     }
+            // }
         },
 
         maxFiles(file) {

@@ -16,7 +16,33 @@
                     </vs-tooltip>
                 </div>
                 <p style="margin-top: 0.3rem;font-size: 0.9rem; display: none"
-                   id="text-verify-line-participation" class="text-danger">Debes seleccionar la linea de participación</p>
+                   id="text-verify-line-participation" class="text-danger">Debes seleccionar la linea de
+                    participación</p>
+            </div>
+            <div class="col-12 col-md-4 col-lg-4 mt-2">
+                <input-form
+                    label="Categoría de trayectorias"
+                    id="textCategoryApirant"
+                    errorMsg
+                    requiredMsg="La categoría de trayectorias es requerido"
+                    :required="true"
+                    :modelo.sync="aspirant.categoryAspirant"
+                    :msgServer.sync="errors.categoryAspirant"
+                    type="multiselect"
+                    selectLabel="Seleccione en que categoría se encuentra"
+                    :multiselect="{ options: optionsCategoryAspirant,
+                                           selectLabel:'Seleccione en que categoría se encuentra',
+                                           selectedLabel:'Seleccionado',
+                                           deselectLabel:'Desmarcar',
+                                           placeholder:'Género',
+                                          taggable : false,
+                                          'track-by':'id',
+                                          label: 'name',
+                                          'custom-label': categoryAspirant=>categoryAspirant.name
+                                        }"
+                ></input-form>
+                <span data-toggle="modal" data-target="#modal-show-info-category-aspirant" class="pr-2"
+                      style="color: #B53E2A; cursor: pointer">Clíc para más información</span>
             </div>
         </div>
         <hr>
@@ -115,10 +141,10 @@
                        id="text-verify-phone" class="text-danger">
                         El número de celular no coincide
                     </p>
-<!--                    <p style="margin-top: -0.5rem;font-size: 0.9rem; display: none;"-->
-<!--                       id="text-verify-phone-confir-valide" class="text-danger">-->
-<!--                        La confirmación del celular es obligatorio-->
-<!--                    </p>-->
+                    <!--                    <p style="margin-top: -0.5rem;font-size: 0.9rem; display: none;"-->
+                    <!--                       id="text-verify-phone-confir-valide" class="text-danger">-->
+                    <!--                        La confirmación del celular es obligatorio-->
+                    <!--                    </p>-->
                 </div>
             </div>
             <!--=====================================
@@ -273,19 +299,28 @@
                 <h5 id="text-line-questions">Responda las siguientes preguntas</h5>
             </div>
             <div class="col-12 col-md-3 col-lg-3">
-                <label for="" id="title-headHousehold">¿Es padre o madre cabeza de hogar? <span class="text-danger"> *</span></label>
-                <vs-radio color="#11435b" v-model="aspirant.headHousehold" vs-name="headHousehold1" vs-value="Si">Si</vs-radio>
-                <vs-radio color="#11435b" v-model="aspirant.headHousehold" vs-name="headHousehold2" vs-value="No">No</vs-radio>
+                <label for="" id="title-headHousehold">¿Es padre o madre cabeza de hogar? <span
+                    class="text-danger"> *</span></label>
+                <vs-radio color="#11435b" v-model="aspirant.headHousehold" vs-name="headHousehold1" vs-value="Si">Si
+                </vs-radio>
+                <vs-radio color="#11435b" v-model="aspirant.headHousehold" vs-name="headHousehold2" vs-value="No">No
+                </vs-radio>
             </div>
             <div class="col-12 col-md-3 col-lg-3">
-                <label for="" id="title-victimConflict">¿Reporta ser víctima del conflicto?<span class="text-danger"> *</span></label>
-                <vs-radio color="#11435b" v-model="aspirant.victimConflict" vs-name="victimConflict1" vs-value="Si">Si</vs-radio>
-                <vs-radio color="#11435b" v-model="aspirant.victimConflict" vs-name="victimConflict2" vs-value="No">No</vs-radio>
+                <label for="" id="title-victimConflict">¿Reporta ser víctima del conflicto?<span
+                    class="text-danger"> *</span></label>
+                <vs-radio color="#11435b" v-model="aspirant.victimConflict" vs-name="victimConflict1" vs-value="Si">Si
+                </vs-radio>
+                <vs-radio color="#11435b" v-model="aspirant.victimConflict" vs-name="victimConflict2" vs-value="No">No
+                </vs-radio>
             </div>
             <div class="col-12 col-md-3 col-lg-3">
-                <label for="" id="title-disability">¿Posee alguna discapacidad?<span class="text-danger"> *</span></label>
-                <vs-radio color="#11435b" v-model="aspirant.disability" vs-name="disability1" vs-value="Si">Si</vs-radio>
-                <vs-radio color="#11435b" v-model="aspirant.disability" vs-name="disability2" vs-value="No">No</vs-radio>
+                <label for="" id="title-disability">¿Posee alguna discapacidad?<span
+                    class="text-danger"> *</span></label>
+                <vs-radio color="#11435b" v-model="aspirant.disability" vs-name="disability1" vs-value="Si">Si
+                </vs-radio>
+                <vs-radio color="#11435b" v-model="aspirant.disability" vs-name="disability2" vs-value="No">No
+                </vs-radio>
             </div>
         </div>
         <!--=====================================
@@ -295,10 +330,13 @@
             <div class="col-12 mt-1">
                 <h5 id="text-line-type-document">Seleccione como va a subir su documento de identificación</h5>
                 <p style="margin-top: 0.3rem;font-size: 0.9rem; display: none"
-                   id="text-verify-type-document" class="text-danger">Debe agergar la foto o documento de identificación</p>
-                <vs-radio color="#11435b" v-model="aspirant.typeDocument" vs-name="typeDocument1" vs-value="1">Agregar documento en pdf
+                   id="text-verify-type-document" class="text-danger">Debe agergar la foto o documento de
+                    identificación</p>
+                <vs-radio color="#11435b" v-model="aspirant.typeDocument" vs-name="typeDocument1" vs-value="1">Agregar
+                    documento en pdf
                 </vs-radio>
-                <vs-radio color="#11435b" v-model="aspirant.typeDocument" vs-name="typeDocument2" vs-value="2">Agregar fotografía del documento
+                <vs-radio color="#11435b" v-model="aspirant.typeDocument" vs-name="typeDocument2" vs-value="2">Agregar
+                    fotografía del documento
                 </vs-radio>
             </div>
             <div class="col-12 mt-2" v-if="aspirant.typeDocument === '1'">
@@ -373,6 +411,31 @@
                     </div>
                 </div>
             </div>
+            <!--=====================================
+		        MODAL INFORMACIÓN DE LAS CATEGORIAS
+            ======================================-->
+            <div class="modal fade text-left" id="modal-show-info-category-aspirant" tabindex="-1" role="dialog"
+                 aria-labelledby="modal-show-info-category-aspirant" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">¿Que es Categoría de Trayectorias?</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div v-for="(category, index) in optionsCategoryAspirant" :key="category.id" class="p-1">
+                                <h4>{{ index + 1 }}. {{ category.name }}:</h4>
+                                <p>{{ category.description }}:</p>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -415,6 +478,7 @@ export default {
                 birthday: null,
                 genero: null,
                 ethnic: null,
+                categoryAspirant: null,
                 homeDepartment: null,
                 homeCity: null,
                 selectAspirantType: null,
@@ -429,6 +493,7 @@ export default {
             optionsCities: [],
             optionsGender: [],
             optionsEthnic: [],
+            optionsCategoryAspirant: [],
 
             errors: {},
             currentDate: null,
@@ -447,10 +512,10 @@ export default {
         datUrlDropzone(data) {
             this.aspirant.urlDataArchive = data
         },
-        datUrlDropzonePhotoFrontal(data){
+        datUrlDropzonePhotoFrontal(data) {
             this.aspirant.urlDataDocumentPhotoFrontal = data;
         },
-        datUrlDropzonePhotoBack(data){
+        datUrlDropzonePhotoBack(data) {
             this.aspirant.urlDataDocumentPhotoBack = data;
         },
 
@@ -472,6 +537,21 @@ export default {
         getEthnics() {
             axios.get('/api/get-ethnics').then(resp => {
                 this.optionsEthnic = resp.data.data
+            }).catch(err => {
+                console.log(err)
+                this.$toast.error({
+                    title: 'Error',
+                    message: 'Algo salió mal, consulte al administrador',
+                    showDuration: 1000,
+                    hideDuration: 6000,
+                    position: 'top right',
+                })
+            })
+        },
+
+        getCategoryAspirant() {
+            axios.get('/api/get-category-aspirant').then(resp => {
+                this.optionsCategoryAspirant = resp.data.data
             }).catch(err => {
                 console.log(err)
                 this.$toast.error({
@@ -546,37 +626,37 @@ export default {
     },
 
     watch: {
-        'aspirant.phone': function (val){
-            if (val){
+        'aspirant.phone': function (val) {
+            if (val) {
                 $('#phoneAspirant').removeClass('is-invalid')
-            }else{
+            } else {
                 this.aspirant.phone_confirmed = ''
             }
         },
-        'aspirant.headHousehold': function (val){
-            if (val){
+        'aspirant.headHousehold': function (val) {
+            if (val) {
                 $('#title-headHousehold').removeClass('is-invalid')
             }
         },
-        'aspirant.victimConflict': function (val){
-            if (val){
+        'aspirant.victimConflict': function (val) {
+            if (val) {
                 $('#title-victimConflict').removeClass('is-invalid')
             }
         },
-        'aspirant.disability': function (val){
-            if (val){
+        'aspirant.disability': function (val) {
+            if (val) {
                 $('#title-disability').removeClass('is-invalid')
             }
         },
-        'aspirant.typeDocument': function (val){
-            if (val){
+        'aspirant.typeDocument': function (val) {
+            if (val) {
                 $("#text-verify-type-document").css("display", "none");
                 $('#text-line-type-document').removeClass('is-invalid')
-            }else{
+            } else {
                 $("#text-verify-type-document").css("display", "block");
                 $('#text-line-type-document').addClass('is-invalid')
             }
-            if(val === '1' && this.aspirant.urlDataArchive.length > 0){
+            if (val === '1' && this.aspirant.urlDataArchive.length > 0) {
                 Swal.fire({
                     title: 'Confirmar',
                     text: '¿Esta seguro que desea cambiar el documento?',
@@ -591,7 +671,7 @@ export default {
                 }).then(result => {
                     if (result.value) {
                         this.aspirant.typeDocument = '2'
-                    }else{
+                    } else {
                         this.aspirant.typeDocument = '1'
                     }
                 });
@@ -613,6 +693,7 @@ export default {
         this.getDeparments();
         this.getGenders();
         this.getEthnics();
+        this.getCategoryAspirant();
         this.currentDate = new Date()
         this.currentDate.setFullYear(this.currentDate.getFullYear() - 18)
         this.currentDate = this.currentDate.getFullYear() + 1

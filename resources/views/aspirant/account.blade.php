@@ -58,10 +58,10 @@
             <div class="auth-wrapper auth-v2">
                 <div class="auth-inner row m-0">
                     <!-- Brand logo-->
-                    <a class="brand-logo" href="javascript:void(0);">
-                        <img width="200" src="{{ env('URL_IMG_LOGO') }}" alt="">
+{{--                    <a class="brand-logo" href="javascript:void(0);">--}}
+{{--                        <img width="150" src="{{ env('URL_IMG_LOGO') }}" alt="">--}}
 {{--                        <h2 class="brand-text text-primary ml-1">Vuexy</h2>--}}
-                    </a>
+{{--                    </a>--}}
                     <!-- /Brand logo-->
                     <!-- Left Text-->
                     <div class="d-none d-lg-flex col-lg-8 align-items-center background-auth">

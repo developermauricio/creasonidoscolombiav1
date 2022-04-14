@@ -1,6 +1,6 @@
 .logo-header {
     position: absolute;
-    left: calc(50% - 30px) !important;
+    left: calc(50% - -3px) !important;
     padding: 0;
     z-index: 1000;
 }
@@ -56,40 +56,54 @@
 #title-disability.is-invalid{
     color: red;
 }
+#title-vinculad-ecopetrol.is-invalid{
+    color: red;
+}
+#title-primero-empleo_ecopetrol.is-invalid{
+    color: red;
+}
+#title-bachiller-colombia-ecopetrol.is-invalid{
+    color: red;
+}
 
 .background-auth {
-    background-size: contain;
+    object-fit: contain;
+    background-size: cover;
+    height: 100%;
     background-repeat: no-repeat !important;
-    background-image: url(/img/backg-auth.png)
+    background-image: url(/images/imagen-registro-logos.png)
 }
 
 @media (max-width: 472px) and (min-width: 320px) {
     .background-auth {
-        display: none !important;
+        height: 45%;
+        width: 50%;
+        background-size: cover;
+        display: block !important;
     }
 }
 
 .plyr--audio .plyr__control.plyr__tab-focus, .plyr--audio .plyr__control:hover, .plyr--audio .plyr__control[aria-expanded=true] {
-    background: #11435b !important;
+    background: #00CDC7 !important;
 }
 
 .plyr--full-ui input[type=range] {
-    color: #11435b !important;;
+    color: #00CDC7 !important;;
 }
 
 .plyr__menu__container .plyr__control[role=menuitemradio][aria-checked=true]::before {
-    background: #11435b !important;
+    background: #00CDC7 !important;
 }
 .multiselect__option--highlight{
-    background: #11435b !important;
+    background: #00CDC7 !important;
 }
 .vdp-datepicker__calendar .cell.selected{
-    background: #11435b !important;
+    background: #00CDC7 !important;
     color: #ffffff !important;
 }
 
 .vdp-datepicker__calendar .cell:not(.blank):not(.disabled).day:hover, .vdp-datepicker__calendar .cell:not(.blank):not(.disabled).month:hover, .vdp-datepicker__calendar .cell:not(.blank):not(.disabled).year:hover{
-    border: 1px solid #11435b !important;
+    border: 1px solid #00CDC7 !important;
 }
 
 #dpz-archives-register-minor{
