@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="row">
-            <div class="col-xl-2 col-md-4 col-sm-6">
+            <div class="col-xl-4 col-md-4 col-sm-6">
                 <div class="card text-center">
                     <div class="card-body">
                         <div class="avatar bg-light-info p-50 mb-1">
@@ -19,7 +19,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-2 col-md-4 col-sm-6">
+            <div class="col-xl-4 col-md-4 col-sm-6">
                 <div class="card text-center">
                     <div class="card-body">
                         <div class="avatar bg-light-danger p-50 mb-1">
@@ -35,7 +35,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-2 col-md-4 col-sm-6">
+            <div class="col-xl-4 col-md-4 col-sm-6">
                 <div class="card text-center">
                     <div class="card-body">
                         <div class="avatar bg-light-warning p-50 mb-1">
@@ -109,7 +109,6 @@
                                     <h6>
                                         <vs-tooltip
                                             :text="qualifit.description"
-                                            color="primary"
                                         >
                                             {{ qualifit.name }}
                                             <vs-icon
@@ -126,6 +125,7 @@
                                         :max="qualifit.value"
                                         color="#11435b"
                                         v-model="qualifit.model"
+                                        :disabled="project.state == 4"
                                     />
                                 </div>
                                 <!-- <span>{{ qualifit.model }}</span> -->
@@ -134,32 +134,41 @@
                             <div class="col-md-6 pt-3">
                                 <input-form
                                     type="textarea"
-                                    label="Descripción"
+                                    label="Observaciones"
                                     id="txtDescription"
                                     pattern="all"
                                     errorMsg="Ingrese información válida"
                                     requiredMsg="Este campo es requerido"
-                                    :required="false"
+                                    :required="true"
                                     :modelo.sync="description"
                                     :msgServer.sync="errors.description"
                                     :options="{
-                                        rows: 5,
+                                        rows: 9,
                                     }"
+                                    :disabled="project.state == 4"
                                 >
                                 </input-form>
                             </div>
                         </div>
 
-                        <vs-button
+                        <!-- <vs-button
                             class="d-flex ml-auto"
                             color="primary"
                             type="filled"
                             v-on:click="saveQualification(project.id)"
                             >Enviar Calificación</vs-button
+                        > -->
+                        <button
+                            :disabled="!description"
+                            v-on:click="saveQualification(project.id)"
+                            class="btn btn-primary btn-block col-md-2 ml-auto"
                         >
+                            Enviar Calificación
+                        </button>
                     </vs-collapse-item>
                 </vs-collapse>
                 <pagination
+                    color="red"
                     align="center"
                     :data="projects"
                     @pagination-change-page="getProjects"
@@ -230,13 +239,19 @@ export default {
             Swal.fire({
                 title: "Confirmación de calificación",
                 text: "¿Está seguro de guardar la calificación?",
+                confirmButtonColor: "#11435b",
+                cancelButtonColor: "#B53E2A",
                 confirmButtonText: "Aceptar",
                 cancelButtonText: "Cancelar",
+                customClass: "swal-confirmation",
+                showCancelButton: true,
+                reverseButtons: true,
+                allowOutsideClick: false,
             }).then((result) => {
                 axios
                     .post("/api/curador/save-qualifications/", data)
                     .then((data) => {
-                        console.log(data);
+                        window.location.reload();
                     })
                     .catch(({ response }) => {
                         console.error(response);
