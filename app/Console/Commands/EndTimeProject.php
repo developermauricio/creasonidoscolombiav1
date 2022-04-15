@@ -47,14 +47,14 @@ class EndTimeProject extends Command
         $name = $project->aspirant[0]->user->name;
         $last_name = $project->aspirant[0]->user->last_name;
         $project_name = $project->title;
-        $project_category = $project->category->category;
+//        $project_category = $project->category->category;
         if($project){
             $project->available_edit = 2;
             $project->state = 2;
             $project->save();
 
             MQTT::publish('subsanador_project', 'Nuevo proyecto en la bandeja');
-            Mail::to($project->aspirant[0]->user->email)->send(new \App\Mail\Aspirant\EndTimeProject($email, $name, $last_name, $project_name, $project_category));
+            Mail::to($project->aspirant[0]->user->email)->send(new \App\Mail\Aspirant\EndTimeProject($email, $name, $last_name, $project_name));
 
         }
     }
