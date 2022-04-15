@@ -11,8 +11,8 @@
 @section('title', 'Registro')
 
 @section('content')
-    <h1>Hola curador estas en tus proyectos</h1>
-{{--    @dd(App\User::getCurador(auth()->user()->id))--}}
+    <!-- <h1>Hola curador estas en tus proyectos</h1> -->
+    {{-- @dd(App\User::getCurador(auth()->user()->id)) --}}
     <curador-project-component :user="{{ \App\User::getCurador(auth()->user()->id)}}"></curador-project-component>
 {{--    <curador-project-component></curador-project-component>--}}
 @endsection
