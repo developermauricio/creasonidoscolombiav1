@@ -1195,7 +1195,7 @@ export default {
                     title: 'Confirmar',
                     text: '¿Esta seguro de actualizar?',
                     confirmButtonColor: "#11435b",
-                    cancelButtonColor: "#114455",
+                    cancelButtonColor: "#B53E2A",
                     confirmButtonText: 'Aceptar',
                     cancelButtonText: 'Cancelar',
                     customClass: "swal-confirmation",

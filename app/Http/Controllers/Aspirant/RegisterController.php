@@ -40,9 +40,9 @@ class RegisterController extends Controller
         $archiveExtension = $archive->getClientOriginalExtension();
         $ramdon = Str::random(10);
         $nameArchive = Str::slug(strtolower($nameAspirant) . '-' . Str::random(15), '-');
-        $path = Storage::disk('public')->put('/archives/document-pdf/minor/' . $nameArchive . '.' . $archiveExtension, file_get_contents($archive));
+        $path = Storage::disk('s3')->putFileAs('/archives/document-pdf/minor/', $archive, $nameArchive . '.' . $archiveExtension, 'public');
 
-        $urlFinal = '/storage/archives/document-pdf/minor/' . $nameArchive . '.' . $archiveExtension;
+        $urlFinal = env('AWS_URL_ARCHIVE_PDF_MINOR') . $nameArchive . '.' . $archiveExtension;
         return response()->json(['data' => $urlFinal, 'uuid' => $uuid, 'extension' => $archiveExtension]);
     }
 
@@ -54,9 +54,9 @@ class RegisterController extends Controller
         $archiveExtension = $archive->getClientOriginalExtension();
         $ramdon = Str::random(10);
         $nameArchive = Str::slug(strtolower($nameAspirant) . '-' .'frontal'.'-'.Str::random(15), '-');
-        $path = Storage::disk('public')->put('/archives/document-photo/minor/' . $nameArchive . '.' . $archiveExtension, file_get_contents($archive));
+        $path = Storage::disk('s3')->putFileAs('/archives/document-photo/minor/', $archive, $nameArchive . '.' . $archiveExtension, 'public');
 
-        $urlFinal = '/storage/archives/document-photo/minor/' . $nameArchive . '.' . $archiveExtension;
+        $urlFinal = env('AWS_URL_ARCHIVE_PHOTO_MINOR') . $nameArchive . '.' . $archiveExtension;
         return response()->json(['data' => $urlFinal, 'uuid' => $uuid, 'extension' => $archiveExtension]);
     }
 
@@ -69,9 +69,9 @@ class RegisterController extends Controller
         $archiveExtension = $archive->getClientOriginalExtension();
         $ramdon = Str::random(10);
         $nameArchive = Str::slug(strtolower($nameAspirant) . '-' .'back'.'-'.Str::random(15), '-');
-        $path = Storage::disk('public')->put('/archives/document-photo/minor/' . $nameArchive . '.' . $archiveExtension, file_get_contents($archive));
+        $path = Storage::disk('s3')->putFileAs('/archives/document-photo/minor/', $archive, $nameArchive . '.' . $archiveExtension, 'public');
 
-        $urlFinal = '/storage/archives/document-photo/minor/' . $nameArchive . '.' . $archiveExtension;
+        $urlFinal = env('AWS_URL_ARCHIVE_PHOTO_MINOR'). $nameArchive . '.' . $archiveExtension;
         return response()->json(['data' => $urlFinal, 'uuid' => $uuid, 'extension' => $archiveExtension]);
     }
 
@@ -79,7 +79,7 @@ class RegisterController extends Controller
     {
         $pathArchive = $request->get('archiveArtistPhotoFrontal');
         $partes_ruta = pathinfo($pathArchive);
-        Storage::delete('archives/document-photo/minor/' . $partes_ruta['basename']);
+        Storage::disk('s3')->delete('archives/document-photo/minor/' . $partes_ruta['basename']);
 
         return response()->json('Se eliminó correctamente');
     }
@@ -87,7 +87,7 @@ class RegisterController extends Controller
     {
         $pathArchive = $request->get('archiveArtistPhotoBack');
         $partes_ruta = pathinfo($pathArchive);
-        Storage::delete('archives/document-photo/minor/' . $partes_ruta['basename']);
+        Storage::disk('s3')->delete('archives/document-photo/minor/' . $partes_ruta['basename']);
         return response()->json('Se eliminó correctamente');
     }
 
@@ -95,7 +95,7 @@ class RegisterController extends Controller
     {
         $pathArchive = $request->get('archiveMinor');
         $partes_ruta = pathinfo($pathArchive);
-        Storage::delete('archives/document-pdf/minor/' . $partes_ruta['basename']);
+        Storage::disk('s3')->delete('archives/document-pdf/minor/' . $partes_ruta['basename']);
 
         return response()->json('Se eliminó correctamente');
     }
@@ -110,9 +110,9 @@ class RegisterController extends Controller
         $archiveExtension = $archive->getClientOriginalExtension();
         $ramdon = Str::random(10);
         $nameArchive = Str::slug(strtolower($nameAspirant) . '-' . Str::random(15), '-');
-        $path = Storage::disk('public')->put('/archives/document-pdf/' . $nameArchive . '.' . $archiveExtension, file_get_contents($archive));
+        $path = Storage::disk('s3')->putFileAs('/archives/document-pdf/', $archive,$nameArchive . '.' . $archiveExtension, 'public');
 
-        $urlFinal = '/storage/archives/document-pdf/' . $nameArchive . '.' . $archiveExtension;
+        $urlFinal = env('AWS_URL_ARCHIVE_ASPIRANT_DOCUMENT_PDF') . $nameArchive . '.' . $archiveExtension;
         return response()->json(['data' => $urlFinal, 'uuid' => $uuid, 'extension' => $archiveExtension]);
     }
 
@@ -125,9 +125,9 @@ class RegisterController extends Controller
         $archiveExtension = $archive->getClientOriginalExtension();
         $ramdon = Str::random(10);
         $nameArchive = Str::slug(strtolower($nameAspirant) . '-' .'frontal'.'-'.Str::random(15), '-');
-        $path = Storage::disk('public')->put('/archives/document-photo/' . $nameArchive . '.' . $archiveExtension, file_get_contents($archive));
+        $path = Storage::disk('s3')->putFileAs('/archives/document-photo/', $archive,$nameArchive . '.' . $archiveExtension, 'public');
 
-        $urlFinal = '/storage/archives/document-photo/' . $nameArchive . '.' . $archiveExtension;
+        $urlFinal = env('AWS_URL_ARCHIVE_ASPIRANT_DOCUMENT_PHOTO'). $nameArchive . '.' . $archiveExtension;
         return response()->json(['data' => $urlFinal, 'uuid' => $uuid, 'extension' => $archiveExtension]);
     }
     public function uploadArchiveAspirantPhotoBack(Request $request)
@@ -139,9 +139,9 @@ class RegisterController extends Controller
         $archiveExtension = $archive->getClientOriginalExtension();
         $ramdon = Str::random(10);
         $nameArchive = Str::slug(strtolower($nameAspirant) . '-' .'back'.'-'.Str::random(15), '-');
-        $path = Storage::disk('public')->put('/archives/document-photo/' . $nameArchive . '.' . $archiveExtension, file_get_contents($archive));
+        $path = Storage::disk('s3')->putFileAs('/archives/document-photo/', $archive, $nameArchive . '.' . $archiveExtension, 'public');
 
-        $urlFinal = '/storage/archives/document-photo/' . $nameArchive . '.' . $archiveExtension;
+        $urlFinal = env('AWS_URL_ARCHIVE_ASPIRANT_DOCUMENT_PHOTO') . $nameArchive . '.' . $archiveExtension;
         return response()->json(['data' => $urlFinal, 'uuid' => $uuid, 'extension' => $archiveExtension]);
     }
 
@@ -149,7 +149,7 @@ class RegisterController extends Controller
     {
         $pathArchive = $request->get('archiveArtistPhotoFrontal');
         $partes_ruta = pathinfo($pathArchive);
-        Storage::delete('archives/document-photo/' . $partes_ruta['basename']);
+        Storage::disk('s3')->delete('archives/document-photo/' . $partes_ruta['basename']);
 
         return response()->json('Se eliminó correctamente');
     }
@@ -157,14 +157,14 @@ class RegisterController extends Controller
     {
         $pathArchive = $request->get('archiveArtistPhotoBack');
         $partes_ruta = pathinfo($pathArchive);
-        Storage::delete('archives/document-photo/' . $partes_ruta['basename']);
+        Storage::disk('s3')->delete('archives/document-photo/' . $partes_ruta['basename']);
         return response()->json('Se eliminó correctamente');
     }
     public function removedArchivePdf(Request $request)
     {
         $pathArchive = $request->get('archiveArtist');
         $partes_ruta = pathinfo($pathArchive);
-        Storage::delete('archives/document-pdf/' . $partes_ruta['basename']);
+        Storage::disk('s3')->delete('archives/document-pdf/' . $partes_ruta['basename']);
 
         return response()->json('Se eliminó correctamente');
     }
@@ -187,9 +187,9 @@ class RegisterController extends Controller
         $archive = $request->file('archiveMusic');
         $archiveExtension = $archive->getClientOriginalExtension();
         $nameArchive = Str::slug(strtolower($nameProject) . '-' . strtolower($nameAspirant) . '-' . strtolower($archive->getClientOriginalName()) . '-' . 'principal' . '-' . Str::random(10), '-');
-        $path = Storage::disk('public')->put('/projects/' . $nameArchive . '.' . $archiveExtension, file_get_contents($archive));
+        $path = Storage::disk('s3')->putFileAs('/projects/', $archive,  $nameArchive . '.' . $archiveExtension, 'public');
 
-        $urlFinal = '/storage/projects/' . $nameArchive . '.' . $archiveExtension;
+        $urlFinal = env('AWS_URL_PROJECT'). $nameArchive . '.' . $archiveExtension;
         return response()->json(['data' => $urlFinal, 'uuid' => $uuid, 'extension' => $archiveExtension]);
     }
 
@@ -197,7 +197,8 @@ class RegisterController extends Controller
     {
         $pathArchive = $request->get('archiveMusicPrincipal');
         $partes_ruta = pathinfo($pathArchive);
-        Storage::delete('projects/' . $partes_ruta['basename']);
+//        Storage::delete('projects/' . $partes_ruta['basename']);
+        Storage::disk('s3')->delete('projects/' . $partes_ruta['basename']);
 
         return response()->json('Se eliminó correctamente');
     }
