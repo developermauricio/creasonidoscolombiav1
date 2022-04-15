@@ -149,7 +149,7 @@ class DatabaseSeeder extends \Illuminate\Database\Seeder
         /*=============================================
          CREAMOS 100 ASPIRANTES CON PROYECTOS EN REVISION
        =============================================*/
-        if (env('APP_DEBUG') === true) {
+        if (env('APP_ENV') === 'production') {
 
 
             factory(User::class, 100)->create([

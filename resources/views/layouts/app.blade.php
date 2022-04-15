@@ -31,6 +31,18 @@
         window.user_last_name = '{{ auth()->user()->last_name }}'
         @endauth
     </script>
+    @if(env('APP_ENV') === 'production')
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-PXCL7MRG4N"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-PXCL7MRG4N');
+        </script>
+    @endif
+
 </head>
 <!-- END: Head-->
 
