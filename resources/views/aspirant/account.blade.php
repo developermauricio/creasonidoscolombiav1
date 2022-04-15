@@ -40,7 +40,17 @@
     <!-- BEGIN: Custom CSS-->
 {{--    <link rel="stylesheet" type="text/css" href="/assets/css/style.css">--}}
     <!-- END: Custom CSS-->
+    @if(env('APP_ENV') === 'production')
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-PXCL7MRG4N"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
 
+            gtag('config', 'G-PXCL7MRG4N');
+        </script>
+    @endif
 </head>
 <!-- END: Head-->
 
