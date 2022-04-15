@@ -65,7 +65,7 @@ class DatabaseSeeder extends \Illuminate\Database\Seeder
 
         //Perspectiva étnica
         factory(Ethnic::class, 1)->create([
-           'name' => 'Indigena',
+            'name' => 'Indigena',
         ]);
         factory(Ethnic::class, 1)->create([
             'name' => 'Afrodescendiente',
@@ -149,64 +149,67 @@ class DatabaseSeeder extends \Illuminate\Database\Seeder
         /*=============================================
          CREAMOS 100 ASPIRANTES CON PROYECTOS EN REVISION
        =============================================*/
-        factory(User::class, 100)->create([
-        ])->each(function (User $u) {
-            $u->roles()->attach('2');
-            factory(Aspirant::class, 1)
-                ->create([
-                    'has_project' => Aspirant::HAS_PROJECT,
-                    'user_id' => $u->id,
-                ])->each(function (Aspirant $as) {
-                    factory(\App\Models\Proyect::class, 1)
-                        ->create([
-                            'state' => \App\Models\Proyect::REVISION
-                        ])->each(function (\App\Models\Proyect $proyect) use ($as) {
-                            $proyect->aspirant()->attach($as->id);
-                        });
-                });
-        });
+        if (env('APP_DEBUG') === true) {
 
-        /*=============================================
-         CREAMOS 100 ASPIRANTES EN PROCESO DE CURADURIA
-       =============================================*/
-        factory(User::class, 100)->create([
-        ])->each(function (User $u) {
-            $u->roles()->attach('2');
-            factory(Aspirant::class, 1)
-                ->create([
-                    'has_project' => Aspirant::HAS_PROJECT,
-                    'user_id' => $u->id,
-                ])->each(function (Aspirant $as) use ($u) {
-                    factory(\App\Models\Proyect::class, 1)
-                        ->create([
-                            'state' => \App\Models\Proyect::ACEPTED,
-                            'category_id' => 1
-                        ])->each(function (\App\Models\Proyect $proyect) use ($as, $u) {
-                            $proyect->aspirant()->attach($as->id);
-                        });
-                });
-        });
 
-        /*=============================================
-         CREAMOS 8 CURADORES
-       =============================================*/
-        for ($i = 1; $i < 9; $i++) {
-            factory(User::class, 1)->create()
-                ->each(function (User $u) use ($i) {
-                    $u->roles()->attach('4');
-                    factory(\App\Models\Curador::class, 1)
-                        ->create([
-                            'user_id' => $u->id,
-                            'categories_id' => $i
-                        ])->each(function (\App\Models\Curador $curador){
-                            for ($i = 1; $i < 21; $i++) {
-                                $curador->projects()->attach(\App\Models\Proyect::all()->random()->id);
-                            }
-                        });
+            factory(User::class, 100)->create([
+            ])->each(function (User $u) {
+                $u->roles()->attach('2');
+                factory(Aspirant::class, 1)
+                    ->create([
+                        'has_project' => Aspirant::HAS_PROJECT,
+                        'user_id' => $u->id,
+                    ])->each(function (Aspirant $as) {
+                        factory(\App\Models\Proyect::class, 1)
+                            ->create([
+                                'state' => \App\Models\Proyect::REVISION
+                            ])->each(function (\App\Models\Proyect $proyect) use ($as) {
+                                $proyect->aspirant()->attach($as->id);
+                            });
+                    });
+            });
 
-                });
+            /*=============================================
+             CREAMOS 100 ASPIRANTES EN PROCESO DE CURADURIA
+           =============================================*/
+            factory(User::class, 100)->create([
+            ])->each(function (User $u) {
+                $u->roles()->attach('2');
+                factory(Aspirant::class, 1)
+                    ->create([
+                        'has_project' => Aspirant::HAS_PROJECT,
+                        'user_id' => $u->id,
+                    ])->each(function (Aspirant $as) use ($u) {
+                        factory(\App\Models\Proyect::class, 1)
+                            ->create([
+                                'state' => \App\Models\Proyect::ACEPTED,
+                                'category_id' => 1
+                            ])->each(function (\App\Models\Proyect $proyect) use ($as, $u) {
+                                $proyect->aspirant()->attach($as->id);
+                            });
+                    });
+            });
+
+            /*=============================================
+             CREAMOS 8 CURADORES
+           =============================================*/
+            for ($i = 1; $i < 9; $i++) {
+                factory(User::class, 1)->create()
+                    ->each(function (User $u) use ($i) {
+                        $u->roles()->attach('4');
+                        factory(\App\Models\Curador::class, 1)
+                            ->create([
+                                'user_id' => $u->id,
+                                'categories_id' => $i
+                            ])->each(function (\App\Models\Curador $curador) {
+                                for ($i = 1; $i < 21; $i++) {
+                                    $curador->projects()->attach(\App\Models\Proyect::all()->random()->id);
+                                }
+                            });
+
+                    });
+            }
         }
-
         /*=============================================
          CREAMOS LAS VARIABLES PARA LOS REPORTES
         =============================================*/
