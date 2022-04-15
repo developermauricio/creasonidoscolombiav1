@@ -13,6 +13,7 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -273,9 +274,9 @@ class RegisterController extends Controller
         /*=============================================
                 ACTUALIZAMOS EL USUARIO
         =============================================*/
-//        $success = true;
-//        DB::beginTransaction();
-//        try {
+        $success = true;
+        DB::beginTransaction();
+        try {
             $user = User::where('id', $user_id)->update([
                 'name' => ucwords($name),
                 'last_name' => ucwords($last_name),
@@ -354,16 +355,22 @@ class RegisterController extends Controller
 
             $project->aspirant()->attach($aspirant_id);
             Mail::to($email)->send(new RegisterProject($email, $name, $last_name, ucwords($project_name)));
-//        } catch (\Exception $exception) {
-//            $success = $exception->getMessage();
-//        }
-//        if ($success === true) {
-//            DB::commit();
-//            return response()->json('Transacción realizada exitosamente', 200);
-//        } else {
-//            return response()->json('Error al realizar la transacción', 500);
-//
-//        }
-        return 'sisas';
+        } catch (\Throwable $th) {
+            $response = [
+                'msg' => 'Registro Fallido',
+                'error' => $th->getMessage(),
+                'trace' => $th->getTraceAsString()
+            ];
+            Log::error('MENSAJE LOG.', $response);
+            return response()->json($response, 501);
+        }
+        if ($success === true) {
+            DB::commit();
+            return response()->json('Transacción realizada exitosamente', 200);
+        } else {
+            return response()->json('Error al realizar la transacción', 500);
+
+        }
+//        return 'sisas';
     }
 }
