@@ -18,13 +18,13 @@
 ======================================-->
     @include('partials.assets.styles')
     @stack('css')
-    <script>
+    {{-- <script>
         window.user_ìd = '{{ auth()->user()->id }}'
         window.aspirant_id = '{{ auth()->user()->aspirant->id }}'
         window.user_email = '{{ auth()->user()->email }}'
         window.user_name = '{{ auth()->user()->name }}'
         window.user_last_name = '{{ auth()->user()->last_name }}'
-    </script>
+    </script> --}}
 </head>
 <!-- END: Head-->
 
