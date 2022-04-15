@@ -146,8 +146,8 @@
                                         </p>
                                         <p style="--text-opacity: 1; color: #263238; color: rgba(38, 50, 56, var(--text-opacity)); text-align: center;">
                                             El uso de nuestro servicio y sitio web está sujeto a nuestros
-                                            <a href="https://pixinvent.com/" class="hover-underline" style="--text-opacity: 1; color: #B53E2A; text-decoration: none;">Términos</a> y
-                                            <a href="https://pixinvent.com/" class="hover-underline" style="--text-opacity: 1; color: #B53E2A; text-decoration: none;">Políticas de Privacidad</a>.
+                                            <a target="_blank" href="https://www.creasonidos.com/wp-content/uploads/2022/04/1.-TERMINOS-DE-PARTICIPACION-CREASONIDOS-2022.pdf" class="hover-underline" style="--text-opacity: 1; color: #B53E2A; text-decoration: none;">Términos</a> y
+                                            <a target="_blank" href="https://www.creasonidos.com/wp-content/uploads/2022/04/1.-TERMINOS-DE-PARTICIPACION-CREASONIDOS-2022.pdf" class="hover-underline" style="--text-opacity: 1; color: #B53E2A; text-decoration: none;">Políticas de Privacidad</a>.
                                         </p>
                                     </td>
                                 </tr>

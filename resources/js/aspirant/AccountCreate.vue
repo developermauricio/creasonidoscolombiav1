@@ -45,7 +45,7 @@
                 </div>
                 <div class="form-group d-flex">
                     <vs-checkbox color="#B53E2A" v-model="acceptTerm"></vs-checkbox>
-                    <a href="#" style="margin-right:1.2rem">Acepto términos y politicas de privacidad</a>
+                    <a target="_blank" href="https://www.creasonidos.com/wp-content/uploads/2022/04/1.-TERMINOS-DE-PARTICIPACION-CREASONIDOS-2022.pdf" style="margin-right:1.2rem">Acepto términos y politicas de privacidad</a>
                 </div>
                 <!--                <button :disabled="acceptTerm !== true" @click="accountCreate()" class="btn btn-primary btn-block"-->
                 <!--                        tabindex="5">-->
