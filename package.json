@@ -30,6 +30,7 @@
         "moment": "^2.29.1",
         "mqtt": "^4.3.5",
         "vue-bootstrap4-table": "^1.1.11",
+        "vue-carousel": "^0.18.0",
         "vue-multiselect": "^2.1.6",
         "vue-phone-number-input": "^1.1.12",
         "vue-plyr": "^7.0.0",

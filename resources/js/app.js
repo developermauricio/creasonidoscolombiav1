@@ -60,6 +60,9 @@ Vue.component('curador-project-component', require('./curador/Projects.vue').def
 
 Vue.component('subsanador-project-component', require('./subsanador/Projects.vue').default);
 
+
+Vue.component('footer-component', require('./components/Footer.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

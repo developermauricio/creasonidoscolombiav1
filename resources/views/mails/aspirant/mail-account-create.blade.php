@@ -102,7 +102,7 @@
                                         <p class="sm-leading-32" style="font-weight: 600; font-size: 20px; margin: 0 0 16px; --text-opacity: 1; color: #263238; color: rgba(38, 50, 56, var(--text-opacity));">
                                             Su cuenta ha sido creada exitosamente!
                                         </p>
-                                        <p>Tus credenciales de acceso para participar en <span style="color: #11435b; font-weight: bold">Creasonidos Colombia</span></p>
+                                        <p>Sus credenciales de acceso para participar en <span style="color: #11435b; font-weight: bold">Creasonidos Colombia</span></p>
                                         <ul style="margin-bottom: 24px;">
                                             <li><span style="font-weight: bold">Correo electrónico:</span> <span style="color: #11435b; font-weight: bold">{{ $email }}</span></li>
                                             <li><span style="font-weight: bold">Contraseña:</span>  <span style="color: #11435b; font-weight: bold">{{ $password }}</span></li>
@@ -124,7 +124,7 @@
                                         </table>
                                         <p style="margin: 0 0 16px;">
                                             Necesita ayuda? Por favor contáctenos
-                                            <a href="#" class="hover-underline" style="--text-opacity: 1; color: #B53E2A; text-decoration: none;">haciendo clic aquí</a>.
+                                            <a href="https://www.creasonidos.com/contactanos/" class="hover-underline" style="--text-opacity: 1; color: #B53E2A; text-decoration: none;">haciendo clic aquí</a>.
                                         </p>
                                         <p style="margin: 0 0 16px;">Gracias, <br>Equipo Creasonidos</p>
                                     </td>
@@ -141,8 +141,8 @@
                                         </p>
                                         <p style="--text-opacity: 1; color: #263238; color: rgba(38, 50, 56, var(--text-opacity)); text-align: center;">
                                             El uso de nuestro servicio y sitio web está sujeto a nuestros
-                                            <a href="https://pixinvent.com/" class="hover-underline" style="--text-opacity: 1; color: #B53E2A; text-decoration: none;">Términos</a> y
-                                            <a href="https://pixinvent.com/" class="hover-underline" style="--text-opacity: 1; color: #B53E2A; text-decoration: none;">Políticas de Privacidad</a>.
+                                            <a href="#" class="hover-underline" style="--text-opacity: 1; color: #B53E2A; text-decoration: none;">Términos</a> y
+                                            <a href="#" class="hover-underline" style="--text-opacity: 1; color: #B53E2A; text-decoration: none;">Políticas de Privacidad</a>.
                                         </p>
                                     </td>
                                 </tr>

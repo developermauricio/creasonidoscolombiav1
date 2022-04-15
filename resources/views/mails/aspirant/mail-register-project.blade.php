@@ -100,10 +100,10 @@
                                         <p style="font-weight: 700; font-size: 20px; margin-top: 0; --text-opacity: 1; color: #11435b;">
                                             {{ $name }} {{ $last_name }}</p>
                                         <p class="sm-leading-32" style="font-weight: 600; font-size: 20px; margin: 0 0 16px; --text-opacity: 1; color: #263238; color: rgba(38, 50, 56, var(--text-opacity));">
-                                            Su propuesta musical ha sido registrada exitosamente!.
+                                            ¡Su propuesta musical ha sido registrada exitosamente!.
                                         </p>
                                         <p>
-                                            <span style="--text-opacity: 1; color: #B53E2A; text-decoration: none;">TENGA EN CUENTA QUE TIENE 24 HORAS PARA EDITAR TU INFORMACIÓN SI ES QUE HAS INGRESADO ALGÚN DATO INCORRECTO.</span>
+                                            <span style="--text-opacity: 1; color: #B53E2A; text-decoration: none;">TENGA EN CUENTA QUE TIENE 24 HORAS PARA EDITAR TU INFORMACIÓN SI ES QUE HA INGRESADO ALGÚN DATO INCORRECTO.</span>
                                             Para editar puedes iniciar sesión con tus credenciales de acceso.
                                         </p>
                                         <p>Esta es la información principal de su propuesta musical:</p>
@@ -128,8 +128,8 @@
                                         </table>
 
                                         <p style="margin: 0 0 16px;">
-                                            Necesita ayuda? Por favor contáctenos
-                                            <a href="#" class="hover-underline" style="--text-opacity: 1; color: #B53E2A; text-decoration: none;">haciendo clic aquí</a>.
+                                            ¿Necesita ayuda? Por favor contáctenos
+                                            <a href="https://www.creasonidos.com/contactanos/" class="hover-underline" style="--text-opacity: 1; color: #B53E2A; text-decoration: none;">haciendo clic aquí</a>.
                                         </p>
                                         <p style="margin: 0 0 16px;">Gracias, <br>Equipo Creasonidos</p>
                                     </td>

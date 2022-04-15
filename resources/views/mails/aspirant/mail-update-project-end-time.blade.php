@@ -101,13 +101,13 @@
                                             {{ $name }} {{ $last_name }}</p>
                                         <p class="sm-leading-32" style="font-weight: 600; font-size: 15px; margin: 0 0 16px; --text-opacity: 1; color: #263238; color: rgba(38, 50, 56, var(--text-opacity));">
                                             Su propuesta musical ha cambiado de estado ha REVISIÓN. En estos momentos estamos válidando que la información enviada
-                                            registrada este correcta. Pronto nos comunicaremos con usted.
+                                            este correcta. Pronto nos comunicarémos con usted.
                                         </p>
 
                                         <p>Esta es la información principal de su propuesta musical:</p>
                                         <ul style="margin-bottom: 24px;">
                                             <li><span style="font-weight: bold">Titulo de la canción:</span> <span style="color: #11435b; font-weight: bold">{{ $project_name }}</span></li>
-                                            <li><span style="font-weight: bold">Modalidad o categoría de la canción:</span>  <span style="color: #11435b; font-weight: bold">{{ $project_category }}</span></li>
+{{--                                            <li><span style="font-weight: bold">Modalidad o categoría de la canción:</span>  <span style="color: #11435b; font-weight: bold">{{ $project_category }}</span></li>--}}
                                         </ul>
                                         <table style="font-family: 'Montserrat',Arial,sans-serif;" cellpadding="0" cellspacing="0" role="presentation">
                                             <tbody><tr>
@@ -126,8 +126,8 @@
                                         </table>
 
                                         <p style="margin: 0 0 16px;">
-                                            Necesita ayuda? Por favor contáctenos
-                                            <a href="#" class="hover-underline" style="--text-opacity: 1; color: #B53E2A; text-decoration: none;">haciendo clic aquí</a>.
+                                            ¿Necesita ayuda? Por favor contáctenos
+                                            <a href="https://www.creasonidos.com/contactanos/" class="hover-underline" style="--text-opacity: 1; color: #B53E2A; text-decoration: none;">haciendo clic aquí</a>.
                                         </p>
                                         <p style="margin: 0 0 16px;">Gracias, <br>Equipo Creasonidos</p>
                                     </td>
@@ -144,8 +144,8 @@
                                         </p>
                                         <p style="--text-opacity: 1; color: #263238; color: rgba(38, 50, 56, var(--text-opacity)); text-align: center;">
                                             El uso de nuestro servicio y sitio web está sujeto a nuestros
-                                            <a href="https://pixinvent.com/" class="hover-underline" style="--text-opacity: 1; color: #B53E2A; text-decoration: none;">Términos</a> y
-                                            <a href="https://pixinvent.com/" class="hover-underline" style="--text-opacity: 1; color: #B53E2A; text-decoration: none;">Políticas de Privacidad</a>.
+                                            <a href="#" class="hover-underline" style="--text-opacity: 1; color: #B53E2A; text-decoration: none;">Términos</a> y
+                                            <a href="#" class="hover-underline" style="--text-opacity: 1; color: #B53E2A; text-decoration: none;">Políticas de Privacidad</a>.
                                         </p>
                                     </td>
                                 </tr>

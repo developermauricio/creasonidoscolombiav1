@@ -5,7 +5,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    {{--    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">--}}
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">
     {{--    <meta name="description" content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">--}}
     {{--    <meta name="keywords" content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">--}}
     <meta name="author" content="CREASONIDOS COLOMBIA">
@@ -58,7 +58,7 @@
 <!-- END: Main Menu-->
 
 <!-- BEGIN: Content-->
-<div class="app-content content" id="app">
+<div class="app-content content padding-bottom-audio" id="app">
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
     <div class="content-wrapper container-xxl p-0">
@@ -99,17 +99,47 @@
 </div>
 <!-- BEGIN: Footer-->
 <footer class="footer footer-light">
-    <p class="clearfix mb-0">
-        <span class="float-md-left d-block d-md-inline-block mt-25">
             Con el apoyo de:
-            <img class="ml-2" width="180" src="/images/logo-fundacion-yuri-buenaventura.png" alt="">
-            <img class="ml-2" width="140" src="/images/logo-ecopetrol.png" alt="" style="margin-top: -1.5rem;">
-            <img class="ml-2" width="175" src="/images/logo-bancolombia.png" alt="" style="margin-top: -0.010rem;">
-        </span>
+    <div id="carousel-pause" class="carousel slide d-lg-none d-md-none text-center" data-ride="carousel" data-pause="hover">
+        <ol class="carousel-indicators">
+            <li data-target="#carousel-pause" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-pause" data-slide-to="1"></li>
+            <li data-target="#carousel-pause" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <div class="carousel-item active">
+                <img class="img-fluid" width="200" src="/images/logo-fun-yuri-footer.png" alt="First slide" />
+            </div>
+            <div class="carousel-item">
+                <img class="img-fluid" width="200" src="/images/logo-ecopetrol-footer.png" alt="Second slide" />
+            </div>
+            <div class="carousel-item">
+                <img class="img-fluid" width="200" src="/images/logo-bancolombia-footer.png" alt="Third slide" />
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carousel-pause" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carousel-pause" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+            <div class="row footer-logos">
+                <div class="col-12 col-md-1 col-lg-2 mt-2">
+                     <img class="" width="180" src="/images/logo-fundacion-yuri-buenaventura.png" alt="">
+                </div>
+                <div class="col-12 col-md-1 col-lg-2 mt-2">
+                    <img class="" width="140" src="/images/logo-ecopetrol.png" alt="" style="margin-top: -1.5rem;">
+                </div>
+                <div class="col-12 col-md-1 col-lg-2 mt-2">
+                    <img class="" width="175" src="/images/logo-bancolombia.png" alt="" style="margin-top: -0.010rem;">
+                </div>
+            </div>
         <span class="float-md-right d-none d-md-block" style="font-size: 0.8rem !important; margin-top: 1rem;">
             Creasonidos 2022 © Todos los derechos reservados.
         </span>
-    </p>
 </footer>
 <button class="btn btn-primary btn-icon scroll-top" type="button"><i data-feather="arrow-up"></i></button>
 <!-- END: Footer-->

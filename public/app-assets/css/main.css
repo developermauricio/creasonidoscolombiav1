@@ -83,6 +83,25 @@
     }
 }
 
+@media (max-width: 472px) and (min-width: 320px) {
+    .footer-logos{
+        display: none !important;
+    }
+    .logo-header {
+        position: absolute;
+        left: calc(50% - -17px) !important;
+        padding: 1rem;
+        z-index: 1000;
+    }
+    .fixed-player {
+        position: fixed;
+        bottom: 15rem;
+        width: 100%;
+        left: 0;
+        z-index: 200 !important;
+    }
+}
+
 .plyr--audio .plyr__control.plyr__tab-focus, .plyr--audio .plyr__control:hover, .plyr--audio .plyr__control[aria-expanded=true] {
     background: #00CDC7 !important;
 }

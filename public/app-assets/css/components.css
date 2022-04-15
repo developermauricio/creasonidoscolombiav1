@@ -469,7 +469,11 @@ html .navbar-sticky .nav.header-navbar .navbar-container .search-input .search-l
   left: 1%; }
 
 html .footer-fixed .content.app-content {
-  padding-bottom: 3.35rem !important; }
+  padding-bottom: 3.35rem !important;
+}
+html .footer-fixed .content.padding-bottom-audio {
+    padding-bottom: 8rem !important;
+}
 
 html [data-col='1-column'] .header-navbar {
   width: 100%;
