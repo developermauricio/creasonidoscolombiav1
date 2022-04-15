@@ -22,7 +22,9 @@ class ProjectsController extends Controller
     {
         $projects = Proyect::whereHas('curador', function ($q) use ($id) {
             $q->where('curador_id', $id);
-        })->paginate(10);
+        })
+            ->orderBy('state')
+            ->paginate(10);
         return response()->json($projects);
     }
 
@@ -65,13 +67,21 @@ class ProjectsController extends Controller
         $newQualification->proyect_id = $data['proyect_id'];
         $newQualification->curadores_id = $data['curadores_id'];
         $newQualification->save();
+        $proyect = Proyect::find($data['proyect_id']);
+        $proyect->update([
+            'state' => 4,
+        ]);
+
         return response()->json($data, 201);
     }
-    // public function getProjectsReview($id)
-    // {
-    //     $projects = Proyect::whereHas('curador', function ($q) use ($id) {
-    //         $q->where('curador_id', $id);
-    //     })->where('state', Proyect::)->get()->count();
-    //     return response()->json($projects);
-    // }
+    public function getProjectsReview($id)
+    {
+        $projects = Proyect::whereHas('curador', function ($q) use ($id) {
+            $q->where('curador_id', $id);
+        })
+            ->where('state', Proyect::QUALIFIED)
+            ->get()
+            ->count();
+        return response()->json($projects);
+    }
 }

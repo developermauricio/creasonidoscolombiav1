@@ -1,8 +1,7 @@
 <template>
-
-    <div :class="'form-group '+clases">
+    <div :class="'form-group ' + clases">
         <label v-if="showLabel" class="form-control-label" :for="id">
-            <span  v-text="label"></span>
+            <span v-text="label"></span>
 
             <span class="text-danger asterisco" v-if="required">*</span>
             <slot name="toltip"></slot>
@@ -10,9 +9,11 @@
         <datepicker
             v-if="type === 'date'"
             :language="es"
-            :input-class="'form-control '+((!validated||msgServer) ? 'is-invalid': '')"
+            :input-class="
+                'form-control ' + (!validated || msgServer ? 'is-invalid' : '')
+            "
             placeholder="formato 1998-06-06"
-            :class="((!validated||msgServer) ? 'is-invalid': '')"
+            :class="!validated || msgServer ? 'is-invalid' : ''"
             :full-month-name="true"
             format="yyyy-MM-dd"
             :value="modelo"
@@ -24,7 +25,7 @@
         <textarea
             v-else-if="type === 'textarea'"
             class="form-control"
-            :class="(!validated||msgServer) ? 'is-invalid': ''"
+            :class="!validated || msgServer ? 'is-invalid' : ''"
             :id="id"
             :placeholder="label"
             :value="modelo"
@@ -35,7 +36,7 @@
         ></textarea>
         <multiselect
             v-else-if="type === 'multiselect'"
-            :class="(!validated||msgServer) ? 'is-invalid': ''"
+            :class="!validated || msgServer ? 'is-invalid' : ''"
             :id="id"
             :label="label"
             :required="required"
@@ -49,18 +50,18 @@
             v-bind:value="modelo"
             v-bind="money"
             class="form-control"
-            :class="(!validated||msgServer) ? 'is-invalid': ''"
+            :class="!validated || msgServer ? 'is-invalid' : ''"
         ></money>
         <ckeditor
             v-else-if="type === 'ckeditor'"
             @input="onEditorInput"
             v-bind="options"
-            :class="(!validated||msgServer) ? 'is-invalid': ''"
+            :class="!validated || msgServer ? 'is-invalid' : ''"
         ></ckeditor>
         <input
             :type="tipoInput"
             class="form-control"
-            :class="(!validated||msgServer) ? 'is-invalid': ''"
+            :class="!validated || msgServer ? 'is-invalid' : ''"
             :id="id"
             :placeholder="label"
             :required="required"
@@ -73,10 +74,15 @@
             v-else
             :disabled="disabled == 1"
         />
-        <div
-            class="invalid-feedback"
-            v-if="!validated || msgServer"
-        >{{ msgServer ? msgServer[0] : ( (!validated&&noValue) ? requiredMsg : errorMsg )}}</div>
+        <div class="invalid-feedback" v-if="!validated || msgServer">
+            {{
+                msgServer
+                    ? msgServer[0]
+                    : !validated && noValue
+                    ? requiredMsg
+                    : errorMsg
+            }}
+        </div>
     </div>
 </template>
 <script>
@@ -85,7 +91,7 @@ import Datepicker from "vuejs-datepicker";
 import Multiselect from "vue-multiselect";
 
 export default {
-    data: function() {
+    data: function () {
         return {
             validator: null,
             validated: true,
@@ -94,11 +100,11 @@ export default {
             es: es,
             en: en,
             language: window.lang,
-            noValue: true
+            noValue: true,
         };
     },
     props: {
-        disabled:Number,
+        disabled: Number,
         label: String,
         id: String,
         pattern: String,
@@ -111,45 +117,45 @@ export default {
         type: String,
         datepicker: {
             type: Object,
-            default: function() {
+            default: function () {
                 return {};
-            }
+            },
         },
         money: {
             type: Object,
-            default: function() {
+            default: function () {
                 return {};
-            }
+            },
         },
         multiselect: {
             type: Object,
-            default: function() {
+            default: function () {
                 return {};
-            }
+            },
         },
         options: {
             type: Object,
-            default: function() {
+            default: function () {
                 return {};
-            }
+            },
         },
         showLabel: {
             type: Boolean,
-            default: true
+            default: true,
         },
         customValid: {
-            type: Function
-        }
+            type: Function,
+        },
     },
     components: {
         Datepicker,
-        Multiselect
+        Multiselect,
     },
     computed: {
-        inputListeners: function() {
+        inputListeners: function () {
             var vm = this;
             return Object.assign({}, this.$listeners);
-        }
+        },
     },
     mounted() {
         if (this.type) {
@@ -178,13 +184,16 @@ export default {
                 this.validator = RegExp(".+");
                 break;
             case "url":
-                this.validator = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
+                this.validator =
+                    /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
                 break;
             case "datemdy":
-                this.validator = /^([0-2][0-9]|(3)[0-1])(.)(((0)[0-9])|((1)[0-2]))(.)\d{4}$/;
+                this.validator =
+                    /^([0-2][0-9]|(3)[0-1])(.)(((0)[0-9])|((1)[0-2]))(.)\d{4}$/;
                 break;
             case "dateymd":
-                this.validator = /^\d{4}(.)(((0)[0-9])|((1)[0-2]))(.)([0-2][0-9]|(3)[0-1])$/;
+                this.validator =
+                    /^\d{4}(.)(((0)[0-9])|((1)[0-2]))(.)([0-2][0-9]|(3)[0-1])$/;
                 break;
             default:
                 this.validator = RegExp(this.pattern);
@@ -199,7 +208,7 @@ export default {
         },
         validate(value = null, change = false) {
             if (change) {
-                if (value !== this.valorActual){
+                if (value !== this.valorActual) {
                     this.$emit("update:modelo", value);
                     this.$emit("updatedValue", value);
                 } else {
@@ -278,7 +287,7 @@ export default {
                 return "";
             }
             return moment(date).format("YYYY-MM-DD HH:mm");
-        }
-    }
+        },
+    },
 };
 </script>
