@@ -14,19 +14,17 @@ class RegisterProject extends Mailable
     private $name;
     private $last_name;
     private $project_name;
-    private $project_category;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($email, $name, $last_name, $project_name, $project_category)
+    public function __construct($email, $name, $last_name, $project_name)
     {
         $this->email = $email;
         $this->name = $name;
         $this->last_name = $last_name;
         $this->project_name = $project_name;
-        $this->project_category = $project_category;
     }
 
     /**
@@ -42,7 +40,6 @@ class RegisterProject extends Mailable
             ->with('email',$this->email)
             ->with('name',$this->name)
             ->with('last_name',$this->last_name)
-            ->with('project_name',$this->project_name)
-            ->with('project_category',$this->project_category);
+            ->with('project_name',$this->project_name);
     }
 }

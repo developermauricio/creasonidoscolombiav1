@@ -54,7 +54,7 @@ export default {
                 paramName: 'archiveMusic',
                 acceptedFiles: "audio/*,mp3, wav",
                 addRemoveLinks: true,
-                dictDefaultMessage: 'Clic aquí o arrastra tu canción en formato mp3 o wav',
+                dictDefaultMessage: 'Clic aquí o arrastra su canción en formato mp3 o wav',
                 dictMaxFilesExceeded: 'No es posible agregar más archivos. Limite maximo 1',
                 dictFileTooBig: 'El archivo es demasiado grande, su peso es' + " ({{filesize}} MiB). " + 'El tamaño máximo del archivo debe ser de' + " {{maxFilesize}} MiB.",
                 dictRemoveFile: 'Remover Archivo',
@@ -83,11 +83,14 @@ export default {
             },
         }
     },
-    props:['nameProject', 'name', 'lastName'],
+    props:['nameProject', 'name', 'lastName', 'editArchiveAudio', 'urlArchiveAudio'],
     methods:{
 
         messagesError(file, message, xhr){
             this.$refs.myVueDropzone.removeFile(file);
+            setTimeout(() =>{
+                this.$vs.loading.close()
+            }, 500)
             this.$toast.error({
                 title: 'Error',
                 message: message,
@@ -98,22 +101,35 @@ export default {
         },
 
         sendingEvent(file, xhr, formData) {
+            this.$vs.loading({
+                color: '#11435b',
+                text: 'Subiendo audio espere un momento por favor...'
+            })
             console.log('upload file', file);
             formData.append('nameAspirant', this.name +'-'+ this.lastName);
             formData.append('nameProject', this.nameProject);
             formData.append('archiveUuid', file.upload.uuid);
+            formData.append('archiveUuid', file.upload.uuid);
+            if (this.editArchiveAudio){
+                formData.append('editArchiveAudio', this.editArchiveAudio);
+                formData.append('urlArchive', this.urlArchiveAudio);
+            }
         },
 
-        // maxFiles(file) {
-        //     this.$refs.myVueDropzone.removeFile(file);
-        //     this.$toast.error({
-        //         title: 'Atención',
-        //         message: 'No es posible agregar otra canción. Limite maximo 1',
-        //         showDuration: 1000,
-        //         hideDuration: 8000,
-        //         position: 'top right',
-        //     })
-        // },
+        maxFiles(file) {
+            this.$refs.myVueDropzone.removeFile(file);
+
+            setTimeout(() =>{
+                this.$vs.loading.close()
+            }, 500)
+            // this.$toast.error({
+            //     title: 'Atención',
+            //     message: 'No es posible agregar otra canción. Limite maximo 1',
+            //     showDuration: 1000,
+            //     hideDuration: 8000,
+            //     position: 'top right',
+            // })
+        },
 
         addArchiveMusicPrincipal(file, response) {
 
@@ -132,6 +148,7 @@ export default {
                     hideDuration: 5000,
                     position: 'top right',
                 })
+                this.$vs.loading.close()
             }, 1000);
             this.$emit('dataUrlMusicPrincipal', this.urlsArchiveMusicPrincipal);
         },

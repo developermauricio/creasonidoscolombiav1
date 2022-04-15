@@ -1,13 +1,13 @@
 <template>
     <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5">
         <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
-            <h2 class="card-title font-weight-bold mb-1">Bienvenido</h2>
+            <h2 class="card-title font-weight-bold mb-1 mt-3">Bienvenido</h2>
             <p class="card-text mb-2">Para iniciar el proceso de participación, primero crea una cuenta</p>
             <form class="auth-register-form mt-2">
                 <div class="form-group">
                     <input-form
                         id="txtNameAspirant"
-                        label="Nombres Completos"
+                        label="Nombres completos"
                         pattern="alf"
                         errorMsg="Ingrese un nombre válido"
                         requiredMsg="Su nombre es requerido"
@@ -19,7 +19,7 @@
                 <div class="form-group">
                     <input-form
                         id="txtLastNameAspirant"
-                        label="Apellidos Completos"
+                        label="Apellidos completos"
                         pattern="alf"
                         errorMsg="Ingrese un nombre válido"
                         requiredMsg="Sus apellidos son requeridos"
@@ -43,9 +43,9 @@
                        id="text-verify-email-aspirant" class="text-danger">El correo electrónico ya ha sido registrado,
                         por favor ingrese otro</p>
                 </div>
-                <div class="form-group d-flex justify-content-between">
+                <div class="form-group d-flex">
                     <vs-checkbox color="#B53E2A" v-model="acceptTerm"></vs-checkbox>
-                    <a href="/login" style="margin-right:1.2rem">Acepto términos y politicas de privacidad</a>
+                    <a href="#" style="margin-right:1.2rem">Acepto términos y politicas de privacidad</a>
                 </div>
                 <!--                <button :disabled="acceptTerm !== true" @click="accountCreate()" class="btn btn-primary btn-block"-->
                 <!--                        tabindex="5">-->
@@ -197,6 +197,11 @@ export default {
 
             }
         }
+    },
+
+    mounted() {
+        // this.$cookie.delete('creasonidos_colombia_session')
+        // this.$cookie.delete('XSRF-TOKEN')
     }
 }
 </script>

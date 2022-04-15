@@ -15,6 +15,9 @@ class Proyect extends Model
     const APPROVAL = 6;
     const PENDING_REGISTER = 7;
 
+    const AVAILABLE_TO_EDIT = 1;
+    const NOT_AVAILABLE_TO_EDIT = 2;
+
     protected $fillable = [
 
         'title',
@@ -24,7 +27,9 @@ class Proyect extends Model
         'name_author',
         'slug',
         'end_time',
-        'category_id'
+        'category_id',
+        'category_by_aspirant',
+        'available_edit'
     ];
 
     public function aspirant(){
@@ -33,5 +38,9 @@ class Proyect extends Model
 
     public function curador(){
         return $this->belongsToMany(Curador::class, 'curador_projects', 'proyect_id', 'curador_id');
+    }
+
+    public function category() {
+        return $this->belongsTo(Category::class, 'category_id');
     }
 }

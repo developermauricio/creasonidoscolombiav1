@@ -1,11 +1,13 @@
 <?php
 
+use \App\Models\Ethnic;
 use App\Models\Aspirant;
 use App\Models\AspirantType;
 use App\Models\DocumentType;
 use App\Models\Gender;
 use App\Models\Zonas;
 use App\User;
+use \App\CategoryAspirant;
 use  \Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 
@@ -40,6 +42,12 @@ class DatabaseSeeder extends \Illuminate\Database\Seeder
         factory(Gender::class, 1)->create([
             'name' => 'Femenino'
         ]);
+        factory(Gender::class, 1)->create([
+            'name' => 'Otros'
+        ]);
+        factory(Gender::class, 1)->create([
+            'name' => 'No reporta género'
+        ]);
 //        factory(Gender::class, 1)->create([
 //            'name' => 'Otro'
 //        ]);
@@ -53,6 +61,34 @@ class DatabaseSeeder extends \Illuminate\Database\Seeder
         ]);
         factory(DocumentType::class, 1)->create([
             'name' => 'CE'
+        ]);
+
+        //Perspectiva étnica
+        factory(Ethnic::class, 1)->create([
+           'name' => 'Indigena',
+        ]);
+        factory(Ethnic::class, 1)->create([
+            'name' => 'Afrodescendiente',
+        ]);
+        factory(Ethnic::class, 1)->create([
+            'name' => 'Rom',
+        ]);
+        factory(Ethnic::class, 1)->create([
+            'name' => 'No reporta',
+        ]);
+
+        //Categorias de aspirantes
+        factory(\App\CategoryAspirant::class, 1)->create([
+            'name' => 'Inicial',
+            'description' => 'Músicos, cantantes, intérpretes y/o compositores no inscritos a Sayco – Acinpro, ni a ninguna sociedad de gestión, que no hayan participado en ninguna grabación musical.'
+        ]);
+        factory(\App\CategoryAspirant::class, 1)->create([
+            'name' => 'Mediana',
+            'description' => 'Músicos, cantantes, intérpretes y/o compositores inscritos a Sayco – Acinpro, o a alguna sociedad de gestión, y que hayan participado en alguna grabación musical, pero que nunca hayan tenido contrato con disquera.'
+        ]);
+        factory(\App\CategoryAspirant::class, 1)->create([
+            'name' => 'Profesional',
+            'description' => 'Músicos, intérpretes y/o compositores inscritos a Sayco – Acinpro o alguna sociedad de gestión, que tengan grabación musical a su nombre, y un contrato con una disquera y/o casa editorial.'
         ]);
 
 
@@ -100,6 +136,14 @@ class DatabaseSeeder extends \Illuminate\Database\Seeder
             'email' => 'admin@admin.co',
         ])->each(function (\App\User $u) {
             $u->roles()->attach('1');
+        });
+
+        /*=============================================
+         CREAMOS LOS SUBSANADORES
+       =============================================*/
+        factory(User::class, 3)->create([
+        ])->each(function (\App\User $u) {
+            $u->roles()->attach('3');
         });
 
         /*=============================================
@@ -163,5 +207,22 @@ class DatabaseSeeder extends \Illuminate\Database\Seeder
                 });
         }
 
+        /*=============================================
+         CREAMOS LAS VARIABLES PARA LOS REPORTES
+        =============================================*/
+        $listVars = [
+            'lastRegisteredIDSync',
+            'lastLocationIDSync',
+            'lastTotalAspRegIDSync',
+            'lastTotalCuradoresIDSync',
+            'lastTotalProjectIDSync'
+        ];
+
+        foreach ($listVars as $var) {
+            $variable = new \App\Models\ReportVariable;
+            $variable->name = $var;
+            $variable->value = 0;
+            $variable->save();
+        }
     }
 }

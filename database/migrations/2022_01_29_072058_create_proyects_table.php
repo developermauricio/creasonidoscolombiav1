@@ -29,8 +29,13 @@ class CreateProyectsTable extends Migration
             ])->default(\App\Models\Proyect::BORRADOR);
             $table->string('audio');
             $table->string('slug');
+            $table->string('category_by_aspirant')->nullable();
             $table->timestamp('end_time')->nullable();
-            $table->unsignedBigInteger('category_id');
+            $table->enum('available_edit', [
+                \App\Models\Proyect::AVAILABLE_TO_EDIT,
+                \App\Models\Proyect::NOT_AVAILABLE_TO_EDIT,
+            ])->default(\App\Models\Proyect::AVAILABLE_TO_EDIT);
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
         });

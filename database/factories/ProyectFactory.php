@@ -15,6 +15,7 @@ $factory->define(\App\Models\Proyect::class, function (Faker $faker) {
         'title'=>$title,
         'description'=>$faker->sentence,
         'name_author'=>$faker->name.' '.$faker->lastName,
+        'category_by_aspirant'=>$faker->title,
         'category_id' => \App\Models\Category::all()->random()->id,
         'state'=> \App\Models\Proyect::REVISION,
         'slug'=> \Illuminate\Support\Str::slug($title, '-'),

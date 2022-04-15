@@ -24,6 +24,9 @@ import 'vue-plyr/dist/vue-plyr.css'
 Vue.use(VuePlyr, {
     plyr: {}
 })
+
+import VueTheMask from 'vue-the-mask'
+Vue.use(VueTheMask)
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -37,15 +40,25 @@ Vue.use(VuePlyr, {
 /*COMPONENTES EXTERNOS*/
 Vue.component('input-form', require('./components/InputFormComponent.vue').default);
 Vue.component('dropzone-upload-document', require('./aspirant/components/DropzoneUploadDocument.vue').default);
+Vue.component('dropzone-minor-upload-document', require('./aspirant/components/DropzoneMinorUploadDocument.vue').default);
 Vue.component('dropzone-upload-music', require('./aspirant/components/DropzoneUploadMusic.vue').default);
+
+Vue.component('dropzone-personal-document-photo', require('./aspirant/components/DropzonePersonalDocumentPhoto.vue').default);
+Vue.component('dropzone-minor-document-photo', require('./aspirant/components/DropzoneMinorDocumentPhoto.vue').default);
 
 Vue.component('aspirant-account-create-component', require('./aspirant/AccountCreate.vue').default);
 Vue.component('aspirant-register-component', require('./aspirant/Register.vue').default);
 Vue.component('aspirant-data-personal-register-component', require('./aspirant/components/DataPersonalRegister.vue').default);
+Vue.component('aspirant-data-minor-register-component', require('./aspirant/components/DataPersonalMinor.vue').default);
 Vue.component('aspirant-project-register-component', require('./aspirant/components/DataProjectRegister.vue').default);
 
+Vue.component('aspirant-profile-component', require('./aspirant/profile/Profile.vue').default);
+Vue.component('aspirant-profile-edit-component', require('./aspirant/profile/components/ProfileEdit.vue').default);
+// Vue.component('aspirant-profile-data-personal', require('./aspirant/profile/components/DataPersonal.vue').default);
 
 Vue.component('curador-project-component', require('./curador/Projects.vue').default);
+
+Vue.component('subsanador-project-component', require('./subsanador/Projects.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

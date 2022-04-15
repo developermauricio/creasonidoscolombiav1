@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">
-    <meta name="author" content="CREA SONIDOS COLOMBIA">
+    <meta name="author" content="CREASONIDOS COLOMBIA">
     <title>{{ config('app.name') }} | Crear Cuenta</title>
     <link rel="apple-touch-icon" href="/app-assets/images/ico/apple-icon-120.png">
 {{--    <link rel="shortcut icon" type="image/x-icon" href="/app-assets/images/ico/favicon.ico">--}}
@@ -58,10 +58,10 @@
             <div class="auth-wrapper auth-v2">
                 <div class="auth-inner row m-0">
                     <!-- Brand logo-->
-                    <a class="brand-logo" href="javascript:void(0);">
-                        <img width="200" src="{{ env('URL_IMG_LOGO') }}" alt="">
+{{--                    <a class="brand-logo" href="javascript:void(0);">--}}
+{{--                        <img width="150" src="{{ env('URL_IMG_LOGO') }}" alt="">--}}
 {{--                        <h2 class="brand-text text-primary ml-1">Vuexy</h2>--}}
-                    </a>
+{{--                    </a>--}}
                     <!-- /Brand logo-->
                     <!-- Left Text-->
                     <div class="d-none d-lg-flex col-lg-8 align-items-center background-auth">

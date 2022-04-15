@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\CategoryAspirant;
 use App\Models\Category;
 use App\Models\City;
 use App\Models\Departament;
+use App\Models\Ethnic;
 use App\Models\Gender;
 use App\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -34,6 +36,16 @@ class Controller extends BaseController
     public function getProjectCategories(){
         $categories = Category::all();
         return response()->json(['data' => $categories]);
+    }
+
+    public function categoryAspirant(){
+        $categories = CategoryAspirant::all();
+        return response()->json(['data' => $categories]);
+    }
+
+    public function getEthnics(){
+        $ethnics = Ethnic::all();
+        return response()->json(['data' => $ethnics]);
     }
 
     public function validateEmail($email)

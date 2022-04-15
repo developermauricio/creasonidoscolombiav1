@@ -11,4 +11,9 @@ class City extends Model
         'iddepartamento',
         'descripcion'
     ];
+
+
+    public function departament() {
+        return $this->belongsTo(Departament::class, 'iddepartamento');
+    }
 }

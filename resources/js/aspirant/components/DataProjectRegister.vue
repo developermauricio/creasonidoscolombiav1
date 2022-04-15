@@ -1,6 +1,5 @@
 <template>
 <div class="pt-1">
-    <h5 class="pb-1">3. Datos de la propuesta musical</h5>
     <div class="row">
         <div class="col-12 col-lg-6 col-md-6">
             <input-form
@@ -8,7 +7,7 @@
                 label="Título de la canción"
                 pattern="all"
                 errorMsg="Ingrese un título válido"
-                requiredMsg="El título de la canción es obligatorio"
+                requiredMsg="El título de la canción es requerido"
                 :modelo.sync="project.name"
                 :required="true"
                 :msgServer.sync="errors.name"
@@ -17,10 +16,10 @@
         <div class="col-12 col-lg-6 col-md-6">
             <input-form
                 id="txtProjectNameAuthor"
-                label="Nombre del autor o compositor"
+                label="Nombre del intérprete o agrupación"
                 pattern="all"
-                errorMsg="Ingrese un nombre del autor o compositor válido"
-                requiredMsg="El nombre del autor o compositor es obligatorio"
+                errorMsg="Ingrese un nombre del intérprete o agrupación válido"
+                requiredMsg="El nombre del intérprete o agrupación requerido"
                 :modelo.sync="project.nameAuthor"
                 :required="true"
                 :msgServer.sync="errors.nameAuthor"
@@ -28,26 +27,36 @@
         </div>
         <div class="col-12 col-md-6 col-lg-6">
             <input-form
-                label="Modalidad o categoría de la canción"
-                id="textProjectCategory"
-                errorMsg
-                requiredMsg="La modalidad o categoría es obligatorio"
+                id="txtProjectCategoryByAspirant"
+                label="Género musical de la canción"
+                pattern="all"
+                errorMsg="Ingrese un género válido"
+                requiredMsg="Género de la canción"
+                :modelo.sync="project.categoryByAspirant"
                 :required="true"
-                :modelo.sync="project.category"
-                :msgServer.sync="errors.category"
-                type="multiselect"
-                selectLabel="Tipo de documento"
-                :multiselect="{ options: optionsProjectCategory,
-                                           selectLabel:'Seleccionar',
-                                           selectedLabel:'Seleccionado',
-                                           deselectLabel:'Desmarcar',
-                                           placeholder:'Seleccione Modalidad',
-                                          taggable : false,
-                                          'track-by':'id',
-                                          label: 'category',
-                                          'custom-label': category=>category.category
-                                        }"
+                :msgServer.sync="errors.categoryByAspirant"
             ></input-form>
+<!--            <input-form-->
+<!--                label="Modalidad o categoría de la canción"-->
+<!--                id="textProjectCategory"-->
+<!--                errorMsg-->
+<!--                requiredMsg="La modalidad o categoría es obligatorio"-->
+<!--                :required="true"-->
+<!--                :modelo.sync="project.category"-->
+<!--                :msgServer.sync="errors.category"-->
+<!--                type="multiselect"-->
+<!--                selectLabel="Seleccione modalidad"-->
+<!--                :multiselect="{ options: optionsProjectCategory,-->
+<!--                                           selectLabel:'Seleccionar',-->
+<!--                                           selectedLabel:'Seleccionado',-->
+<!--                                           deselectLabel:'Desmarcar',-->
+<!--                                           placeholder:'Seleccione modalidad',-->
+<!--                                          taggable : false,-->
+<!--                                          'track-by':'id',-->
+<!--                                          label: 'category',-->
+<!--                                          'custom-label': category=>category.category-->
+<!--                                        }"-->
+<!--            ></input-form>-->
         </div>
     </div>
     <div class="row">
@@ -58,7 +67,7 @@
                 id="txtProjectDescription"
                 pattern="all"
                 errorMsg="Ingrese texto válido"
-                requiredMsg="La reseña es obligatoria"
+                requiredMsg="La reseña es requerida"
                 :required="true"
                 :modelo.sync="project.description"
                 :msgServer.sync="errors.description"
@@ -87,6 +96,7 @@ export default {
                 name: '',
                 nameAuthor: '',
                 category: null,
+                categoryByAspirant: null,
                 dataArchiveMusicPrincipal: [],
                 dataArchiveMusicOpcional: [],
                 description: ''
