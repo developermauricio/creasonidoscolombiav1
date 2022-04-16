@@ -2,7 +2,7 @@
     <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5">
         <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
             <h2 class="card-title font-weight-bold mb-1 mt-3">Bienvenido</h2>
-            <p class="card-text mb-2">Para iniciar el proceso de participación, primero crea una cuenta</p>
+            <p class="card-text mb-2">Para iniciar el proceso de participación, primero crea una cuenta.</p>
             <form class="auth-register-form mt-2">
                 <div class="form-group">
                     <input-form
@@ -57,6 +57,9 @@
                     Crear Cuenta
                 </button>
             </form>
+            <div class="pt-1">
+                <a target="_blank" href="https://www.creasonidos.com/contactanos" class="mt-5" style="color: #FD6E4A">¿Necesita ayuda?</a>
+            </div>
             <p class="text-center mt-2"><span>Tienes una cuenta y quieres ingresar a tu perfil?</span><a
                 href="/login"><span>&nbsp;Ingresar</span></a></p>
         </div>

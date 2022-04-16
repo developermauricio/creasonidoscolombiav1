@@ -1,7 +1,7 @@
 <!--=====================================
 		LOGO
 ======================================-->
-<div class="navbar-header d-xl-block d-none">
+<div class="navbar-header d-xl-block d-block">
     <ul class="nav navbar-nav">
         <li class="nav-item">
             <a class="navbar-brand" href="#">
@@ -30,14 +30,15 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-user">
                 <p class="pl-2 pt-1">{{ auth()->user()->name }} {{ auth()->user()->last_name }}</p>
-                {{--                <a class="dropdown-item" href="page-profile.html"><i class="mr-50" data-feather="user"></i> Profile</a>--}}
-                {{--                <a class="dropdown-item" href="app-email.html"><i class="mr-50" data-feather="mail"></i> Inbox</a>--}}
-                {{--                <a class="dropdown-item" href="app-todo.html"><i class="mr-50" data-feather="check-square"></i> Task</a>--}}
-                {{--                <a class="dropdown-item" href="app-chat.html"><i class="mr-50" data-feather="message-square"></i> Chats</a>--}}
-                {{--                <div class="dropdown-divider"></div>--}}
-                {{--                <a class="dropdown-item" href="page-account-settings.html"><i class="mr-50" data-feather="settings"></i> Settings</a>--}}
-                {{--                <a class="dropdown-item" href="page-pricing.html"><i class="mr-50" data-feather="credit-card"></i> Pricing</a>--}}
-                {{--                <a class="dropdown-item" href="page-faq.html"><i class="mr-50" data-feather="help-circle"></i> FAQ</a>--}}
+                <a class="dropdown-item" target="_blank" href="https://www.creasonidos.com/contactanos"><i data-feather='help-circle'></i> ¿Necesitas ayuda?</a>
+                <a class="dropdown-item" target="_blank" href="https://www.creasonidos.com/wp-content/uploads/2022/04/1.-TERMINOS-DE-PARTICIPACION-CREASONIDOS-2022.pdf"><i data-feather='info'></i> Términos generales de participación</a>
+{{--                                <a class="dropdown-item" href="app-email.html"><i class="mr-50" data-feather="mail"></i> Inbox</a>--}}
+{{--                                <a class="dropdown-item" href="app-todo.html"><i class="mr-50" data-feather="check-square"></i> Task</a>--}}
+{{--                                <a class="dropdown-item" href="app-chat.html"><i class="mr-50" data-feather="message-square"></i> Chats</a>--}}
+{{--                                <div class="dropdown-divider"></div>--}}
+{{--                                <a class="dropdown-item" href="page-account-settings.html"><i class="mr-50" data-feather="settings"></i> Settings</a>--}}
+{{--                                <a class="dropdown-item" href="page-pricing.html"><i class="mr-50" data-feather="credit-card"></i> Pricing</a>--}}
+{{--                                <a class="dropdown-item" href="page-faq.html"><i class="mr-50" data-feather="help-circle"></i> FAQ</a>--}}
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit" class="dropdown-item" href="page-auth-login-v2.html"><i class="mr-50"
