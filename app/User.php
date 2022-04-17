@@ -82,6 +82,11 @@ class User extends Authenticatable
         return $this->belongsTo(City::class, 'city_id');
     }
 
+    public static function navigation(){
+
+        return auth()->check() ? auth()->user()->roles[0]->name : 'Aspirante';
+    }
+
    static public function getCurador($id){
 //        dd($id);
         $curador = Curador::where('user_id', $id)->first();

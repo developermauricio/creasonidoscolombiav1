@@ -1,6 +1,6 @@
 .logo-header {
     position: absolute;
-    left: calc(50% - -3px) !important;
+    left: calc(50% - 2rem) !important;
     padding: 0;
     z-index: 1000;
 }
@@ -89,7 +89,14 @@
     }
     .logo-header {
         position: absolute;
-        left: calc(50% - -17px) !important;
+        left: calc(50% - 45px) !important;
+        padding: 1rem;
+        z-index: 1000;
+        /*margin-bottom: 1rem;*/
+    }
+    .logo-header-aspirant{
+        position: absolute;
+        left: calc(50% - -25px) !important;
         padding: 1rem;
         z-index: 1000;
     }
@@ -99,6 +106,12 @@
         width: 100%;
         left: 0;
         z-index: 200 !important;
+    }
+}
+@media (max-width: 800px) and (min-width: 700px) {
+    .footer-logos{
+        display: none !important;
+        left: calc(50% - 20px) !important;
     }
 }
 

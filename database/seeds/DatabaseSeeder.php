@@ -139,18 +139,9 @@ class DatabaseSeeder extends \Illuminate\Database\Seeder
         });
 
         /*=============================================
-         CREAMOS LOS SUBSANADORES
-       =============================================*/
-        factory(User::class, 3)->create([
-        ])->each(function (\App\User $u) {
-            $u->roles()->attach('3');
-        });
-
-        /*=============================================
          CREAMOS 100 ASPIRANTES CON PROYECTOS EN REVISION
        =============================================*/
-        if (env('APP_ENV') === 'production') {
-
+        if (env('APP_ENV') === 'local') {
 
             factory(User::class, 100)->create([
             ])->each(function (User $u) {
@@ -210,6 +201,26 @@ class DatabaseSeeder extends \Illuminate\Database\Seeder
                     });
             }
         }
+
+        /*=============================================
+         CREAMOS LOS SUBSANADORES
+       =============================================*/
+        for ($i = 1; $i < 3; $i++) {
+            factory(User::class, 1)->create()
+                ->each(function (User $u) use ($i) {
+                    $u->roles()->attach('3');
+                    factory(\App\Models\Subsanador::class, 1)
+                        ->create([
+                            'user_id' => $u->id,
+                        ])->each(function (\App\Models\Subsanador $subsanador) {
+                            for ($i = 1; $i < 21; $i++) {
+                                $subsanador->projects()->attach(\App\Models\Proyect::all()->random()->id);
+                            }
+                        });
+
+                });
+
+            }
         /*=============================================
          CREAMOS LAS VARIABLES PARA LOS REPORTES
         =============================================*/

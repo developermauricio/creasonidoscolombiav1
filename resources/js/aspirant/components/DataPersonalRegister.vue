@@ -427,7 +427,7 @@
                         <div class="modal-body">
                             <div v-for="(category, index) in optionsCategoryAspirant" :key="category.id" class="p-1">
                                 <h4>{{ index + 1 }}. {{ category.name }}:</h4>
-                                <p>{{ category.description }}:</p>
+                                <p>{{ category.description }}</p>
                             </div>
                         </div>
                         <div class="modal-footer">

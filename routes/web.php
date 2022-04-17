@@ -62,4 +62,11 @@ RUTAS PARA LOS REPORTES
 =============================================*/
 Route::group(['middleware' => 'auth', 'namespace' => 'Reports'], function () {
     Route::get('/dashboard', 'DashboardController@index')->name('reports.dashboard.page');
+    Route::get('/usuarios', 'UserController@index')->name('user.page');
+});
+/*=============================================
+RUTAS PARA LOS USUARIOS
+=============================================*/
+Route::group(['middleware' => 'auth', 'namespace' => 'User'], function () {
+    Route::get('/usuarios', 'UserController@index')->name('user.page');
 });

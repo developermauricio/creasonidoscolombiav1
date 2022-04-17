@@ -1,20 +1,37 @@
 <!--=====================================
 		LOGO
 ======================================-->
-<div class="navbar-header d-xl-block d-block">
+{{--@if(auth()->user()->roles[0]->name == "Aspirante" || auth()->user()->roles[0]->name == "Curador" )--}}
+{{--<div class="navbar-header d-xl-block d-block">--}}
+{{--    <ul class="nav navbar-nav">--}}
+{{--        <li class="nav-item">--}}
+{{--            <a class="navbar-brand" href="#">--}}
+{{--                <img class="logo-header" width="110" src="{{ env('URL_IMG_LOGO') }}" alt="">--}}
+{{--            </a>--}}
+{{--        </li>--}}
+{{--    </ul>--}}
+{{--</div>--}}
+{{--@endif--}}
+<div class="navbar-header d-xl-block d-none">
     <ul class="nav navbar-nav">
         <li class="nav-item">
             <a class="navbar-brand" href="#">
-                <img class="logo-header" width="110" src="{{ env('URL_IMG_LOGO') }}" alt="">
+                <img class="{{ auth()->user()->roles[0]->name == "Aspirante" ? 'logo-header-aspirant' : 'logo-header'}}" width="90" src="{{ env('URL_IMG_LOGO') }}" alt="">
             </a>
         </li>
     </ul>
 </div>
-
 <!--=====================================
 		INFORMACION DE USUARIO LOGUEADO
 ======================================-->
 <div class="navbar-container d-flex content">
+    @if(auth()->user()->roles[0]->name == "Administrador")
+    <div class="bookmark-wrapper d-flex align-items-center">
+        <ul class="nav navbar-nav d-xl-none">
+            <li class="nav-item"><a class="nav-link menu-toggle" href="javascript:void(0);"><i class="ficon" data-feather="menu"></i></a></li>
+        </ul>
+    </div>
+    @endif
     <ul class="nav navbar-nav align-items-center ml-auto">
         <li class="nav-item dropdown dropdown-user">
             <a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="javascript:void(0);"
@@ -30,7 +47,7 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-user">
                 <p class="pl-2 pt-1">{{ auth()->user()->name }} {{ auth()->user()->last_name }}</p>
-                <a class="dropdown-item" target="_blank" href="https://www.creasonidos.com/contactanos"><i data-feather='help-circle'></i> ¿Necesitas ayuda?</a>
+                <a class="dropdown-item" target="_blank" href="https://www.creasonidos.com/contactanos"><i data-feather='help-circle'></i> ¿Necesita ayuda?</a>
                 <a class="dropdown-item" target="_blank" href="https://www.creasonidos.com/wp-content/uploads/2022/04/1.-TERMINOS-DE-PARTICIPACION-CREASONIDOS-2022.pdf"><i data-feather='info'></i> Términos generales de participación</a>
 {{--                                <a class="dropdown-item" href="app-email.html"><i class="mr-50" data-feather="mail"></i> Inbox</a>--}}
 {{--                                <a class="dropdown-item" href="app-todo.html"><i class="mr-50" data-feather="check-square"></i> Task</a>--}}

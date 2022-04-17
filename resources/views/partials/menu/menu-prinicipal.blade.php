@@ -1,5 +1,6 @@
 <div class="horizontal-menu-wrapper">
     <div class="header-navbar navbar-expand-sm navbar navbar-horizontal floating-nav navbar-light navbar-shadow menu-border container-xxl" role="navigation" data-menu="menu-wrapper" data-menu-type="floating-nav">
+
         <div class="shadow-bottom"></div>
         <!-- Horizontal menu content-->
         <div class="navbar-container main-menu-content" data-menu="menu-container">

@@ -57,6 +57,7 @@
     <!--=====================================
 		 HEADER
     ======================================-->
+
     @include('partials.header.header-principal')
 </nav>
 <!-- END: Header-->
@@ -66,7 +67,8 @@
 <!--=====================================
      MENU PRINCIPAL
 ======================================-->
-{{--@include('partials.menu.menu-prinicipal')--}}
+
+@include('partials.menu.'.\App\User::navigation())
 <!-- END: Main Menu-->
 
 <!-- BEGIN: Content-->
@@ -109,6 +111,8 @@
 
     </div>
 </div>
+<div class="sidenav-overlay"></div>
+<div class="drag-target"></div>
 <!-- BEGIN: Footer-->
 <footer class="footer footer-light">
             Con el apoyo de:

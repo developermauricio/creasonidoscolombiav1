@@ -180,8 +180,8 @@
   border-radius: 4px; }
 
 .horizontal-menu .header-navbar.navbar-horizontal ul#main-menu-navigation > li.active > a {
-  background: linear-gradient(118deg, #7367f0, rgba(115, 103, 240, 0.7));
-  box-shadow: 0px 0px 6px 1px rgba(115, 103, 240, 0.6);
+  background: linear-gradient(118deg, #114455, rgba(0, 84, 139, 0.34));
+  box-shadow: 0px 0px 6px 1px rgba(0, 84, 139, 0.3);
   color: #fff;
   border-radius: 4px; }
 

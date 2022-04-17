@@ -54,8 +54,9 @@ class AccountController extends Controller
         try {
             Mail::to($email)->send(new AccountCreate(ucwords($name), ucwords($lastName), $password, $email));
         } catch (\Throwable $th) {
+            DB::rollBack();
             $response = [
-                'msg' => 'Registro Exitoso',
+                'msg' => 'Error al enviar el correo electrónico',
                 'error' => $th->getMessage(),
                 'trace' => $th->getTraceAsString()
             ];

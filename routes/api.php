@@ -34,10 +34,10 @@ Route::post(
     '/removed-archive-aspirant',
     'Aspirant\RegisterController@removedArchiveAspirant'
 )->name('api.removed.archive.aspirant');
-Route::post(
-    '/upload-archive-music-principal',
-    'Aspirant\RegisterController@uploadArchiveMusic'
-)->name('api.upload.archive.music.aspirant');
+//Route::post(
+//    '/upload-archive-music-principal',
+//    'Aspirant\RegisterController@uploadArchiveMusic'
+//)->name('api.upload.archive.music.aspirant');
 Route::post(
     '/removed-archive-music-principal',
     'Aspirant\RegisterController@removedArchiveMusicPrincipal'
@@ -55,18 +55,21 @@ Route::post(
     'Aspirant\RegisterController@createRegister'
 )->name('api.create.register.aspirant');
 
-Route::post(
-    '/aspirant/account-create',
-    'Aspirant\AccountController@createAccount'
-)->name('aspirant.create.account');
-Route::get(
-    '/get-aspirant-types',
-    'Aspirant\RegisterController@getAspirantType'
-)->name('aspirant.get.aspirant.type');
-Route::post(
-    '/upload-archive-aspirant',
-    'Aspirant\RegisterController@uploadArchiveAspirant'
-)->name('api.upload.archive.aspirant');
+
+
+
+//Route::post(
+//    '/aspirant/account-create',
+//    'Aspirant\AccountController@createAccount'
+//)->name('aspirant.create.account');
+//Route::get(
+//    '/get-aspirant-types',
+//    'Aspirant\RegisterController@getAspirantType'
+//)->name('aspirant.get.aspirant.type');
+//Route::post(
+//    '/upload-archive-aspirant',
+//    'Aspirant\RegisterController@uploadArchiveAspirant'
+//)->name('api.upload.archive.aspirant');
 Route::post(
     '/upload-archive-document-photo-frontal',
     'Aspirant\RegisterController@uploadArchiveAspirantPhotoFrontal'
@@ -117,22 +120,22 @@ Route::post(
     '/upload-archive-music-principal',
     'Aspirant\RegisterController@uploadArchiveMusic'
 )->name('api.upload.archive.music.aspirant');
-Route::post(
-    '/removed-archive-music-principal',
-    'Aspirant\RegisterController@removedArchiveMusicPrincipal'
-)->name('api.remove.archive.music.principal');
-Route::post(
-    '/upload-archive-music-opcional',
-    'Aspirant\RegisterController@uploadArchiveMusicOpcional'
-)->name('api.upload.archive.music.aspirant');
-Route::post(
-    '/removed-archive-music-opcional',
-    'Aspirant\RegisterController@removedArchiveMusicOpcional'
-)->name('api.remove.archive.music.opcional');
-Route::post(
-    '/create-register',
-    'Aspirant\RegisterController@createRegister'
-)->name('api.create.register.aspirant');
+//Route::post(
+//    '/removed-archive-music-principal',
+//    'Aspirant\RegisterController@removedArchiveMusicPrincipal'
+//)->name('api.remove.archive.music.principal');
+//Route::post(
+//    '/upload-archive-music-opcional',
+//    'Aspirant\RegisterController@uploadArchiveMusicOpcional'
+//)->name('api.upload.archive.music.aspirant');
+//Route::post(
+//    '/removed-archive-music-opcional',
+//    'Aspirant\RegisterController@removedArchiveMusicOpcional'
+//)->name('api.remove.archive.music.opcional');
+//Route::post(
+//    '/create-register',
+//    'Aspirant\RegisterController@createRegister'
+//)->name('api.create.register.aspirant');
 
 Route::post(
     '/update-project-endtime/{id}',
@@ -159,7 +162,9 @@ Route::get('/get-project-categories', 'Controller@getProjectCategories')->name(
     'get.categories.project'
 );
 
-Route::group(['middleware' => 'auth:api'], function () {});
+
+
+//Route::group(['middleware' => 'auth:api'], function () {});
 Route::get(
     '/curador/projects/{id}',
     'Curador\ProjectsController@getProjects'
@@ -180,15 +185,19 @@ Route::post(
     '/curador/save-qualifications',
     'Curador\ProjectsController@saveQualification'
 )->name('curador.save.qualifications');
+
+/*=============================================
+API PARA LOS USUARIOS
+=============================================*/
+Route::get('/get-users', 'User\UserController@getUsers')->name('get.users');
+
 /* consultas para los reportes. */
 Route::get(
     '/get-all-aspirants-registers',
     'Aspirant\AccountController@getAllAspirantsRegisters'
 );
 Route::get('/get-all-aspirants', 'Aspirant\AccountController@getAllAspirants');
-Route::get(
-    '/get-all-aspirants-location',
-    'Aspirant\AccountController@getAllAspirantsLocation'
+Route::get('/get-all-aspirants-location', 'Aspirant\AccountController@getAllAspirantsLocation'
 );
 
 Route::get('/get-all-curadors', 'Aspirant\AccountController@getAllCuradors');
