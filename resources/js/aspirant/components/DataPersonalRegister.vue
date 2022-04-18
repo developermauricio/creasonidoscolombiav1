@@ -112,7 +112,7 @@
                         label="Celular"
                         id="phoneAspirant"
                         pattern="all"
-                        errorMsg="Ingrese un celular valido"
+                        errorMsg="Ingrese un celular válido"
                         requiredMsg="El número de celular es requerido"
                         :required="true"
                         :modelo.sync="aspirant.phone"

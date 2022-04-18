@@ -54,13 +54,13 @@ class DatabaseSeeder extends \Illuminate\Database\Seeder
 
         // Tipo de documentos
         factory(DocumentType::class, 1)->create([
-            'name' => 'CC'
+            'name' => 'Cédula de Ciudadanía'
         ]);
         factory(DocumentType::class, 1)->create([
-            'name' => 'TI'
+            'name' => 'Cédula de Extranjería'
         ]);
         factory(DocumentType::class, 1)->create([
-            'name' => 'CE'
+            'name' => 'Tarjeta de Identidad'
         ]);
 
         //Perspectiva étnica

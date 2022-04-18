@@ -56,9 +56,18 @@ Vue.component('aspirant-profile-component', require('./aspirant/profile/Profile.
 Vue.component('aspirant-profile-edit-component', require('./aspirant/profile/components/ProfileEdit.vue').default);
 // Vue.component('aspirant-profile-data-personal', require('./aspirant/profile/components/DataPersonal.vue').default);
 
+/*=============================================
+ COMPONENTES CURADORES
+=============================================*/
 Vue.component('curador-project-component', require('./curador/Projects.vue').default);
-
+/*=============================================
+COMPONENTES SUBSANADOR
+=============================================*/
 Vue.component('subsanador-project-component', require('./subsanador/Projects.vue').default);
+/*=============================================
+COMPONENTES USUARIOS
+=============================================*/
+Vue.component('create-user-component', require('./users/CreateUser').default);
 
 
 Vue.component('footer-component', require('./components/Footer.vue').default);

@@ -20,7 +20,8 @@
         "league/flysystem-aws-s3-v3": "~1.0",
         "manish-manghwani/google-spreadsheet-acolyte": "^1.0",
         "php-mqtt/laravel-client": "^1.0",
-        "spatie/laravel-permission": "^5.5"
+        "spatie/laravel-permission": "^5.5",
+        "yajra/laravel-datatables-oracle": "~9.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",

@@ -137,31 +137,20 @@ Route::post(
 //    'Aspirant\RegisterController@createRegister'
 //)->name('api.create.register.aspirant');
 
-Route::post(
-    '/update-project-endtime/{id}',
-    'Aspirant\ProfileController@udpateStateProject'
-)->name('api.update.state.project');
-Route::post(
-    '/update-profile-register',
-    'Aspirant\ProfileController@editProfile'
-)->name('api.update.profile.aspirant');
+Route::post('/update-project-endtime/{id}', 'Aspirant\ProfileController@udpateStateProject')->name('api.update.state.project');
+Route::post('/update-profile-register', 'Aspirant\ProfileController@editProfile')->name('api.update.profile.aspirant');
 
-Route::get('/get-category-aspirant', 'Controller@categoryAspirant')->name(
-    'get.category.aspirant'
-);
+Route::get('/get-category-aspirant', 'Controller@categoryAspirant')->name('get.category.aspirant');
 Route::get('/get-ethnics', 'Controller@getEthnics')->name('get.ethnics');
 Route::get('/get-genders', 'Controller@getGenders')->name('get.genders');
 Route::get('/get-cities/{id}', 'Controller@getCities')->name('get.cities');
-Route::get('/get-departaments', 'Controller@getDepartaments')->name(
-    'get.departaments'
-);
-Route::get('/verify-email-user/{email}', 'Controller@validateEmail')->name(
-    'api.validate.email'
-);
-Route::get('/get-project-categories', 'Controller@getProjectCategories')->name(
-    'get.categories.project'
-);
+Route::get('/get-departaments', 'Controller@getDepartaments')->name('get.departaments');
+Route::get('/verify-email-user/{email}', 'Controller@validateEmail')->name('api.validate.email');
+Route::get('/get-project-categories', 'Controller@getProjectCategories')->name('get.categories.project');
+Route::get('/get-document-types', 'Controller@getDocumentTypes')->name('get.document.types');
+Route::get('/get-roles', 'Controller@getRoles')->name('get.roles');
 
+Route::get('/reportes', 'Controller@getDataReports')->name('get.reports.temporaly');
 
 
 //Route::group(['middleware' => 'auth:api'], function () {});
@@ -189,17 +178,11 @@ Route::post(
 /*=============================================
 API PARA LOS USUARIOS
 =============================================*/
-Route::get('/get-users', 'User\UserController@getUsers')->name('get.users');
+Route::get('/get-users', 'User\UserController@getUsers')->name('get.api.users');
 
 /* consultas para los reportes. */
-Route::get(
-    '/get-all-aspirants-registers',
-    'Aspirant\AccountController@getAllAspirantsRegisters'
-);
+Route::get('/get-all-aspirants-registers', 'Aspirant\AccountController@getAllAspirantsRegisters');
 Route::get('/get-all-aspirants', 'Aspirant\AccountController@getAllAspirants');
-Route::get('/get-all-aspirants-location', 'Aspirant\AccountController@getAllAspirantsLocation'
-);
-
+Route::get('/get-all-aspirants-location', 'Aspirant\AccountController@getAllAspirantsLocation');
 Route::get('/get-all-curadors', 'Aspirant\AccountController@getAllCuradors');
-
 Route::get('/get-all-projects', 'Aspirant\AccountController@getAllProjects');

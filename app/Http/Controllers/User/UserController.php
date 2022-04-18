@@ -14,6 +14,6 @@ class UserController extends Controller
 
     public function getUsers(){
         $user = User::role(['Administrador', 'Curador', 'Subsanador'])->with('roles')->get();
-        return response()->json(['data' => $user]);
+        return datatables()->of($user)->toJson();
     }
 }
