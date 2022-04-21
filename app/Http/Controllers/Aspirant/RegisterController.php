@@ -346,7 +346,7 @@ class RegisterController extends Controller
             $project = Proyect::create([
                 'title' => ucwords($project_name),
                 'name_author' => ucwords($project_name_author),
-                'description' => ucwords($project_description),
+                'description' => $project_description,
                 'category_id' => $project_category ? $project_category->id : null,
                 'category_by_aspirant' => ucwords($project_category_by_aspirant),
                 'audio' => $project_audio[0]->urlArchive,
@@ -363,6 +363,7 @@ class RegisterController extends Controller
                 'trace' => $th->getTraceAsString()
             ];
             Log::error('MENSAJE LOG.', $response);
+            $success = false;
             return response()->json($response, 501);
         }
         if ($success === true) {
@@ -370,7 +371,6 @@ class RegisterController extends Controller
             return response()->json('Transacción realizada exitosamente', 200);
         } else {
             return response()->json('Error al realizar la transacción', 500);
-
         }
 //        return 'sisas';
     }

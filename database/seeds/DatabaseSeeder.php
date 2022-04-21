@@ -191,10 +191,12 @@ class DatabaseSeeder extends \Illuminate\Database\Seeder
                         factory(\App\Models\Curador::class, 1)
                             ->create([
                                 'user_id' => $u->id,
-                                'categories_id' => $i
                             ])->each(function (\App\Models\Curador $curador) {
                                 for ($i = 1; $i < 21; $i++) {
                                     $curador->projects()->attach(\App\Models\Proyect::all()->random()->id);
+                                }
+                                for ($i = 1; $i < 2; $i++) {
+                                    $curador->categories()->attach(\App\Models\Category::all()->random()->id);
                                 }
                             });
 

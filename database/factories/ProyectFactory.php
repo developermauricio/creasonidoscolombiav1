@@ -19,6 +19,6 @@ $factory->define(\App\Models\Proyect::class, function (Faker $faker) {
         'category_id' => \App\Models\Category::all()->random()->id,
         'state'=> \App\Models\Proyect::REVISION,
         'slug'=> \Illuminate\Support\Str::slug($title, '-'),
-        'audio' => $audios[array_rand($audios)]
+        'audio' => "https://creasonidos-colombia.s3.sa-east-1.amazonaws.com/projects/que-hay-de-malo-boris-rene-velez-coy-que-hay-de-malo-boris-velezmp3-principal-0rm2dxjzdl.mp3"
     ];
 });

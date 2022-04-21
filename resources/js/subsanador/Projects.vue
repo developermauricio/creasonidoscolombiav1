@@ -1,12 +1,21 @@
 <template>
-    <h1>Pagina subsanador</h1>
+    <div>
+        <list-projects-component v-on:dataProject="dataProject"></list-projects-component>
+        <show-projects-component :project="project"></show-projects-component>
+    </div>
 </template>
 
 <script>
 import {subscriberMQTT} from '../plugins/mqtt.js'
+
+;
 export default {
     name: "Projects",
-
+    data(){
+      return{
+          project: null
+      }
+    },
     methods:{
         notification(){
             let key = 'notification_subsanardor_31231'
@@ -14,15 +23,8 @@ export default {
 
             subscriberMQTT(key, topic, this.loadDataProjects)
         },
-
-        loadDataProjects(data){
-            this.$toast.success({
-                title: 'Notificación',
-                message: data,
-                showDuration: 1000,
-                hideDuration: 5000,
-                position: 'top right',
-            })
+        dataProject(data){
+            this.project = data
         }
     },
 
@@ -33,5 +35,10 @@ export default {
 </script>
 
 <style scoped>
-
+/*.text-location{*/
+/*    text-transform: lowercase;*/
+/*}*/
+/*.text-location:first-letter{*/
+/*    text-transform: uppercase*/
+/*}*/
 </style>

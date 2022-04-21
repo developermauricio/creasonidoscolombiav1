@@ -27,6 +27,7 @@ Vue.use(VuePlyr, {
 
 import VueTheMask from 'vue-the-mask'
 Vue.use(VueTheMask)
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -68,7 +69,11 @@ Vue.component('subsanador-project-component', require('./subsanador/Projects.vue
 COMPONENTES USUARIOS
 =============================================*/
 Vue.component('create-user-component', require('./users/CreateUser').default);
-
+/*=============================================
+COMPONENTES PROYECTOS
+=============================================*/
+Vue.component('list-projects-component', require('./components/projects/ListProject').default);
+Vue.component('show-projects-component', require('./components/projects/ShowProject').default);
 
 Vue.component('footer-component', require('./components/Footer.vue').default);
 

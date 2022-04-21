@@ -45,7 +45,7 @@ class LoginController extends Controller
         $userAdministrator = \auth()->user()->hasRole('Administrador');
         $userAspirant = \auth()->user()->hasRole('Aspirante');
         $userCurador = \auth()->user()->hasRole('Curador');
-        $userSubsanador = \auth()->user()->hasRole('Subsadanor');
+        $userSubsanador = \auth()->user()->hasRole('Subsanador');
 
         /*=============================================
             VALIDAMOS EL ROL

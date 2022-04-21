@@ -550,7 +550,6 @@ export default {
                             })
                             resp.$vs.loading.close()
                         })
-
                     }
                 });
                 resp.$vs.loading.close()

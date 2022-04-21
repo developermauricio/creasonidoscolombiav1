@@ -179,6 +179,12 @@ Route::post(
 API PARA LOS USUARIOS
 =============================================*/
 Route::get('/get-users', 'User\UserController@getUsers')->name('get.api.users');
+Route::post('/create-user', 'User\UserController@createUser')->name('create.api.users');
+
+/*=============================================
+API PARA EL SUBSANADOR
+=============================================*/
+Route::get('/subsanador/get-projects-revision', 'Subsanador\ProjectsController@getProjectsRevision')->name('get.projects.revision');
 
 /* consultas para los reportes. */
 Route::get('/get-all-aspirants-registers', 'Aspirant\AccountController@getAllAspirantsRegisters');

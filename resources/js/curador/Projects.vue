@@ -263,6 +263,7 @@ export default {
                 color: "#11435b",
                 text: "Cargando...",
             });
+            console.log(project);
             setTimeout(() => {
                 this.$refs.plyr.player.source = {
                     type: "audio",
@@ -327,7 +328,7 @@ export default {
 <style scoped>
 .fixed-player {
     position: fixed;
-    bottom: 4rem;
+    bottom: 8.5rem;
     width: 100%;
     left: 0;
     z-index: 200 !important;
