@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Aspirant;
 use App\Http\Controllers\Controller;
 use App\Mail\Aspirant\AccountCreate;
 use App\Models\Aspirant;
+use App\Models\AspirantProyect;
 use App\Models\Curador;
 use App\Models\Proyect;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -69,15 +71,29 @@ class AccountController extends Controller
 
     /* Consultas para los reportes */
     public function getAllAspirantsRegisters() {
-        $listAspirant = Aspirant::with('user')
-            ->get();
+        $listAspirant = AspirantProyect::with('project', 
+            'aspirant', 
+            'aspirant.user', 
+            'aspirant.user.gender', 
+            'aspirant.user.city', 
+            'aspirant.user.city.departament', 
+            'aspirant.aspirant_type', 
+            'aspirant.ethnic', 
+            'aspirant.categoryAspirant')->get();
+        /* $listAspirant = Aspirant::with('user')
+            ->get(); */
+        //Log::debug('consulta...');
+        //Log::debug($listAspirant[0]["aspirant"]["created_at"]);
+        //$newDate = new Carbon($listAspirant[0]["aspirant"]["created_at"], 'America/Bogota');
+        //Log::debug($newDate->toDateTimeString());
         return response()->json(['status' => 'ok', 'data' => $listAspirant]);
     }
 
     public function getAllAspirants() {
+        //$listAspirant = Aspirant::with('user', 'user.gender', 'user.city', 'user.city.departament', 'aspirant_type', 'ethnic', 'categoryAspirant')
         $listAspirant = Aspirant::with('user', 'aspirantType')
-            ->where('aspirant_type_id', '<>', null)
-            //->where('id', '>', 10)
+            //->where('aspirant_type_id', '<>', null)
+            ->where('id', '>', 120)
             ->get();
         return response()->json(['status' => 'ok', 'data' => $listAspirant]);
     }

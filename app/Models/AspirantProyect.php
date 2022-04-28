@@ -10,4 +10,12 @@ class AspirantProyect extends Model
         'aspirant_id',
         'proyect_id'
     ];
+
+    public function project(){
+        return $this->belongsTo(Proyect::class, 'proyect_id');
+    }
+
+    public function aspirant() {
+        return $this->belongsTo(Aspirant::class, 'aspirant_id');
+    }
 }

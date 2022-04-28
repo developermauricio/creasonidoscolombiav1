@@ -45,6 +45,12 @@ class TotalAspirantRegistered extends Command
             ->where('name', 'lastTotalAspRegIDSync')
             ->first();
         
+        /* if ( $variable->value > 100 ) {
+            $variable->value = $variable->value - 100;
+        }
+        Log::debug('lastTotalAspRegIDSync...');
+        Log::debug($variable->value);      */ 
+        
         $rows = Aspirant::with('user')
             ->where('id', '>', $variable->value)
             ->orderBy('id')
@@ -61,7 +67,7 @@ class TotalAspirantRegistered extends Command
         foreach ($rows as $row){      
             $fullName = $row->user->name . ' ' . $row->user->last_name;
             $dateRegister = new Carbon($row->created_at, 'America/Bogota');
-            $phone = $row->user->phone ? $row->user->phone : '0';
+            $phone = $row->user->phone ? $row->user->phone : '--';
             //$project = $row->has_project == 1 ? 'Si' : 'No';
 
             $finalData->push([
@@ -70,7 +76,7 @@ class TotalAspirantRegistered extends Command
                 $row->user->email,
                 $phone,
                 $row->has_project,
-                $dateRegister
+                $dateRegister->toDateTimeString(),
             ]);
             $lastId = $row->id;
         }    

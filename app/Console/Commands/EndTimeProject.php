@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
 use \PhpMqtt\Client\Facades\MQTT;
+use Illuminate\Support\Facades\Log;
 
 class EndTimeProject extends Command
 {
@@ -43,12 +44,20 @@ class EndTimeProject extends Command
     {
         $date = Carbon::now();
         $project = Proyect::where('end_time', '<=', $date->format('Y-m-d H:i:s'))->where('available_edit', 1)->with('aspirant.user', 'category')->first();
-        $email = $project->aspirant[0]->user->email;
+        //Log::debug('project...');
+        //Log::debug($project);
+
+        /* $email = $project->aspirant[0]->user->email;
         $name = $project->aspirant[0]->user->name;
         $last_name = $project->aspirant[0]->user->last_name;
-        $project_name = $project->title;
+        $project_name = $project->title; */
 //        $project_category = $project->category->category;
         if($project){
+            $email = $project->aspirant[0]->user->email;
+            $name = $project->aspirant[0]->user->name;
+            $last_name = $project->aspirant[0]->user->last_name;
+            $project_name = $project->title;
+
             $project->available_edit = 2;
             $project->state = 2;
             $project->save();
