@@ -145,3 +145,9 @@
 .vue-dropzone>.dz-preview .dz-details{
     background-color: #00CDC7 !important;
 }
+.multiselect__tag{
+    background: #00CDC7 !important;
+}
+.swal2-container{
+    z-index: 99999999999 !important;
+}

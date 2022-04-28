@@ -69,7 +69,7 @@
                                 <div class="col-8">
                                     <h5 @click="selectProject(project)">
                                         Clic para escuchar la canción #
-                                        {{ index + 1 }}
+                                        {{ project.num + 1 }}
                                     </h5>
                                     <div
                                         v-if="project.state == 4"
@@ -219,7 +219,11 @@ export default {
             await axios
                 .get(`/api/curador/projects/${this.user.id}?page=${page}`)
                 .then(({ data }) => {
-                    this.projects = data;
+                    this.projects = data.map((value) => {
+                        let i = 1;
+                        value.num = i++;
+                        return value;
+                    });
                 })
                 .catch(({ response }) => {
                     console.error(response);
@@ -263,6 +267,7 @@ export default {
                 color: "#11435b",
                 text: "Cargando...",
             });
+            console.log(project);
             setTimeout(() => {
                 this.$refs.plyr.player.source = {
                     type: "audio",
@@ -327,7 +332,7 @@ export default {
 <style scoped>
 .fixed-player {
     position: fixed;
-    bottom: 4rem;
+    bottom: 8.5rem;
     width: 100%;
     left: 0;
     z-index: 200 !important;

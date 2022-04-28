@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
 class Proyect extends Model
@@ -14,6 +14,7 @@ class Proyect extends Model
     const REJECTED = 5;
     const APPROVAL = 6;
     const PENDING_REGISTER = 7;
+    const SUBSANADO = 8;
 
     const AVAILABLE_TO_EDIT = 1;
     const NOT_AVAILABLE_TO_EDIT = 2;
@@ -43,4 +44,6 @@ class Proyect extends Model
     public function category() {
         return $this->belongsTo(Category::class, 'category_id');
     }
+
+   
 }

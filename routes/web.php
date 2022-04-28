@@ -54,7 +54,7 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Curador'], function () {
 RUTAS DE LOS SUBSANADORES
 =============================================*/
 Route::group(['middleware' => 'auth', 'namespace' => 'Subsanador'], function () {
-    Route::get('/subsanador', 'ProjectsController@index')->name('subsanador.projects.page');
+    Route::get('/subsanador', 'ProjectsController@index')->name('subsanador.projects.page')->middleware('midd_subsanador_page');
 });
 
 /*=============================================
@@ -62,11 +62,11 @@ RUTAS PARA LOS REPORTES
 =============================================*/
 Route::group(['middleware' => 'auth', 'namespace' => 'Reports'], function () {
     Route::get('/dashboard', 'DashboardController@index')->name('reports.dashboard.page');
-    Route::get('/usuarios', 'UserController@index')->name('user.page');
+//    Route::get('/users', 'UserController@index')->name('user.page');
 });
 /*=============================================
 RUTAS PARA LOS USUARIOS
 =============================================*/
 Route::group(['middleware' => 'auth', 'namespace' => 'User'], function () {
-    Route::get('/usuarios', 'UserController@index')->name('user.page');
+    Route::get('/users', 'UserController@index')->name('users.admin.page');
 });

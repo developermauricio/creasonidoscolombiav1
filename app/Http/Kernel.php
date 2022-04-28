@@ -41,6 +41,7 @@ class Kernel extends HttpKernel
 
         'api' => [
             'throttle:60,1',
+            'bindings',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
     ];
@@ -62,6 +63,7 @@ class Kernel extends HttpKernel
         'midd_aspirant_profile' => \App\Http\Middleware\AspirantProfile::class,
         'midd_aspirant_register' => \App\Http\Middleware\AspirantRegister::class,
         'midd_aspirant_account' => \App\Http\Middleware\AspirantAccount::class,
+        'midd_subsanador_page' => \App\Http\Middleware\SubsanadorPage::class,
         'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,

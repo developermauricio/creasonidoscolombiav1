@@ -24,6 +24,14 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    private $roles = null;
+
+    public function __construct()
+    {
+        $this->roles = Role::whereIn('name', ['Administrador', 'Curador', 'Subsanador'])->get();
+    }
+
+
     public function getDepartaments()
     {
         $departaments = Departament::all();
@@ -78,7 +86,7 @@ class Controller extends BaseController
 
     public function getRoles()
     {
-        $roles = Role::all();
+        $roles = $this->roles;
         return response()->json(['data' => $roles]);
     }
 

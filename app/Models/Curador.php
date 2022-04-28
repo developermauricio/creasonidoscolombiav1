@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Curador extends Model
 {
     protected $table = 'curadors';
-    protected $fillable = ['biography', 'categories_id', 'user_id'];
+    protected $fillable = ['biography', 'user_id'];
 
     public function projects()
     {
@@ -20,11 +20,21 @@ class Curador extends Model
         );
     }
 
+    public function categories()
+    {
+        return $this->belongsToMany(
+            Category::class,
+            'curador_categories',
+            'curador_id',
+            'category_id'
+        );
+    }
+
     public function user() {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function category() {
-        return $this->belongsTo(Category::class, 'categories_id');
-    }
+//    public function category() {
+//        return $this->belongsTo(Category::class, 'categories_id');
+//    }
 }
