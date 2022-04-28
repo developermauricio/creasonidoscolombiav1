@@ -26,6 +26,7 @@ class CreateProyectsTable extends Migration
                 \App\Models\Proyect::REJECTED,
                 \App\Models\Proyect::APPROVAL,
                 \App\Models\Proyect::PENDING_REGISTER,
+                \App\Models\Proyect::SUBSANADO,
             ])->default(\App\Models\Proyect::BORRADOR);
             $table->string('audio');
             $table->string('slug');

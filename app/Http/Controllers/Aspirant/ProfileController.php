@@ -44,6 +44,7 @@ class ProfileController extends Controller
             Mail::to($email)->send(new EndTimeProject($email, $name, $last_name, $project_name, $project_category));
 
         } catch (\Exception $exception) {
+            DB::rollBack();
             $success = $exception->getMessage();
         }
         if ($success === true) {

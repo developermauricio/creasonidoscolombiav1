@@ -363,6 +363,7 @@ class RegisterController extends Controller
                 'trace' => $th->getTraceAsString()
             ];
             Log::error('MENSAJE LOG.', $response);
+            DB::rollBack();
             $success = false;
             return response()->json($response, 501);
         }

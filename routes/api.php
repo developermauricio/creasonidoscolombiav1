@@ -56,8 +56,6 @@ Route::post(
 )->name('api.create.register.aspirant');
 
 
-
-
 //Route::post(
 //    '/aspirant/account-create',
 //    'Aspirant\AccountController@createAccount'
@@ -153,42 +151,40 @@ Route::get('/get-roles', 'Controller@getRoles')->name('get.roles');
 Route::get('/reportes', 'Controller@getDataReports')->name('get.reports.temporaly');
 
 
-//Route::group(['middleware' => 'auth:api'], function () {});
-Route::get(
-    '/curador/projects/{id}',
-    'Curador\ProjectsController@getProjects'
-)->name('curador.get.projects');
-Route::get(
-    '/curador/projects-qualified/{id}',
-    'Curador\ProjectsController@getProjectsQualified'
-)->name('curador.get.projects.qualified');
-Route::get(
-    '/curador/projects-asign/{id}',
-    'Curador\ProjectsController@getProjectsAsign'
-)->name('curador.get.projects.asign');
-Route::get(
-    '/curador/get-qualifications',
-    'Curador\ProjectsController@getQualifications'
-)->name('curador.get.qualifications');
-Route::post(
-    '/curador/save-qualifications',
-    'Curador\ProjectsController@saveQualification'
-)->name('curador.save.qualifications');
+/*=============================================
+API PARA LOS CURADORES
+=============================================*/
+Route::get('/curador/projects', 'Curador\ProjectsController@getProjects')->name('curador.get.projects');
+Route::get('/curador/projects/{id}', 'Curador\ProjectsController@getProjectsForId')->name('curador.get.projects.for.id');
+Route::get('/curador/projects-qualified/{id}', 'Curador\ProjectsController@getProjectsQualified')->name('curador.get.projects.qualified');
+Route::get('/curador/projects-asign/{id}', 'Curador\ProjectsController@getProjectsAsign')->name('curador.get.projects.asign');
+Route::get('/curador/get-qualifications', 'Curador\ProjectsController@getQualifications')->name('curador.get.qualifications');
+Route::post('/curador/save-qualifications', 'Curador\ProjectsController@saveQualification')->name('curador.save.qualifications');
 
 /*=============================================
 API PARA LOS USUARIOS
 =============================================*/
 Route::get('/get-users', 'User\UserController@getUsers')->name('get.api.users');
 Route::post('/create-user', 'User\UserController@createUser')->name('create.api.users');
+Route::post('/update-password', 'User\UserController@updatePasswordUser')->name('update.password.api.users');
 
 /*=============================================
 API PARA EL SUBSANADOR
 =============================================*/
 Route::get('/subsanador/get-projects-revision', 'Subsanador\ProjectsController@getProjectsRevision')->name('get.projects.revision');
+Route::get('/subsanador/count-need-subsanar', 'Subsanador\ProjectsController@countNeedSubsanar')->name('count.need.subsanar');
+Route::get('/subsanador/count-already-subsanar', 'Subsanador\ProjectsController@countAlreadySubsanar')->name('count.already.subsanar');
+Route::get('/subsanador/count-curador-subsanar', 'Subsanador\ProjectsController@countCuradorSubsanar')->name('count.curador.subsanar');
+Route::post('/subsanador/assign-project-subsanador', 'Subsanador\ProjectsController@assignProject')->name('assign.projects');
+Route::post('/subsanador/update-edit-project/{id}', 'Subsanador\ProjectsController@updateEditProjectDb')->name('update.edit.project');
+Route::post('/subsanador/assign-project-massive', 'Subsanador\ProjectsController@assignProjectsMasive')->name('assign.projects.masive');
 
-/* consultas para los reportes. */
+
 Route::get('/get-all-aspirants-registers', 'Aspirant\AccountController@getAllAspirantsRegisters');
 Route::get('/get-all-aspirants', 'Aspirant\AccountController@getAllAspirants');
 Route::get('/get-all-aspirants-location', 'Aspirant\AccountController@getAllAspirantsLocation');
 Route::get('/get-all-curadors', 'Aspirant\AccountController@getAllCuradors');
 Route::get('/get-all-projects', 'Aspirant\AccountController@getAllProjects');
+
+
+

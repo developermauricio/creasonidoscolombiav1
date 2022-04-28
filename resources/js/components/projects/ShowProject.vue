@@ -10,7 +10,7 @@
                     <div class="modal-header">
                         <h4 class="modal-title" id="myModalLabel17">Aspirante: {{ project.aspirant[0].user.name }}
                             {{ project.aspirant[0].user.last_name }}</h4>
-                        <button type="button" class="close" @click="categorySelected = null" data-dismiss="modal"
+                        <button  type="button" class="close" @click="closeModalInformation()" data-dismiss="modal"
                                 aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -192,18 +192,16 @@
                             ASIGNAR MODALIDAD
                         ======================================-->
                         <hr>
-                        <h4 class="mb-2 text-primary">Asignar Modalidad</h4>
+                        <h4 class="mb-2 text-primary text-assign-category" id="text-assign-category">Asignar Modalidad</h4>
+                        <p class="text-danger m-0" v-if="errorMessage">{{ errorMessage }}</p>
                         <div class="row mt-1">
                             <div class="col-12">
                                 <div class="d-flex" v-for="category in categoriesProject" :key="category.id">
                                     <vs-radio class="mb-1" color="#11435b" v-model="categorySelected"
-                                              :vs-value="category.id">{{
+                                              :vs-value="category">{{
                                             category.category
                                         }}
                                     </vs-radio>
-                                    <!--                                <vs-tooltip :text="category.description">-->
-                                    <!--                                    <vs-icon size="small" class="pl-1 mb-1" icon="help_outline" style="cursor: pointer"></vs-icon>-->
-                                    <!--                                </vs-tooltip>-->
                                 </div>
                                 <p style="margin-top: 0.3rem;font-size: 0.9rem; display: none"
                                    id="text-verify-line-participation" class="text-danger">Debes seleccionar la linea de
@@ -212,10 +210,10 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button @click="categorySelected = null" type="button" class="btn btn-secondary"
+                        <button @click="closeModalInformation()" type="button" class="btn btn-secondary"
                                 data-dismiss="modal">Cerrar
                         </button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Asignar Guardar</button>
+                        <button type="button" class="btn btn-primary" @click="assignProject()">Asignar Guardar</button>
                     </div>
                 </div>
             </div>
@@ -329,6 +327,8 @@
 </template>
 
 <script>
+import Swal from "sweetalert2";
+import {subscriberMQTT, publishMQTT} from '../../plugins/mqtt';
 require("moment/min/locales.min");
 import moment from 'moment';
 
@@ -339,9 +339,12 @@ export default {
             moment: moment,
             aspirant: null,
             edadMinor: null,
+            projectId: null,
+            errorMessage: '',
             categoriesProject: [],
             categorySelected: null,
-            showDocumentAspirant: false
+            showDocumentAspirant: false,
+            currentUserId: window.user_ìd,
         }
     },
     methods: {
@@ -349,6 +352,88 @@ export default {
             let date = birthday;
             let diferencia = moment();
             return diferencia.diff(date, 'years');
+        },
+        closeModalInformation(){
+            this.categorySelected = null
+            publishMQTT('subsanador_edit_close', this.project)
+        },
+
+        async assignProject(){
+            setTimeout(() =>{
+                if (this.categorySelected === null){
+                    this.$toast.error({
+                        title: 'Error',
+                        message: 'Para asignar, seleccione una modalidad',
+                        showDuration: 1000,
+                        hideDuration: 8000,
+                    })
+                    $("#text-assign-category").addClass('is-invalid')
+                    return
+                }
+                const data = new FormData()
+                /*=============================================
+                    ASIGNAR CATEGORÍA
+                =============================================*/
+                data.append('category', JSON.stringify(this.categorySelected));
+                data.append('projectId', this.project.id);
+                data.append('currentUserId', this.currentUserId);
+
+                    Swal.fire({
+                        title: 'Confirmar',
+                        confirmButtonColor: "#11435b",
+                        cancelButtonColor: "#B53E2A",
+                        confirmButtonText: 'Aceptar',
+                        cancelButtonText: 'Cancelar',
+                        customClass: "swal-confirmation",
+                        showCancelButton: true,
+                        reverseButtons: true,
+                        allowOutsideClick: false,
+                        html:'Esta seguro de asignar a '+`<h4>${this.categorySelected.category}</h4>`,
+                    }).then(result => {
+                        if (result.value) {
+                            this.$vs.loading({
+                                color: '#11435b',
+                                text: 'Espere un momento por favor...'
+                            })
+                            axios.post('/api/subsanador/assign-project-subsanador', data).then(resp => {
+                                this.$toast.success({
+                                    title: '¡Muy bien!',
+                                    message: 'La propuesta musical fue asignada correctamente',
+                                    showDuration: 1000,
+                                    hideDuration: 7000,
+                                    position: 'top right',
+                                })
+                                $('#modal-show-project').modal('hide')
+                                this.$emit('loadDataListProject')
+                                publishMQTT('mqtUpdateProjects', this.project)
+                                this.categorySelected = null
+                                publishMQTT('subsanador_edit_close', this.project)
+                                this.$vs.loading.close()
+                                // window.location = '/perfil'
+                            }).catch(err => {
+                                if (err.response.status === 401) {
+                                    this.$vs.loading.close()
+                                    $("#text-assign-category").addClass('is-invalid')
+                                    this.errorMessage = err.response.data
+                                    return this.$toast.error({
+                                        title: 'Atención',
+                                        message: err.response.data,
+                                        showDuration: 1000,
+                                        hideDuration: 5000,
+                                        position: 'top right',
+                                    })
+                                }
+                                this.$toast.error({
+                                    title: 'Error',
+                                    message: 'Hubo un error al asignar la propuesta musical',
+                                    showDuration: 1000,
+                                    hideDuration: 8000,
+                                })
+                                this.$vs.loading.close()
+                            })
+                        }
+                    })
+            }, 200)
         },
         async getCategoriesProject() {
             await axios.get('/api/get-project-categories').then(resp => {
@@ -364,6 +449,14 @@ export default {
         }
     },
     props: ['project'],
+    watch:{
+        categorySelected: function (val) {
+            if (val !== null){
+                this.errorMessage = ''
+                $("#text-assign-category").removeClass('is-invalid')
+            }
+        }
+    },
     mounted() {
         this.getCategoriesProject()
     }
@@ -372,5 +465,7 @@ export default {
 </script>
 
 <style scoped>
-
+.text-assign-category.is-invalid{
+    color: red !important;
+}
 </style>

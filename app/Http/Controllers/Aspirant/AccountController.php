@@ -91,7 +91,7 @@ class AccountController extends Controller
     }
 
     public function getAllCuradors() {
-        $listCuradors = Curador::with('user', 'category')
+        $listCuradors = Curador::with('user', 'categories')->withCount('projects')
             ->get();
         return response()->json(['status' => 'ok', 'data' => $listCuradors]);
     }

@@ -18,7 +18,14 @@ class ProjectsController extends Controller
         return view('curador.projects');
     }
 
-    public function getProjects($id)
+    public function getProjects(){
+        $curadores = Curador::with('user', 'categories')->withCount('projects')
+            ->get();
+
+        return $curadores;
+    }
+
+    public function getProjectsForId($id)
     {
         $projects = Proyect::whereHas('curador', function ($q) use ($id) {
             $q->where('curador_id', $id);

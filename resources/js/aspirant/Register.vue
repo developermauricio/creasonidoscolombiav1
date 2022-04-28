@@ -76,17 +76,17 @@
                         </div>
                     </div>
                     <div class="col-12 col-md-3 col-lg-3 mb-1">
-                        <label for="" id="title-vinculad-ecopetrol">¿Usted tiene vínculo con Ecopetrol? <span class="text-danger"> *</span></label>
+                        <label  id="title-vinculad-ecopetrol">¿Usted tiene vínculo con Ecopetrol? <span class="text-danger"> *</span></label>
                         <vs-radio color="#11435b" v-model="vinculado_ecopetrol" vs-name="headHousehold1" vs-value="Si">Si</vs-radio>
                         <vs-radio color="#11435b" v-model="vinculado_ecopetrol" vs-name="headHousehold2" vs-value="No">No</vs-radio>
                     </div>
                     <div class="col-12 col-md-3 col-lg-3 mb-1" v-if="vinculado_ecopetrol ==='Si'">
-                        <label for="" id="title-primero-empleo_ecopetrol">¿Su primer empleo ha sido con Ecopetrol?<span class="text-danger"> *</span></label>
+                        <label id="title-primero-empleo_ecopetrol">¿Su primer empleo ha sido con Ecopetrol?<span class="text-danger"> *</span></label>
                         <vs-radio color="#11435b" v-model="primer_empleo_ecopetrol" vs-name="victimConflict1" vs-value="Si">Si</vs-radio>
                         <vs-radio color="#11435b" v-model="primer_empleo_ecopetrol" vs-name="victimConflict2" vs-value="No">No</vs-radio>
                     </div>
                     <div class="col-12 col-md-3 col-lg-3" v-if="vinculado_ecopetrol ==='Si'">
-                        <label for="" id="title-bachiller-colombia-ecopetrol">¿Usted ha sido beneficiario del programa bachilleres por Colombia de Ecopetrol?<span class="text-danger"> *</span></label>
+                        <label id="title-bachiller-colombia-ecopetrol">¿Usted ha sido beneficiario del programa bachilleres por Colombia de Ecopetrol?<span class="text-danger"> *</span></label>
                         <vs-radio color="#11435b" v-model="bachilleres_colombia_ecopetrol" vs-name="disability1" vs-value="Si">Si</vs-radio>
                         <vs-radio color="#11435b" v-model="bachilleres_colombia_ecopetrol" vs-name="disability2" vs-value="No">No</vs-radio>
                     </div>

@@ -22,8 +22,11 @@
                 <li class="{{request()->is('dashboard') ? 'active' : '' }}" data-menu=""><a class="dropdown-item d-flex align-items-center" href="{{ route('reports.dashboard.page') }}" data-i18n="Leaflet Maps"><i data-feather='bar-chart'></i><span data-i18n="Dashboard">Dashboard</span></a>
                 </li>
 
-                <li class="{{request()->is('usuarios') ? 'active' : '' }}"><a class="dropdown-item d-flex align-items-center" href="{{ route('user.page') }}" data-i18n="Leaflet Maps"><i data-feather='users'></i><span data-i18n="Dashboard">Usuarios</span></a>
+                <li class="{{request()->is('users') ? 'active' : '' }}"><a class="dropdown-item d-flex align-items-center" href="{{ route('users.admin.page') }}" data-i18n="Leaflet Maps"><i data-feather='users'></i><span data-i18n="Dashboard">Usuarios</span></a>
                 </li>
+                <li class="{{request()->is('subsanador') ? 'active' : '' }}"><a class="dropdown-item d-flex align-items-center" href="{{ route('subsanador.projects.page') }}" data-i18n="Leaflet Maps"><i data-feather='users'></i><span data-i18n="Dashboard">Subsanar</span></a>
+                </li>
+
 
 {{--                <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link d-flex align-items-center" href="index.html" data-toggle="dropdown"><i data-feather="home"></i><span data-i18n="Dashboards">Dashboard</span></a>--}}
 {{--                    <ul class="dropdown-menu">--}}

@@ -14,6 +14,7 @@ class Proyect extends Model
     const REJECTED = 5;
     const APPROVAL = 6;
     const PENDING_REGISTER = 7;
+    const SUBSANADO = 8;
 
     const AVAILABLE_TO_EDIT = 1;
     const NOT_AVAILABLE_TO_EDIT = 2;

@@ -38,6 +38,7 @@ class UserController extends Controller
         $roles = json_decode($request->roles);
 
         $curador = $request->curador;
+        $categories = json_decode($request->categories);
         $subsanador = $request->subsanador;
 
         $ramdon = Str::random(10);
@@ -81,6 +82,7 @@ class UserController extends Controller
 
             Mail::to($email)->send(new UserCreate($email, ucwords($name), ucwords($last_name), $password));
         } catch (\Throwable $th) {
+            DB::rollBack();
             $response = [
                 'msg' => 'Registro Fallido',
                 'error' => $th->getMessage(),
@@ -94,7 +96,34 @@ class UserController extends Controller
             DB::commit();
             return response()->json('Transacción realizada exitosamente', 200);
         } else {
+            DB::rollBack();
             return response()->json('Error al realizar la transacción', 500);
+
+        }
+    }
+    public function updatePasswordUser(Request $request){
+        $pass = bcrypt($request->password);
+        $currentUserId = $request->userId;
+        $success = true;
+        try {
+        $user = User::where('id', $currentUserId)->update([
+            'password' => $pass
+        ]);
+        } catch (\Throwable $th) {
+            $response = [
+                'msg' => 'Actualización Fallida',
+                'error' => $th->getMessage(),
+                'trace' => $th->getTraceAsString()
+            ];
+            Log::error('MENSAJE LOG.', $response);
+            $success = false;
+            return response()->json($response, 501);
+        }
+        if ($success === true) {
+            DB::commit();
+            return response()->json(['Contraseña actualizada correctamente']);
+        } else {
+            return response()->json('Error al realizar la actualización', 500);
 
         }
     }

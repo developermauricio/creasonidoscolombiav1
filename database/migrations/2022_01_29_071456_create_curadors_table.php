@@ -15,7 +15,7 @@ class CreateCuradorsTable extends Migration
     {
         Schema::create('curadors', function (Blueprint $table) {
             $table->id();
-            $table->mediumText('biography')->nullable();
+            $table->text('biography')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

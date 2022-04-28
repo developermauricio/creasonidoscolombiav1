@@ -22,7 +22,7 @@ class AspirantAccount
             $userAdministrator = Auth::user()->hasRole('Administrador');
             $userAspirant = Auth::user()->hasRole('Aspirante');
             $userCurador = Auth::user()->hasRole('Curador');
-            $userSubsanador = Auth::user()->hasRole('Subsadanor');
+            $userSubsanador = Auth::user()->hasRole('Subsanador');
 
             if (Auth::guard($guard)->check()) {
                 if ($userAdministrator) {
