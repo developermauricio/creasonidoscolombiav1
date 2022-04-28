@@ -10,6 +10,7 @@ use App\Models\Qualification;
 use App\Models\QualificationProject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ProjectsController extends Controller
 {
@@ -27,6 +28,7 @@ class ProjectsController extends Controller
 
     public function getProjectsForId($id)
     {
+        // '@rownum:= @rownum + 1 AS row'
         $projects = Proyect::whereHas('curador', function ($q) use ($id) {
             $q->where('curador_id', $id);
         })
