@@ -72,6 +72,7 @@ COMPONENTES USUARIOS
 =============================================*/
 Vue.component('create-user-component', require('./users/CreateUser').default);
 Vue.component('change-password-component', require('./users/ChangePassword.vue').default);
+Vue.component('show-user-component', require('./users/ShowUser.vue').default);
 /*=============================================
 COMPONENTES PROYECTOS
 =============================================*/
