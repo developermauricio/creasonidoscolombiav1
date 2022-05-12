@@ -3,6 +3,11 @@
         <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
             <h2 class="card-title font-weight-bold mb-1 mt-3">Bienvenido</h2>
             <p class="card-text mb-2">Para iniciar el proceso de participación primero crea una cuenta.</p>
+            <div role="alert" aria-live="polite" aria-atomic="true" class="alert alert-warning">
+                <div class="alert-body text-justify">
+                    Al momento de ingresar el correo electrónico, tenga en cuenta no dejar espacios.
+                </div>
+            </div>
             <form class="auth-register-form mt-2">
                 <div class="form-group">
                     <input-form

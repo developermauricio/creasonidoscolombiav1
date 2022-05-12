@@ -57,6 +57,15 @@
             <create-user-component></create-user-component>
         </div>
     </div>
+    <!--=====================================
+        MODAL MOSTRAR USUARIOS
+    ======================================-->
+    <div class="modal fade text-left modal-primary" id="modal-show-user" data-backdrop="static" tabindex="-1"
+         role="dialog" aria-labelledby="myModalLabel160" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <show-user-component id="show-user-component" idUser></show-user-component>
+        </div>
+    </div>
 @endsection
 
 @push('js')
@@ -79,8 +88,9 @@
 @push('js')
     <script>
         $(function () {
+            let table = null;
             setTimeout(() => {
-                    var table = $('.datatables-all-users').DataTable({
+                     table = $('.datatables-all-users').DataTable({
 
                         "processing": true,
                         "lengthMenu": [7, 10, 25, 50, 75, 100],
@@ -98,6 +108,9 @@
                             "defaultContent": "-",
                             "targets": "_all"
                         }],
+                        "drawCallback": function (settings) {
+                            feather.replace();
+                        },
                         // "columnDefs": [
                         //     {"width": '10%', targets: 0},
                         // ],
@@ -165,7 +178,13 @@
                                         return `<div class="badge badge-pill badge-glow badge-danger">Inactivo</div>`;
                                     }
                                 },
-                            },
+                            },{
+                                render: function (data, type, JsonResultRow, meta) {
+                                    return '<div class="demo-inline-spacing text-center"><button data-target="#modal-show-user" data-toggle="modal" data-toggle="tooltip" data-placement="top" title="Más Información" type="button" class="btn btn-show-user btn-icon btn-primary"><i data-feather="eye"></i><span class="mt-2"></span></button></div>'
+
+                                }
+                                ,
+                            }
                         ],
 
 
@@ -282,8 +301,14 @@
                             cell.innerHTML = i + 1;
                         });
                     }).draw();
-                }
-                , 1);
+                }, 10);
+            $('.datatables-all-users').on('click', '.btn-show-user', function (e) {
+                var dataTableUser = table.row($(this).parents('tr')).data();
+                $('#traerDatosBotonCustomer').val(dataTableUser.id).click();
+                $('#show-user-component').attr("id-user", dataTableUser.id)
+                // $('#traerDatosBotonCustomer').val(dataTableCustomer.id).click();
+                // $('#componet-show-customer').attr("id-customer", dataTableCustomer.id)
+            });
         });
 
     </script>
