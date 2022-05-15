@@ -52,29 +52,29 @@
                                         }"
                                 ></input-form>
                             </div>
-<!--                            <div class="col-12 col-lg-6 col-md-6">-->
-<!--                                <input-form-->
-<!--                                    label="Filtar por línea de convocatoria"-->
-<!--                                    id="textLineAspirant"-->
-<!--                                    errorMsg-->
-<!--                                    requiredMsg="La modalidad es requerida"-->
-<!--                                    :required="false"-->
-<!--                                    :modelo.sync="lineFilterSelected"-->
-<!--                                    :msgServer.sync="errors.departamentFilterSelected"-->
-<!--                                    type="multiselect"-->
-<!--                                    selectLabel="Filtar por línea de convocatoria"-->
-<!--                                    :multiselect="{ options: aspirantType,-->
-<!--                                           selectLabel:'Seleccionar',-->
-<!--                                           selectedLabel:'Seleccionado',-->
-<!--                                           deselectLabel:'Desmarcar',-->
-<!--                                           placeholder:'Seleccion una línea',-->
-<!--                                          taggable : false,-->
-<!--                                          'track-by':'id',-->
-<!--                                          label: 'name',-->
-<!--                                          'custom-label': line=>line.name-->
-<!--                                        }"-->
-<!--                                ></input-form>-->
-<!--                            </div>-->
+                            <!--                            <div class="col-12 col-lg-6 col-md-6">-->
+                            <!--                                <input-form-->
+                            <!--                                    label="Filtar por línea de convocatoria"-->
+                            <!--                                    id="textLineAspirant"-->
+                            <!--                                    errorMsg-->
+                            <!--                                    requiredMsg="La modalidad es requerida"-->
+                            <!--                                    :required="false"-->
+                            <!--                                    :modelo.sync="lineFilterSelected"-->
+                            <!--                                    :msgServer.sync="errors.departamentFilterSelected"-->
+                            <!--                                    type="multiselect"-->
+                            <!--                                    selectLabel="Filtar por línea de convocatoria"-->
+                            <!--                                    :multiselect="{ options: aspirantType,-->
+                            <!--                                           selectLabel:'Seleccionar',-->
+                            <!--                                           selectedLabel:'Seleccionado',-->
+                            <!--                                           deselectLabel:'Desmarcar',-->
+                            <!--                                           placeholder:'Seleccion una línea',-->
+                            <!--                                          taggable : false,-->
+                            <!--                                          'track-by':'id',-->
+                            <!--                                          label: 'name',-->
+                            <!--                                          'custom-label': line=>line.name-->
+                            <!--                                        }"-->
+                            <!--                                ></input-form>-->
+                            <!--                            </div>-->
                         </div>
                         <div class="table-responsive">
                             <v-table
@@ -532,6 +532,10 @@ export default {
 
 .demo-inline-spacing {
     flex-wrap: inherit !important;
+}
+
+.smart-pagination {
+    overflow: auto !important;
 }
 
 .fixed-player {
