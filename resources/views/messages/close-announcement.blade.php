@@ -99,7 +99,7 @@
 {{--                                <p style="font-size: 0.8rem">Las personas que lograron hacer la inscripción, aún pueden registrar su propuesta musical hasta el 30 de mayo dando clic en el botón "iniciar sesión".</p>--}}
 {{--                            </div>--}}
 
-                            <a href="/login" class="btn btn-primary btn-block pt-1" type="submit" tabindex="2">Iniciar Sesión</a>
+{{--                            <a href="/login" class="btn btn-primary btn-block pt-1" type="submit" tabindex="2">Iniciar Sesión</a>--}}
 
                             <p class="text-center mt-2">
                                 <a href="https://www.creasonidos.com/"> <i data-feather="chevron-left"></i> Volver a www.creasonidos.com
