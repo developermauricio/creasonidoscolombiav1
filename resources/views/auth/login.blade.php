@@ -132,7 +132,7 @@
                                 {{--                                </div>--}}
                                 <button class="btn btn-primary btn-block" type="submit" tabindex="4">Ingresar</button>
                             </form>
-                            <p class="text-center mt-2"><span>¿Aún no se encuentra registrado?</span><a href="/cuenta"><span>&nbsp;Registrarme</span></a>
+{{--                            <p class="text-center mt-2"><span>¿Aún no se encuentra registrado?</span><a href="/cuenta"><span>&nbsp;Registrarme</span></a>--}}
                             </p>
                         </div>
                     </div>
