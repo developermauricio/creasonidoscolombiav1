@@ -17,7 +17,7 @@ Route::get('/', function () {
     return redirect('/cuenta');
 });
 
-Route::get('/cuenta', function () {
+Route::get('/skd0skd0s', function () {
     return view('aspirant.account');
 })->middleware('midd_aspirant_account');
 
@@ -69,4 +69,11 @@ RUTAS PARA LOS USUARIOS
 =============================================*/
 Route::group(['middleware' => 'auth', 'namespace' => 'User'], function () {
     Route::get('/users', 'UserController@index')->name('users.admin.page');
+});
+
+/*=============================================
+RUTAS PARA LOS MENSAJES
+=============================================*/
+Route::get('/cuenta', function (){
+   return view('messages.close-announcement');
 });
