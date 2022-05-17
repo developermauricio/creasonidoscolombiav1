@@ -8,9 +8,10 @@
             <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel17">Aspirante: {{ project.aspirant[0].user.name }}
+                        <h4 class="modal-title" id="myModalLabel17" v-if="role === 'Administrador'">Aspirante:
+                            {{ project.aspirant[0].user.name }}
                             {{ project.aspirant[0].user.last_name }}</h4>
-                        <button  type="button" class="close" @click="closeModalInformation()" data-dismiss="modal"
+                        <button type="button" class="close" @click="closeModalInformation()" data-dismiss="modal"
                                 aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -40,29 +41,29 @@
                         ======================================-->
                         <h4 class="mb-2 text-primary">Información Personal:</h4>
                         <div class="row">
-                            <div class="col-12 col-md-3 col-lg-3">
+                            <div class="col-12 col-md-3 col-lg-3" v-if="role === 'Administrador'">
                                 <h6>Nombres:</h6>
                                 <p>{{ project.aspirant[0].user.name }}</p>
                             </div>
-                            <div class="col-12 col-md-3 col-lg-3">
+                            <div class="col-12 col-md-3 col-lg-3" v-if="role === 'Administrador'">
                                 <h6>Apellidos:</h6>
                                 <p>{{ project.aspirant[0].user.last_name }}</p>
                             </div>
-                            <div class="col-12 col-md-3 col-lg-3">
+                            <div class="col-12 col-md-3 col-lg-3" v-if="role === 'Administrador'">
                                 <h6>Correo electrónico:</h6>
                                 <p>{{ project.aspirant[0].user.email }}</p>
                             </div>
-                            <div class="col-12 col-md-3 col-lg-3">
+                            <div class="col-12 col-md-3 col-lg-3" v-if="role === 'Administrador'">
                                 <h6>Correo electrónico:</h6>
                                 <p>{{ project.aspirant[0].user.phone }}</p>
                             </div>
-                            <div class="col-12 col-md-3 col-lg-3">
+                            <div class="col-12 col-md-3 col-lg-3" v-if="role === 'Administrador'">
                                 <h6>Fecha de nacimiento:</h6>
                                 <p>{{
                                         moment(project.aspirant[0].user.birthday).locale('es').format("MMMM Do YYYY")
                                     }}</p>
                             </div>
-                            <div class="col-12 col-md-3 col-lg-3">
+                            <div class="col-12 col-md-3 col-lg-3" v-if="role === 'Administrador'">
                                 <h6>Edad:</h6>
                                 <p>{{ formatEdad(project.aspirant[0].user.birthday) }}</p>
                             </div>
@@ -78,7 +79,7 @@
                                 <h6>Ciudad de resindencia:</h6>
                                 <p>{{ project.aspirant[0].user.city.descripcion }}</p>
                             </div>
-                            <div class="col-12 col-md-3 col-lg-3">
+                            <div class="col-12 col-md-3 col-lg-3" v-if="role === 'Administrador'">
                                 <h6>Dirección:</h6>
                                 <p>{{ project.aspirant[0].user.address }}</p>
                             </div>
@@ -98,7 +99,7 @@
                                 <h6>¿Posee alguna discapacidad?</h6>
                                 <p>{{ project.aspirant[0].disability }}</p>
                             </div>
-                            <div class="col-12 col-md-3 col-lg-3">
+                            <div class="col-12 col-md-3 col-lg-3" v-if="role === 'Administrador'">
                                 <h6>Documento de identificación</h6>
                                 <!--                            <span data-toggle="modal" data-target="#modal-show-document" class="pr-2"-->
                                 <!--                                  style="color: #114455; cursor: pointer">Ver documento</span>-->
@@ -111,30 +112,32 @@
                         ======================================-->
                         <div v-if="project.aspirant[0].parent != null">
                             <hr>
-                            <h4 class="mb-2 text-primary">Información del menor de edad:</h4>
-                            <div class="row">
-                                <div class="col-12 col-md-3 col-lg-3">
-                                    <h6>Nombres:</h6>
-                                    <p>{{ project.aspirant[0].parent.minor.name }}</p>
-                                </div>
-                                <div class="col-12 col-md-3 col-lg-3">
-                                    <h6>Apellidos:</h6>
-                                    <p>{{ project.aspirant[0].parent.minor.last_name }}</p>
-                                </div>
-                                <div class="col-12 col-md-3 col-lg-3">
-                                    <h6>Apellidos:</h6>
-                                    <p>{{
-                                            moment(project.aspirant[0].parent.minor.birthday).locale('es').format("MMMM Do YYYY")
-                                        }}</p>
-                                </div>
-                                <div class="col-12 col-md-3 col-lg-3">
-                                    <h6>Edad:</h6>
-                                    <p>{{ formatEdad(project.aspirant[0].parent.minor.birthday) }}</p>
-                                </div>
-                                <div class="col-12 col-md-3 col-lg-3">
-                                    <h6>Documento de identificación</h6>
-                                    <span data-toggle="modal" data-target="#modal-show-document-minor" class="pr-2"
-                                          style="color: #114455; cursor: pointer">Ver documento</span>
+                            <div v-if="role === 'Administrador'">
+                                <h4 class="mb-2 text-primary">Información del menor de edad:</h4>
+                                <div class="row">
+                                    <div class="col-12 col-md-3 col-lg-3">
+                                        <h6>Nombres:</h6>
+                                        <p>{{ project.aspirant[0].parent.minor.name }}</p>
+                                    </div>
+                                    <div class="col-12 col-md-3 col-lg-3">
+                                        <h6>Apellidos:</h6>
+                                        <p>{{ project.aspirant[0].parent.minor.last_name }}</p>
+                                    </div>
+                                    <div class="col-12 col-md-3 col-lg-3">
+                                        <h6>Fecha de Nacimiento:</h6>
+                                        <p>{{
+                                                moment(project.aspirant[0].parent.minor.birthday).locale('es').format("MMMM Do YYYY")
+                                            }}</p>
+                                    </div>
+                                    <div class="col-12 col-md-3 col-lg-3">
+                                        <h6>Edad:</h6>
+                                        <p>{{ formatEdad(project.aspirant[0].parent.minor.birthday) }}</p>
+                                    </div>
+                                    <div class="col-12 col-md-3 col-lg-3">
+                                        <h6>Documento de identificación</h6>
+                                        <span data-toggle="modal" data-target="#modal-show-document-minor" class="pr-2"
+                                              style="color: #114455; cursor: pointer">Ver documento</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -144,11 +147,11 @@
                         <hr>
                         <h4 class="mb-2 text-primary">Información de la propuesta musical:</h4>
                         <div class="row">
-                            <div class="col-12 col-md-3 col-lg-3">
+                            <div class="col-12 col-md-3 col-lg-3" v-if="role === 'Administrador'">
                                 <h6>Título de la canción:</h6>
                                 <p>{{ project.title }}</p>
                             </div>
-                            <div class="col-12 col-md-3 col-lg-3">
+                            <div class="col-12 col-md-3 col-lg-3" v-if="role === 'Administrador'">
                                 <h6>Nombre del intérprete o agrupación:</h6>
                                 <p>{{ project.name_author }}</p>
                             </div>
@@ -179,11 +182,13 @@
                                 <h6>¿Tiene vinculo con Ecopetrol?</h6>
                                 <p>{{ project.aspirant[0].vinculado_ecopetrol }}</p>
                             </div>
-                            <div class="col-12 col-md-4 col-lg-4" v-if="project.aspirant[0].vinculado_ecopetrol === 'Si'">
+                            <div class="col-12 col-md-4 col-lg-4"
+                                 v-if="project.aspirant[0].vinculado_ecopetrol === 'Si'">
                                 <h6>¿Su primer empleo ha sido con Ecopetrol?</h6>
                                 <p>{{ project.aspirant[0].primer_empleo_ecopetrol }}</p>
                             </div>
-                            <div class="col-12 col-md-4 col-lg-4" v-if="project.aspirant[0].vinculado_ecopetrol === 'Si'">
+                            <div class="col-12 col-md-4 col-lg-4"
+                                 v-if="project.aspirant[0].vinculado_ecopetrol === 'Si'">
                                 <h6>¿Ha sido beneficiario del programa bachilleres por Colombia de Ecopetrol?</h6>
                                 <p>{{ project.aspirant[0].bachilleres_colombia_ecopetrol }}</p>
                             </div>
@@ -192,7 +197,8 @@
                             ASIGNAR MODALIDAD
                         ======================================-->
                         <hr>
-                        <h4 class="mb-2 text-primary text-assign-category" id="text-assign-category">Asignar Modalidad</h4>
+                        <h4 class="mb-2 text-primary text-assign-category" id="text-assign-category">Asignar
+                            Modalidad</h4>
                         <p class="text-danger m-0" v-if="errorMessage">{{ errorMessage }}</p>
                         <div class="row mt-1">
                             <div class="col-12">
@@ -329,6 +335,7 @@
 <script>
 import Swal from "sweetalert2";
 import {subscriberMQTT, publishMQTT} from '../../plugins/mqtt';
+
 require("moment/min/locales.min");
 import moment from 'moment';
 
@@ -336,6 +343,7 @@ export default {
     name: "ShowProject",
     data() {
         return {
+            role: window.role,
             moment: moment,
             aspirant: null,
             edadMinor: null,
@@ -353,14 +361,14 @@ export default {
             let diferencia = moment();
             return diferencia.diff(date, 'years');
         },
-        closeModalInformation(){
+        closeModalInformation() {
             this.categorySelected = null
             publishMQTT('subsanador_edit_close', this.project)
         },
 
-        async assignProject(){
-            setTimeout(() =>{
-                if (this.categorySelected === null){
+        async assignProject() {
+            setTimeout(() => {
+                if (this.categorySelected === null) {
                     this.$toast.error({
                         title: 'Error',
                         message: 'Para asignar, seleccione una modalidad',
@@ -378,61 +386,61 @@ export default {
                 data.append('projectId', this.project.id);
                 data.append('currentUserId', this.currentUserId);
 
-                    Swal.fire({
-                        title: 'Confirmar',
-                        confirmButtonColor: "#11435b",
-                        cancelButtonColor: "#B53E2A",
-                        confirmButtonText: 'Aceptar',
-                        cancelButtonText: 'Cancelar',
-                        customClass: "swal-confirmation",
-                        showCancelButton: true,
-                        reverseButtons: true,
-                        allowOutsideClick: false,
-                        html:'Esta seguro de asignar a '+`<h4>${this.categorySelected.category}</h4>`,
-                    }).then(result => {
-                        if (result.value) {
-                            this.$vs.loading({
-                                color: '#11435b',
-                                text: 'Espere un momento por favor...'
+                Swal.fire({
+                    title: 'Confirmar',
+                    confirmButtonColor: "#11435b",
+                    cancelButtonColor: "#B53E2A",
+                    confirmButtonText: 'Aceptar',
+                    cancelButtonText: 'Cancelar',
+                    customClass: "swal-confirmation",
+                    showCancelButton: true,
+                    reverseButtons: true,
+                    allowOutsideClick: false,
+                    html: 'Esta seguro de asignar a ' + `<h4>${this.categorySelected.category}</h4>`,
+                }).then(result => {
+                    if (result.value) {
+                        this.$vs.loading({
+                            color: '#11435b',
+                            text: 'Espere un momento por favor...'
+                        })
+                        axios.post('/api/subsanador/assign-project-subsanador', data).then(resp => {
+                            this.$toast.success({
+                                title: '¡Muy bien!',
+                                message: 'La propuesta musical fue asignada correctamente',
+                                showDuration: 1000,
+                                hideDuration: 7000,
+                                position: 'top right',
                             })
-                            axios.post('/api/subsanador/assign-project-subsanador', data).then(resp => {
-                                this.$toast.success({
-                                    title: '¡Muy bien!',
-                                    message: 'La propuesta musical fue asignada correctamente',
+                            $('#modal-show-project').modal('hide')
+                            this.$emit('loadDataListProject')
+                            publishMQTT('mqtUpdateProjects', this.project)
+                            this.categorySelected = null
+                            publishMQTT('subsanador_edit_close', this.project)
+                            this.$vs.loading.close()
+                            // window.location = '/perfil'
+                        }).catch(err => {
+                            if (err.response.status === 401) {
+                                this.$vs.loading.close()
+                                $("#text-assign-category").addClass('is-invalid')
+                                this.errorMessage = err.response.data
+                                return this.$toast.error({
+                                    title: 'Atención',
+                                    message: err.response.data,
                                     showDuration: 1000,
-                                    hideDuration: 7000,
+                                    hideDuration: 5000,
                                     position: 'top right',
                                 })
-                                $('#modal-show-project').modal('hide')
-                                this.$emit('loadDataListProject')
-                                publishMQTT('mqtUpdateProjects', this.project)
-                                this.categorySelected = null
-                                publishMQTT('subsanador_edit_close', this.project)
-                                this.$vs.loading.close()
-                                // window.location = '/perfil'
-                            }).catch(err => {
-                                if (err.response.status === 401) {
-                                    this.$vs.loading.close()
-                                    $("#text-assign-category").addClass('is-invalid')
-                                    this.errorMessage = err.response.data
-                                    return this.$toast.error({
-                                        title: 'Atención',
-                                        message: err.response.data,
-                                        showDuration: 1000,
-                                        hideDuration: 5000,
-                                        position: 'top right',
-                                    })
-                                }
-                                this.$toast.error({
-                                    title: 'Error',
-                                    message: 'Hubo un error al asignar la propuesta musical',
-                                    showDuration: 1000,
-                                    hideDuration: 8000,
-                                })
-                                this.$vs.loading.close()
+                            }
+                            this.$toast.error({
+                                title: 'Error',
+                                message: 'Hubo un error al asignar la propuesta musical',
+                                showDuration: 1000,
+                                hideDuration: 8000,
                             })
-                        }
-                    })
+                            this.$vs.loading.close()
+                        })
+                    }
+                })
             }, 200)
         },
         async getCategoriesProject() {
@@ -449,9 +457,9 @@ export default {
         }
     },
     props: ['project'],
-    watch:{
+    watch: {
         categorySelected: function (val) {
-            if (val !== null){
+            if (val !== null) {
                 this.errorMessage = ''
                 $("#text-assign-category").removeClass('is-invalid')
             }
@@ -465,7 +473,7 @@ export default {
 </script>
 
 <style scoped>
-.text-assign-category.is-invalid{
+.text-assign-category.is-invalid {
     color: red !important;
 }
 </style>
