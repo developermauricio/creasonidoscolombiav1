@@ -22,6 +22,7 @@
         @auth()
             @if(auth()->user()->id)
             window.user_ìd = '{{ auth()->user()->id }}'
+            window.role = '{{ auth()->user()->roles->first()->name }}'
         @endif
             @if( auth()->user()->aspirant)
             window.aspirant_id = '{{ auth()->user()->aspirant->id }}'
