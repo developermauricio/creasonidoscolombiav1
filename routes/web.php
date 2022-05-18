@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect('/cuenta');
+    return redirect('/login');
 });
 
 Route::get('/skd0skd0s', function () {
