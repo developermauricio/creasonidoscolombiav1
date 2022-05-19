@@ -8,7 +8,7 @@
             <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel17" v-if="role === 'Administrador'">Aspirante:
+                        <h4 class="modal-title" id="myModalLabel17" v-if="role === 'AdministradorD'">Aspirante:
                             {{ project.aspirant[0].user.name }}
                             {{ project.aspirant[0].user.last_name }}</h4>
                         <button type="button" class="close" @click="closeModalInformation()" data-dismiss="modal"
@@ -41,29 +41,29 @@
                         ======================================-->
                         <h4 class="mb-2 text-primary">Información Personal:</h4>
                         <div class="row">
-                            <div class="col-12 col-md-3 col-lg-3" v-if="role === 'Administrador'">
+                            <div class="col-12 col-md-3 col-lg-3" v-if="role === 'AdministradorD'">
                                 <h6>Nombres:</h6>
                                 <p>{{ project.aspirant[0].user.name }}</p>
                             </div>
-                            <div class="col-12 col-md-3 col-lg-3" v-if="role === 'Administrador'">
+                            <div class="col-12 col-md-3 col-lg-3" v-if="role === 'AdministradorD'">
                                 <h6>Apellidos:</h6>
                                 <p>{{ project.aspirant[0].user.last_name }}</p>
                             </div>
-                            <div class="col-12 col-md-3 col-lg-3" v-if="role === 'Administrador'">
+                            <div class="col-12 col-md-3 col-lg-3" v-if="role === 'AdministradorD'">
                                 <h6>Correo electrónico:</h6>
                                 <p>{{ project.aspirant[0].user.email }}</p>
                             </div>
-                            <div class="col-12 col-md-3 col-lg-3" v-if="role === 'Administrador'">
+                            <div class="col-12 col-md-3 col-lg-3" v-if="role === 'AdministradorD'">
                                 <h6>Correo electrónico:</h6>
                                 <p>{{ project.aspirant[0].user.phone }}</p>
                             </div>
-                            <div class="col-12 col-md-3 col-lg-3" v-if="role === 'Administrador'">
+                            <div class="col-12 col-md-3 col-lg-3" v-if="role === 'AdministradorD'">
                                 <h6>Fecha de nacimiento:</h6>
                                 <p>{{
                                         moment(project.aspirant[0].user.birthday).locale('es').format("MMMM Do YYYY")
                                     }}</p>
                             </div>
-                            <div class="col-12 col-md-3 col-lg-3" v-if="role === 'Administrador'">
+                            <div class="col-12 col-md-3 col-lg-3" v-if="role === 'AdministradorD'">
                                 <h6>Edad:</h6>
                                 <p>{{ formatEdad(project.aspirant[0].user.birthday) }}</p>
                             </div>
@@ -79,7 +79,7 @@
                                 <h6>Ciudad de resindencia:</h6>
                                 <p>{{ project.aspirant[0].user.city.descripcion }}</p>
                             </div>
-                            <div class="col-12 col-md-3 col-lg-3" v-if="role === 'Administrador'">
+                            <div class="col-12 col-md-3 col-lg-3" v-if="role === 'AdministradorD'">
                                 <h6>Dirección:</h6>
                                 <p>{{ project.aspirant[0].user.address }}</p>
                             </div>
@@ -99,7 +99,7 @@
                                 <h6>¿Posee alguna discapacidad?</h6>
                                 <p>{{ project.aspirant[0].disability }}</p>
                             </div>
-                            <div class="col-12 col-md-3 col-lg-3" v-if="role === 'Administrador'">
+                            <div class="col-12 col-md-3 col-lg-3" v-if="role === 'AdministradorD'">
                                 <h6>Documento de identificación</h6>
                                 <!--                            <span data-toggle="modal" data-target="#modal-show-document" class="pr-2"-->
                                 <!--                                  style="color: #114455; cursor: pointer">Ver documento</span>-->
@@ -112,7 +112,7 @@
                         ======================================-->
                         <div v-if="project.aspirant[0].parent != null">
                             <hr>
-                            <div v-if="role === 'Administrador'">
+                            <div v-if="role === 'AdministradorD'">
                                 <h4 class="mb-2 text-primary">Información del menor de edad:</h4>
                                 <div class="row">
                                     <div class="col-12 col-md-3 col-lg-3">
@@ -147,11 +147,11 @@
                         <hr>
                         <h4 class="mb-2 text-primary">Información de la propuesta musical:</h4>
                         <div class="row">
-                            <div class="col-12 col-md-3 col-lg-3" v-if="role === 'Administrador'">
+                            <div class="col-12 col-md-3 col-lg-3" v-if="role === 'AdministradorD'">
                                 <h6>Título de la canción:</h6>
                                 <p>{{ project.title }}</p>
                             </div>
-                            <div class="col-12 col-md-3 col-lg-3" v-if="role === 'Administrador'">
+                            <div class="col-12 col-md-3 col-lg-3" v-if="role === 'AdministradorD'">
                                 <h6>Nombre del intérprete o agrupación:</h6>
                                 <p>{{ project.name_author }}</p>
                             </div>
@@ -449,7 +449,7 @@ export default {
             }).catch(err => {
                 this.$toast.error({
                     title: 'Error',
-                    message: 'Hubo un error, consulte al administrador',
+                    message: 'Hubo un error, consulte al AdministradorD',
                     showDuration: 1000,
                     hideDuration: 8000,
                 })
