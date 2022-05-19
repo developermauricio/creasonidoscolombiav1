@@ -93,8 +93,8 @@
                                     <thead>
                                     <tr>
                                         <v-th sortKey="aspirant[0].user.name">#</v-th>
-                                        <v-th sortKey="aspirant[0].user.name" v-if="role === 'Administrador'">Nombres</v-th>
-                                        <v-th sortKey="aspirant[0].user.last_name" v-if="role === 'Administrador'">Apellidos</v-th>
+                                        <v-th sortKey="aspirant[0].user.name" v-if="role === 'AdministradorD'">Nombres</v-th>
+                                        <v-th sortKey="aspirant[0].user.last_name" v-if="role === 'AdministradorD'">Apellidos</v-th>
                                         <v-th sortKey="aspirant[0].user.city.departament.descripcion">Departamento
                                         </v-th>
                                         <v-th sortKey="aspirant[0].user.city.descripcion">Ciudad</v-th>
@@ -115,8 +115,8 @@
                                         v-for="(listProjects, index) in displayData" :key="listProjects.id">
 
                                         <td>{{ index + 1 }}</td>
-                                        <td v-if="role === 'Administrador'">{{ listProjects.aspirant[0].user.name }}</td>
-                                        <td v-if="role === 'Administrador'">{{ listProjects.aspirant[0].user.last_name }}</td>
+                                        <td v-if="role === 'AdministradorD'">{{ listProjects.aspirant[0].user.name }}</td>
+                                        <td v-if="role === 'AdministradorD'">{{ listProjects.aspirant[0].user.last_name }}</td>
                                         <td>{{ listProjects.aspirant[0].user.city.departament.descripcion }}</td>
                                         <td>{{ listProjects.aspirant[0].user.city.descripcion }}</td>
                                         <td>{{ listProjects.aspirant[0].aspirant_type.name }}</td>
@@ -297,7 +297,7 @@ export default {
                 console.log(err)
                 this.$toast.error({
                     title: 'Error',
-                    message: 'Algo salió mal, consulte al administrador',
+                    message: 'Algo salió mal, consulte al AdministradorD',
                     showDuration: 1000,
                     hideDuration: 6000,
                     position: 'top right',
@@ -319,7 +319,7 @@ export default {
                 .catch(error => {
                     this.$toast.error({
                         title: 'Error',
-                        message: 'Hubo un error, consulte al administrador',
+                        message: 'Hubo un error, consulte al AdministradorD',
                         showDuration: 1000,
                         hideDuration: 12000,
                     })
@@ -451,7 +451,7 @@ export default {
             }).catch(err => {
                 this.$toast.error({
                     title: 'Error',
-                    message: 'Algo salió mal, consulte al administrador',
+                    message: 'Algo salió mal, consulte al AdministradorD',
                     showDuration: 1000,
                     hideDuration: 6000,
                     position: 'top right',
