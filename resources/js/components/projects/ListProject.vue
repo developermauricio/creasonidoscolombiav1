@@ -64,8 +64,8 @@
                                     <thead>
                                     <tr>
                                         <v-th sortKey="aspirant[0].user.name">#</v-th>
-                                        <v-th sortKey="aspirant[0].user.name" v-if="role === 'AdministradorD'">Nombres</v-th>
-                                        <v-th sortKey="aspirant[0].user.last_name" v-if="role === 'AdministradorD'">Apellidos</v-th>
+                                        <v-th sortKey="aspirant[0].user.name">Nombres</v-th>
+                                        <v-th sortKey="aspirant[0].user.last_name" >Apellidos</v-th>
                                         <v-th sortKey="aspirant[0].user.city.departament.descripcion">Departamento
                                         </v-th>
                                         <v-th sortKey="aspirant[0].user.city.descripcion">Ciudad</v-th>
@@ -86,8 +86,8 @@
                                         v-for="(listProjects, index) in displayData" :key="listProjects.id">
 
                                         <td>{{ index + 1 }}</td>
-                                        <td v-if="role === 'AdministradorD'">{{ listProjects.aspirant[0].user.name }}</td>
-                                        <td v-if="role === 'AdministradorD'">{{ listProjects.aspirant[0].user.last_name }}</td>
+                                        <td >{{ listProjects.aspirant[0].user.name }}</td>
+                                        <td >{{ listProjects.aspirant[0].user.last_name }}</td>
                                         <td>{{ listProjects.aspirant[0].user.city.departament.descripcion }}</td>
                                         <td>{{ listProjects.aspirant[0].user.city.descripcion }}</td>
                                         <td>{{ listProjects.aspirant[0].aspirant_type.name }}</td>
