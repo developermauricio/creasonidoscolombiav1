@@ -56,7 +56,18 @@
                 </div>
             </div>
         </div>
-        <list-projects-component v-on:loadDataCardProjects="loadDataCardProjects" v-on:dataProject="dataProject"></list-projects-component>
+        <vs-tabs color="#f54644">
+            <vs-tab label="Pendientes por subsanar">
+                <div class="con-tab-ejemplo">
+                    <list-projects-by-subsanar-component v-on:loadDataCardProjects="loadDataCardProjects" v-on:dataProject="dataProject"></list-projects-by-subsanar-component>
+                </div>
+            </vs-tab>
+            <vs-tab label="Todas las propuestas">
+                <div class="con-tab-ejemplo">
+                    <list-projects-component v-on:dataProject="dataProject"></list-projects-component>
+                </div>
+            </vs-tab>
+        </vs-tabs>
         <show-projects-component v-on:loadDataListProject="loadDataProjects" :project="project"></show-projects-component>
     </div>
 </template>
