@@ -1,6 +1,12 @@
 <template>
     <div>
         <input type="hidden" @click="loadDataProjects" id="listProjectsComponents"/>
+        <div class="row mb-2">
+            <div class="col-12 text-right">
+                <assign-massive-projects-component
+                    v-on:loadDataProjects="loadDataProjects"></assign-massive-projects-component>
+            </div>
+        </div>
 
         <div class="row">
             <div class="col-12">
@@ -46,6 +52,29 @@
                                         }"
                                 ></input-form>
                             </div>
+                            <!--                            <div class="col-12 col-lg-6 col-md-6">-->
+                            <!--                                <input-form-->
+                            <!--                                    label="Filtar por línea de convocatoria"-->
+                            <!--                                    id="textLineAspirant"-->
+                            <!--                                    errorMsg-->
+                            <!--                                    requiredMsg="La modalidad es requerida"-->
+                            <!--                                    :required="false"-->
+                            <!--                                    :modelo.sync="lineFilterSelected"-->
+                            <!--                                    :msgServer.sync="errors.departamentFilterSelected"-->
+                            <!--                                    type="multiselect"-->
+                            <!--                                    selectLabel="Filtar por línea de convocatoria"-->
+                            <!--                                    :multiselect="{ options: aspirantType,-->
+                            <!--                                           selectLabel:'Seleccionar',-->
+                            <!--                                           selectedLabel:'Seleccionado',-->
+                            <!--                                           deselectLabel:'Desmarcar',-->
+                            <!--                                           placeholder:'Seleccion una línea',-->
+                            <!--                                          taggable : false,-->
+                            <!--                                          'track-by':'id',-->
+                            <!--                                          label: 'name',-->
+                            <!--                                          'custom-label': line=>line.name-->
+                            <!--                                        }"-->
+                            <!--                                ></input-form>-->
+                            <!--                            </div>-->
                         </div>
                         <div class="table-responsive">
                             <v-table
@@ -92,6 +121,17 @@
                                         <td>{{ listProjects.aspirant[0].user.city.descripcion }}</td>
                                         <td>{{ listProjects.aspirant[0].aspirant_type.name }}</td>
                                         <td>{{ listProjects.aspirant[0].category_aspirant.name }}</td>
+                                        <!--                    <td>{{projects.admission_date}}</td>-->
+                                        <!--                    <td>{{projects.pregnant_time}} Meses Aproximadamente</td>-->
+                                        <!--                    <td>{{projects.pregnant_quantity}}</td>-->
+                                        <!--                    <td>-->
+                                        <!--                        <a-->
+                                        <!--                            :href="'/detail-child/' + mother.users.slug"-->
+                                        <!--                            class="tabledit-edit-button text-center offset-md-2 btn btn-sm btn-primary"-->
+                                        <!--                        >-->
+                                        <!--                            <span class="ti-eye"></span>-->
+                                        <!--                        </a>-->
+                                        <!--                    </td>-->
                                         <td>
                                             <div class="demo-inline-spacing">
                                                 <button @click="showProject(listProjects)"
@@ -102,6 +142,8 @@
                                                     <vs-tooltip :text="selectNameSubsanador(listProjects.id)">
                                                         <span class="material-icons">visibility</span>
                                                     </vs-tooltip>
+                                                    <!--                                                    <span v-if="listProjects.id !== (selectedSubsanadorProject ? selectedSubsanadorProject.id : selectedProjectShow)" class="material-icons">visibility</span>-->
+                                                    <!--                                                    <span v-else>Esta siendo subsanado por {{ selectedUserSubsanador }}</span>-->
                                                 </button>
                                                 <button @click="selectPlayProject(listProjects)" type="button"
                                                         class="btn btn-icon btn-primary btn-reproductor waves-effect waves-float waves-light">
@@ -110,7 +152,8 @@
                                                         listProjects.id === (selectedProject ? selectedProject.id : 0) ? 'pause' : 'play_arrow'
                                                     }}
                                                 </span>
-
+                                                    <!--                                                <span class="material-icons">play_arrow</span>-->
+                                                    <!--                                                <span class="material-icons">stop</span>-->
                                                 </button>
                                             </div>
                                         </td>
@@ -267,7 +310,7 @@ export default {
                 text: "Cargando...",
             });
             await axios
-                .get('/api/subsanador/get-projects')
+                .get('/api/subsanador/get-projects-revision')
                 .then(resp => {
                     this.projects = resp.data.data;
                     this.$emit('loadDataCardProjects')

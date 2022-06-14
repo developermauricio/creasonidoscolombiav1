@@ -171,6 +171,7 @@ Route::post('/update-password', 'User\UserController@updatePasswordUser')->name(
 /*=============================================
 API PARA EL SUBSANADOR
 =============================================*/
+Route::get('/subsanador/get-projects', 'Subsanador\ProjectsController@getProjects')->name('get.projects');
 Route::get('/subsanador/get-projects-revision', 'Subsanador\ProjectsController@getProjectsRevision')->name('get.projects.revision');
 Route::get('/subsanador/count-need-subsanar', 'Subsanador\ProjectsController@countNeedSubsanar')->name('count.need.subsanar');
 Route::get('/subsanador/count-already-subsanar', 'Subsanador\ProjectsController@countAlreadySubsanar')->name('count.already.subsanar');

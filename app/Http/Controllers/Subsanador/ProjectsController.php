@@ -16,6 +16,15 @@ class ProjectsController extends Controller
         return view('subsanador.projects');
     }
 
+    public function getProjects()
+    {
+        $projects = Proyect::with(
+            'aspirant.user.city.departament', 'aspirant.aspirant_type',
+            'aspirant.categoryAspirant', 'aspirant.user.gender', 'aspirant.ethnic', 'aspirant.parent.minor'
+        )->latest()->get();
+        return response()->json(['data' => $projects]);
+    }
+
     public function getProjectsRevision()
     {
         $projects = Proyect::where('state', Proyect::REVISION)->with(

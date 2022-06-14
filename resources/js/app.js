@@ -76,6 +76,7 @@ Vue.component('show-user-component', require('./users/ShowUser.vue').default);
 /*=============================================
 COMPONENTES PROYECTOS
 =============================================*/
+Vue.component('list-projects-by-subsanar-component', require('./components/projects/ListProjectBySubsanar').default);
 Vue.component('list-projects-component', require('./components/projects/ListProject').default);
 Vue.component('show-projects-component', require('./components/projects/ShowProject').default);
 
