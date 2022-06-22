@@ -61,7 +61,7 @@
                         v-for="(project, index) in projects.data"
                         :key="project.id"
                     >
-                        <div slot="header">
+                        <div @click="reset()" slot="header">
                             <div class="row">
                                 <div class="col-1">
                                     {{ index + 1 }}
@@ -69,7 +69,7 @@
                                 <div class="col-8">
                                     <h5 @click="selectProject(project)">
                                         Clic para escuchar la canción #
-                                        {{ project.num + 1 }}
+                                        {{ index + 1 }}
                                     </h5>
                                     <div
                                         v-if="project.state == 4"
@@ -219,11 +219,14 @@ export default {
             await axios
                 .get(`/api/curador/projects/${this.user.id}?page=${page}`)
                 .then(({ data }) => {
-                    this.projects = data.map((value) => {
-                        let i = 1;
-                        value.num = i++;
-                        return value;
-                    });
+                    this.projects = data;
+                    // .map((value) => {
+                    //     let i = 1;
+                    //     value.num += i;
+                    //     console.log(value.num, "elvaluer");
+                    //     return value;
+                    // });
+                    console.log(this.projects, "los project");
                 })
                 .catch(({ response }) => {
                     console.error(response);
@@ -261,6 +264,13 @@ export default {
                         console.error(response);
                     });
             });
+        },
+        reset() {
+            this.qualifications[0].model = 0;
+            this.qualifications[1].model = 0;
+            this.qualifications[2].model = 0;
+            this.qualifications[3].model = 0;
+            this.qualifications[4].model = 0;
         },
         selectProject(project) {
             this.$vs.loading({
