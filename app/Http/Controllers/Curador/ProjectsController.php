@@ -58,7 +58,7 @@ class ProjectsController extends Controller
         $projects = Proyect::whereHas('curador', function ($q) use ($id) {
             $q->where('curador_id', $id);
         })
-            ->where('state', Proyect::REVISION)
+            ->where('state', Proyect::ACEPTED)
             ->get()
             ->count();
         return response()->json($projects);

@@ -30,10 +30,10 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('project:end_time_edit')->everyMinute()->withoutOverlapping();
-        $schedule->command('sync:registeredAspirant')->everyTenMinutes()->withoutOverlapping();
+        $schedule->command('sync:registeredAspirant')->everyFiveMinutes()->withoutOverlapping();
         //$schedule->command('sync:registeredAspirant')->everyMinute()->withoutOverlapping();
-        //$schedule->command('sync:totalAspirantRegistered')->everyMinute()->withoutOverlapping();
-        $schedule->command('sync:totalAspirantRegistered')->everyFiveMinutes()->withoutOverlapping();
+        $schedule->command('sync:totalAspirantRegistered')->everyMinute()->withoutOverlapping();
+        //$schedule->command('sync:totalAspirantRegistered')->everyFiveMinutes()->withoutOverlapping();
     }
 
     /**
