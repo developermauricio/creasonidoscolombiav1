@@ -60,7 +60,9 @@
                     <vs-collapse-item
                         v-for="(project, index) in projects.data"
                         :key="project.id"
+                        :not-arrow="true"
                     >
+                        <!-- <div slot="header"> -->
                         <div @click="reset()" slot="header">
                             <div class="row">
                                 <div class="col-1">
@@ -101,11 +103,16 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6 pt-3">
+                            <div class="col-md-6">
                                 <div
-                                    v-for="(qualifit, index) in qualifications"
+                                    class="mt-2"
+                                    v-for="qualifit in project.qualification"
                                     :key="qualifit.id"
                                 >
+                                    <!-- <div
+                                    v-for="qualifit in qualifications"
+                                    :key="qualifit.id"
+                                > -->
                                     <h6>
                                         <vs-tooltip
                                             :text="qualifit.description"
@@ -120,13 +127,47 @@
                                         </vs-tooltip>
                                     </h6>
 
-                                    <vs-slider
-                                        :min="0"
-                                        :max="qualifit.value"
-                                        color="#11435b"
-                                        v-model="qualifit.model"
-                                        :disabled="project.state == 4"
-                                    />
+                                    <!-- <div
+                                        style="
+                                            display: flex;
+                                            justify-content: space-around;
+                                        "
+                                    >
+                                        <vs-slider
+                                            :min="0"
+                                            :max="qualifit.value"
+                                            color="#11435b"
+                                            v-model="qualifit.model"
+                                            :disabled="project.state == 4"
+                                        />
+                                        <span class="style-span">{{
+                                            qualifit.model ? qualifit.model : 0
+                                        }}</span>
+                                    </div> -->
+                                    <div
+                                        style="
+                                            display: flex;
+                                            justify-content: space-around;
+                                        "
+                                    >
+                                        <VueSlideBar
+                                            v-model="qualifit.model"
+                                            style="width: 100%"
+                                            :min="0"
+                                            :max="20"
+                                            :tooltipStyles="{
+                                                backgroundColor: '#004357',
+                                                borderColor: '#004357',
+                                            }"
+                                            :processStyle="{
+                                                backgroundColor: '#004357',
+                                            }"
+                                        ></VueSlideBar>
+
+                                        <!-- <span class="style-span">{{
+                                            qualifit.model ? qualifit.model : 0
+                                        }}</span> -->
+                                    </div>
                                 </div>
                                 <!-- <span>{{ qualifit.model }}</span> -->
                                 <!-- :v-model="'value' + qualifit.id" -->
@@ -148,6 +189,20 @@
                                     :disabled="project.state == 4"
                                 >
                                 </input-form>
+                                <span v-if="total != 0" class="style-span"
+                                    >Total calificación: {{ total }}</span
+                                >
+                                <a
+                                    style="color: #00d5cc"
+                                    @click="
+                                        calcularTotal(project.qualification)
+                                    "
+                                    >{{
+                                        total != 0
+                                            ? "Actualizar"
+                                            : "Ver Calificación"
+                                    }}</a
+                                >
                             </div>
                         </div>
 
@@ -158,9 +213,10 @@
                             v-on:click="saveQualification(project.id)"
                             >Enviar Calificación</vs-button
                         > -->
+
                         <button
                             :disabled="!description"
-                            v-on:click="saveQualification(project.id)"
+                            v-on:click="saveQualification(project)"
                             class="btn btn-primary btn-block col-md-2 ml-auto"
                         >
                             Enviar Calificación
@@ -190,6 +246,7 @@
 <script>
 import pagination from "laravel-vue-pagination";
 import MediaAudio from "../components/MediaAudio";
+import VueSlideBar from "vue-slide-bar";
 import Swal from "sweetalert2";
 
 export default {
@@ -205,11 +262,13 @@ export default {
             errors: {},
             count: 0,
             countQualified: 0,
+            total: 0,
         };
     },
     components: {
         pagination,
         MediaAudio,
+        VueSlideBar,
     },
 
     props: ["user"],
@@ -226,22 +285,36 @@ export default {
                     //     console.log(value.num, "elvaluer");
                     //     return value;
                     // });
-                    console.log(this.projects, "los project");
+                    if (this.qualifications.length) {
+                        this.projects.data.forEach((project) => {
+                            let projectQuali = [];
+                            this.qualifications.forEach((obj) => {
+                                let newObject = Object.assign({}, obj);
+                                newObject.model = 0;
+                                projectQuali.push(newObject);
+                            });
+                            project.qualification = projectQuali;
+                        });
+                    }
+                    console.log(
+                        "calificaciones con proyecto: ",
+                        this.projects.data
+                    );
                 })
                 .catch(({ response }) => {
                     console.error(response);
                 });
         },
 
-        saveQualification(id) {
+        saveQualification(project) {
             const data = new FormData();
-            data.append("interpretive_quality", this.qualifications[0].model);
-            data.append("quality_proposal", this.qualifications[1].model);
-            data.append("composition_quality", this.qualifications[2].model);
-            data.append("song_potential", this.qualifications[3].model);
-            data.append("territorial_value", this.qualifications[4].model);
+            data.append("interpretive_quality", project.qualification[0].model);
+            data.append("quality_proposal", project.qualification[1].model);
+            data.append("composition_quality", project.qualification[2].model);
+            data.append("song_potential", project.qualification[3].model);
+            data.append("territorial_value", project.qualification[4].model);
             data.append("comment", this.description);
-            data.append("proyect_id", id);
+            data.append("proyect_id", project.id);
             data.append("curadores_id", this.user.id);
             Swal.fire({
                 title: "Confirmación de calificación",
@@ -255,22 +328,26 @@ export default {
                 reverseButtons: true,
                 allowOutsideClick: false,
             }).then((result) => {
-                axios
-                    .post("/api/curador/save-qualifications/", data)
-                    .then((data) => {
-                        window.location.reload();
-                    })
-                    .catch(({ response }) => {
-                        console.error(response);
-                    });
+                if (result.isConfirmed) {
+                    axios
+                        .post("/api/curador/save-qualifications/", data)
+                        .then((data) => {
+                            window.location.reload();
+                        })
+                        .catch(({ response }) => {
+                            console.error(response);
+                        });
+                }
             });
         },
         reset() {
-            this.qualifications[0].model = 0;
-            this.qualifications[1].model = 0;
-            this.qualifications[2].model = 0;
-            this.qualifications[3].model = 0;
-            this.qualifications[4].model = 0;
+            this.total = 0;
+        },
+        calcularTotal(qualification) {
+            this.total = 0;
+            qualification.forEach((item) => {
+                this.total += item.model;
+            });
         },
         selectProject(project) {
             this.$vs.loading({
@@ -327,11 +404,19 @@ export default {
         },
     },
 
-    mounted() {
-        this.getProjects();
+    async mounted() {
+        /* this.getProjects();
         this.getProjectAsign();
         this.getProjectQualified();
         this.getQualifications();
+        this.$refs.plyr.player.on("pause", () => {
+            this.selectedProject = null;
+        }); */
+
+        await this.getQualifications();
+        await this.getProjects();
+        this.getProjectAsign();
+        this.getProjectQualified();
         this.$refs.plyr.player.on("pause", () => {
             this.selectedProject = null;
         });
@@ -346,5 +431,12 @@ export default {
     width: 100%;
     left: 0;
     z-index: 200 !important;
+}
+
+.style-span {
+    font-size: 1.5rem;
+    color: #004357;
+    padding: 0 10px;
+    font-weight: 500;
 }
 </style>
