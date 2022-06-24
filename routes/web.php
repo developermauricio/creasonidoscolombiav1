@@ -29,6 +29,12 @@ Route::get('/email', function () {
     return new \App\Mail\Aspirant\RegisterProject('silviotista93@gmail.com', 'Mauricio', 'Gutierrez', 'Amores como el nuestro', 'Salsa');
 });
 
+Route::get('/email/{email}', function ($email){
+   $user = \App\User::where('email', $email)->with('aspirant')->first();
+
+   return $user;
+});
+
 //Route::post('/aspirant/account-create', 'Aspirant\AccountController@createAccount')->name('aspirant.create.account');
 
 Auth::routes();

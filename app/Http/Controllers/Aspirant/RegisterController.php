@@ -373,6 +373,5 @@ class RegisterController extends Controller
         } else {
             return response()->json('Error al realizar la transacción', 500);
         }
-//        return 'sisas';
     }
 }
