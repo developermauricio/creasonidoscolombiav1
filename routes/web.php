@@ -17,7 +17,7 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
-Route::post('/update-state-project/{id}', function ($id){
+Route::get('/update-state-project/{id}', function ($id){
     $pr = \App\Models\Proyect::where('id', $id)->update([
        'state' => \App\Models\Proyect::SUBSANADO
     ]);
