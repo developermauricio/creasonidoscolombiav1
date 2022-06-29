@@ -53,11 +53,14 @@ class ProjectsController extends Controller
             /*=============================================
                 ASIGNAMOS LA PROPUESTA MUSICAL AL CURADOR
             =============================================*/
-            $curadorProject = DB::table('curador_projects')
-                ->insert([
-                    'curador_id' => $randomCurador->curador_id,
-                    'proyect_id' => $projectId
-                ]);
+            if($randomCurador->curador_id !== 7){
+                $curadorProject = DB::table('curador_projects')
+                    ->insert([
+                        'curador_id' => $randomCurador->curador_id,
+                        'proyect_id' => $projectId
+                    ]);
+            }
+
         }
         /*=============================================
             ACTUALIZAMOS LA CATEGORÍA DEL PROYECTO
