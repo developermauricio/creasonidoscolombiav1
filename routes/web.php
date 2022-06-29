@@ -17,6 +17,13 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
+Route::post('/update-state-project/{id}', function ($id){
+    $pr = \App\Models\Proyect::where('id', $id)->update([
+       'state' => \App\Models\Proyect::SUBSANADO
+    ]);
+    return response()->json('ok');
+});
+
 Route::get('/skd0skd0s', function () {
     return view('aspirant.account');
 })->middleware('midd_aspirant_account');
