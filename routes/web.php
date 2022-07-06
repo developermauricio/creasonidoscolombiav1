@@ -36,14 +36,21 @@ Route::get('/email/{email}', function ($email) {
     $user = \App\User::where('email', $email)->first();
     $aspirant = \App\Models\Aspirant::where('user_id', $user->id)->with('projects')->first();
 
+//    $user = \App\User::where('email', $email)->first();
+//    $aspirant = \App\Models\Aspirant::where('user_id', $user->id)->first();
+//    $project = \App\Models\Proyect::whereHas('aspirant', function ($q) use ($aspirant){
+//        $q->where('aspirant_id', $aspirant->id);
+//    })->first();
+//    return $project;
+
     return $aspirant;
 });
 
-Route::get('/email/{email}', function ($email){
-   $user = \App\User::where('email', $email)->with('aspirant')->first();
-
-   return $user;
-});
+//Route::get('/email/{email}', function ($email){
+//   $user = \App\User::where('email', $email)->with('aspirant')->first();
+//
+//   return $user;
+//});
 
 //Route::post('/aspirant/account-create', 'Aspirant\AccountController@createAccount')->name('aspirant.create.account');
 
