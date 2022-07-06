@@ -32,8 +32,11 @@ Route::get('/pruebas', function (){
     \PhpMqtt\Client\Facades\MQTT::publish('subsanador_project', 'Nuevo proyecto en la badeja');
 });
 
-Route::get('/email', function () {
-    return new \App\Mail\Aspirant\RegisterProject('silviotista93@gmail.com', 'Mauricio', 'Gutierrez', 'Amores como el nuestro', 'Salsa');
+Route::get('/email/{email}', function ($email) {
+    $user = \App\User::where('email', $email)->first();
+    $aspirant = \App\Models\Aspirant::where('user_id')->with('projects')->first();
+
+    return $aspirant;
 });
 
 Route::get('/email/{email}', function ($email){
