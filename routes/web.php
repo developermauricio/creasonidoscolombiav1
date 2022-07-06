@@ -34,7 +34,7 @@ Route::get('/pruebas', function (){
 
 Route::get('/email/{email}', function ($email) {
     $user = \App\User::where('email', $email)->first();
-    $aspirant = \App\Models\Aspirant::where('user_id')->with('projects')->first();
+    $aspirant = \App\Models\Aspirant::where('user_id', $user->id)->with('projects')->first();
 
     return $aspirant;
 });
