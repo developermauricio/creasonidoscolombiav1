@@ -22,8 +22,30 @@
                                            aria-describedby="basic-addon-search1"/>
                                 </div>
                             </div>
-
                             <div class="col-12 col-lg-3 col-md-3">
+                                <input-form
+                                    label="Filtar por categoría"
+                                    id="textFilterDepartament"
+                                    errorMsg
+                                    requiredMsg="La modalidad es requerida"
+                                    :required="false"
+                                    :modelo.sync="categoryFilterSelected"
+                                    :msgServer.sync="errors.categoryFilterSelected"
+                                    type="multiselect"
+                                    selectLabel="Filtrar por categoría"
+                                    :multiselect="{ options: optionsCategories,
+                                           selectLabel:'Seleccionar',
+                                           selectedLabel:'Seleccionado',
+                                           deselectLabel:'Desmarcar',
+                                           placeholder:'Seleccionar Categoría',
+                                          taggable : false,
+                                          'track-by':'id',
+                                          label: 'category',
+                                          'custom-label': category=>category.category
+                                        }"
+                                ></input-form>
+                            </div>
+                           <!--  <div class="col-12 col-lg-3 col-md-3">
                                 <input-form
                                     label="Filtar por departamento"
                                     id="textFilterDepartament"
@@ -45,7 +67,7 @@
                                           'custom-label': departament=>departament.descripcion
                                         }"
                                 ></input-form>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="table-responsive">
                             <v-table
@@ -159,7 +181,9 @@ export default {
                 id: null
             },
             optionsDepartaments: [],
+            optionsCategories: [],
             departamentFilterSelected: null,
+            categoryFilterSelected: null,
             noData: false,
             userSubsanador: window.user,
             userSubsanadorId: window.user_ìd,
@@ -250,6 +274,20 @@ export default {
         getDeparments() {
             axios.get('/api/get-departaments').then(resp => {
                 this.optionsDepartaments = resp.data.data
+            }).catch(err => {
+                console.log(err)
+                this.$toast.error({
+                    title: 'Error',
+                    message: 'Algo salió mal, consulte al AdministradorD',
+                    showDuration: 1000,
+                    hideDuration: 6000,
+                    position: 'top right',
+                })
+            })
+        },
+        getCategories() {
+            axios.get('/api/get-project-categories').then(resp => {
+                this.optionsCategories = resp.data.data
             }).catch(err => {
                 console.log(err)
                 this.$toast.error({
@@ -417,7 +455,51 @@ export default {
         },
     },
     computed: {
-        listProjects: function () {
+
+    listProjects: function () {
+            let selectedCategory = this.categoryFilterSelected
+            let selectedLine = this.lineFilterSelected
+            let listProjects = []
+            let listProjectsLine = []
+            if (selectedCategory === null || selectedCategory === 0) {
+                listProjects = this.projects
+                return listProjects;
+            }
+            if (this.categoryFilterSelected) {
+                this.projects.filter(item => {
+                    let filtered = false
+                    if (item.category_id === selectedCategory.id) {
+                        //filtered = true
+                        listProjects.push(item)
+                    }
+                    
+                    /*if (filtered === true) {
+                        listProjects.push(item)
+                    }*/
+                })
+                return listProjects;
+            }
+
+            if (selectedLine === null || selectedLine === 0) {
+                listProjectsLine = this.projects
+                return listProjectsLine;
+            }
+            if (this.lineFilterSelected) {
+                this.projects.filter(item => {
+                    let filtered = false
+                    if (selectedLine) {
+                        if (item.id === selectedLine.id) {
+                                filtered = true
+                            }
+                    }
+                    if (filtered === true) {
+                        listProjectsLine.push(item)
+                    }
+                })
+                return listProjectsLine
+            }
+        }
+        /*listProjects: function () {
             let selectedDepartament = this.departamentFilterSelected
             let selectedLine = this.lineFilterSelected
             let listProjects = []
@@ -463,11 +545,12 @@ export default {
                 })
                 return listProjectsLine
             }
-        }
+        }*/
     },
     mounted() {
         this.loadDataProjects();
         this.getDeparments();
+        this.getCategories();
         this.selectedSubsanador();
         this.deselectSubsanador();
         this.mqttLoadDataListProjects();

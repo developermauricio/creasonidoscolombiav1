@@ -178,6 +178,35 @@ class RegisterController extends Controller
         return response()->json('Se eliminó correctamente');
     }
 
+    public function uploadIconDogeniusOne(Request $request){
+        $icon = $request->file('image-icon-one');
+        $path = Storage::disk('s3')->putFileAs('/archives/icons-dogenius/', $icon, Str::random(15).'.'.$icon->getClientOriginalExtension(), 'public');
+        return response()->json('subidos correctamente');
+    }
+
+    public function uploadIconDogeniusTwo(Request $request){
+        $icon = $request->file('image-icon-two');
+        $path = Storage::disk('s3')->putFileAs('/archives/icons-dogenius/', $icon, Str::random(15).'.'.$icon->getClientOriginalExtension(), 'public');
+        return response()->json('subidos correctamente');
+    }
+
+    public function uploadIconDogeniusThree(Request $request){
+        $icon = $request->file('image-icon-three');
+        $path = Storage::disk('s3')->putFileAs('/archives/icons-dogenius/', $icon, Str::random(15).'.'.$icon->getClientOriginalExtension(), 'public');
+        return response()->json('subidos correctamente');
+    }
+
+    public function uploadIconDogeniusThree(Request $request){
+        $icon = $request->file('image-icon-three');
+        $path = Storage::disk('s3')->putFileAs('/archives/icons-dogenius/', $icon, Str::random(15).'.'.$icon->getClientOriginalExtension(), 'public');
+        return response()->json('subidos correctamente');
+    }
+    public function uploadIconDogeniusFour(Request $request){
+        $icon = $request->file('image-icon-four');
+        $path = Storage::disk('s3')->putFileAs('/archives/icons-dogenius/', $icon, Str::random(15).'.'.$icon->getClientOriginalExtension(), 'public');
+        return response()->json('subidos correctamente');
+    }
+
     public function uploadArchiveMusic(Request $request)
     {
 
@@ -355,7 +384,7 @@ class RegisterController extends Controller
             ]);
 
             $project->aspirant()->attach($aspirant_id);
-            Mail::to($email)->send(new RegisterProject($email, $name, $last_name, ucwords($project_name)));
+            //Mail::to($email)->send(new RegisterProject($email, $name, $last_name, ucwords($project_name)));
         } catch (\Throwable $th) {
             $response = [
                 'msg' => 'Registro Fallido',

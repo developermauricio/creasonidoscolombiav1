@@ -30,6 +30,29 @@ Route::post(
     '/upload-archive-aspirant',
     'Aspirant\RegisterController@uploadArchiveAspirant'
 )->name('api.upload.archive.aspirant');
+
+
+
+Route::post(
+    '/upload-icon-dogenius-one',
+    'Aspirant\RegisterController@uploadIconDogeniusOne'
+)->name('api.upload.archive.aspirant');
+Route::post(
+    '/upload-icon-dogenius-two',
+    'Aspirant\RegisterController@uploadIconDogeniusTwo'
+)->name('api.upload.archive.aspirant');
+Route::post(
+    '/upload-icon-dogenius-three',
+    'Aspirant\RegisterController@uploadIconDogeniusThree'
+)->name('api.upload.archive.aspirant');
+Route::post(
+    '/upload-icon-dogenius-four',
+    'Aspirant\RegisterController@uploadIconDogeniusFour'
+)->name('api.upload.archive.aspirant');
+
+
+
+
 Route::post(
     '/removed-archive-aspirant',
     'Aspirant\RegisterController@removedArchiveAspirant'

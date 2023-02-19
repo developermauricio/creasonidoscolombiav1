@@ -19,6 +19,12 @@
  * https://github.com/ssense/vue-carousel#readme
  */
 
+/*!
+ * vue-slide-bar v1.2.0
+ * (c) 2018-present biig_pongsatorn <biig_pongsatorn@hotmail.com>
+ * Released under the MIT License.
+ */
+
 /*! https://mths.be/punycode v1.4.1 by @mathias */
 
 /*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
